@@ -216,7 +216,7 @@
        crearRgraph = function(json){
           var ht = new $jit.RGraph({  
           injectInto: 'arbol',  
-          width: 780,  
+          width: 940,  
           height: 480,
           background: {  
             CanvasStyles: {  
@@ -284,7 +284,7 @@
       crearHyperTree = function(json){
           var ht = new $jit.Hypertree({  
           injectInto: 'hyperArbol',  
-          width: 780,  
+          width: 940,  
           height: 480,
           Node: {  
               dim: 10,  
