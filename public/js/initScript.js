@@ -207,6 +207,10 @@
           $('div.vis').empty();
          current = crearRgraph(dataJson);
         });
+        $('li#spaceLink').on('click',function(){
+          $('div.vis').empty();
+         current = crearSpaceTree(dataJson);
+        });
 
       },
 
@@ -342,6 +346,83 @@
         });
         ht.loadJSON(json);
         ht.refresh(); 
+        return ht;
+      },
+
+       crearSpaceTree = function(json){
+          var ht = new $jit.ST({  
+          injectInto: 'space',  
+          width: 940,  
+          height: 480,
+          duration: 800,  
+          //set animation transition type  
+          transition: $jit.Trans.Quart.easeInOut,  
+          //set distance between node and its children  
+          levelDistance: 30,
+
+          orientation:'top',
+          offsetY: 80,  
+          //enable panning  
+          Navigation: {  
+            enable:true,  
+            panning:true  
+          },  
+          //set node and edge styles  
+          //set overridable=true for styling individual  
+          //nodes or edges  
+          Node: {  
+              height: 70,  
+              width: 120,  
+              type: 'rectangle',  
+              color: '#aaa',  
+              overridable: true  
+          },
+          onCreateLabel: function(domElement, node){
+             
+              domElement.innerHTML = node.name;  
+              $jit.util.addEvent(domElement, 'click', function () { 
+                  //node.getParents && limpiarArbol(node.getParents()[0]);
+                  ht.onClick(node.id, {  
+                      onComplete: function() {  
+                          ht.controller.onComplete();  
+                      }  
+                  });  
+              });
+
+              var style = domElement.style;  
+                 
+          }, 
+          onPlaceLabel: function(domElement, node){  
+              var style = domElement.style;  
+              style.display = '';  
+              style.cursor = 'pointer';
+              style.width = 120 + 'px';  
+              style.height = 70 + 'px';              
+              style.cursor = 'pointer';  
+              style.color = '#333';  
+              style.fontSize = '1em';  
+              style.textAlign= 'center';  
+              style.paddingTop = '.7em';
+              style.color = 'white';  
+              
+          },
+          onBeforeCompute:function(node){ 
+            piesNodoArbol(node);
+            panelTitulo.html("<p>"+node.name+"</p>"); // se pone el nombre del nodo en  el panel               
+          },
+          onAfterCompute:function(node){
+            
+          },
+          Events:{
+            enable:true,
+            onClick:function(){
+             //limpiarArbol(node.getParents());  
+            }
+          }        
+        });
+        ht.loadJSON(json);
+        ht.compute();
+        ht.onClick(ht.root);    
         return ht;
       },
 

@@ -162,6 +162,7 @@ div.color{
 	padding-top:30px;
 	position:fixed;
 	top:-1px;
+	right:.5em;
 	width:100px;
 	height:70px;
 	background: black;
@@ -244,6 +245,7 @@ div.vis{
 	background: rgba(0,0,0,0.9)!important;
 	position:relative;
 	z-index:10;
+	overflow: hidden;
 }
 
 

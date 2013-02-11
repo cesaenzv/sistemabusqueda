@@ -10,13 +10,13 @@
 				<li id="hyperLink">
 					<a href="#hyperArbol">Hypertree</a>
 				</li>	
-				<li>
-					<a href="#icicle">vis2</a>
+				<li id="spaceLink">
+					<a href="#space">Space tree</a>
 				</li>
 			</ul>
 			<div id="arbol"class="vis"></div>
 			<div id="hyperArbol" class="vis"></div>
-			<div id="icicle" class="vis"></div>
+			<div id="space" class="vis"></div>
 		</div>							
 		
 			<div class="piesContainer">
