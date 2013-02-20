@@ -26,6 +26,7 @@ $.fn.sweetPages = function(opts){
 
 	// Creating the controls div:
 	var swControls = $('<div class="swControls">');
+	var inControls = $('<div class="inControls">');
 	
 	for(var i=0;i<pagesNumber;i++)
 	{
@@ -33,9 +34,9 @@ $.fn.sweetPages = function(opts){
 		li.slice(i*resultsPerPage,(i+1)*resultsPerPage).wrapAll('<div class="swPage" />');
 		
 		// Adding a link to the swControls div:
-		swControls.append('<a href="" class="swShowPage">'+(i+1)+'</a>');
+		inControls.append('<a href="" class="swShowPage">'+(i+1)+'</a>');
 	}
-
+	swControls.append(inControls);
 	ul.append(swControls);
 	
 	var maxHeight = 0;

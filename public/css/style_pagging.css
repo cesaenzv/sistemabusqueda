@@ -1,11 +1,11 @@
 #contentResource{
 	/* The main container div */
 	position:relative;
-	margin:50px auto;
-	width:410px;
+	margin: 10px auto;
+	width:300px;
 	background:url('img/main_bg.jpg') repeat-x #aeadad;
 	border:1px solid #CCCCCC;
-	padding:70px 25px 60px;
+	padding:10px 10px 50px 10px;
 	
 	/* CSS3 rounded cornenrs */	
 	-moz-border-radius:12px;
@@ -16,12 +16,11 @@
 #listResource{
 	/* The unordered list that is to be split into pages */
 
-	width:400px;
+	width:100%;
 	overflow:hidden;
 	position:relative;
 	background:url('img/dark_bg.jpg') repeat #4e5355;
 	padding-bottom:10px;
-
 	/*	CSS3 inner shadow (the webkit one is commeted, because Google Chrome
 		does not like rounded corners combined with inset shadows): */
 
@@ -32,19 +31,29 @@
 
 .swControls{
 	position:absolute;
-	margin-top:10px;
+	margin-top:10px;	
+	max-height: 50px;
+	overflow: scroll;
+	overflow-y:hidden;  
+	width: 280px; 
+	height: auto;
+	scrollCar
+}
+
+.inControls{
+	width: 10000px;
 }
 
 a.swShowPage{
 
 	/* The links that initiate the page slide */
-
 	background-color:#444444;
 	float:left;
 	height:15px;
 	margin:4px 3px;
 	text-indent:-9999px;
 	width:15px;
+	display: inline;
 	/*border:1px solid #ccc;*/
 	
 	/* CSS3 rounded corners */
@@ -87,3 +96,17 @@ a.swShowPage.active{
 	border-radius:8px;
 }
 
+#popUp{
+	width:550;
+	height:300;
+	margin: 0 auto;	
+}
+
+div.hidden{
+	display: none;
+}
+
+div.subject{
+	max-height: 7em;
+	overflow-y: scroll; 
+}
