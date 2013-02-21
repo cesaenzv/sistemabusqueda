@@ -183,14 +183,12 @@
           $('div.vis').empty();
          current = crearRgraph(dataJson);
         });
-<<<<<<< HEAD
+
         $('li#spaceLink').on('click',function(){
           $('div.vis').empty();
          current = crearSpaceTree(dataJson);
         });
 
-=======
->>>>>>> 18a8a41b66c13efa1f8c050bbe7c37fbc4cb3d6a
       },
       getActual = function(){
         return current
@@ -215,7 +213,6 @@
           },
           Navigation: {  
               enable: true,  
-<<<<<<< HEAD
               panning: false,  
             
           },
@@ -242,13 +239,8 @@
             }  
           },
 
-          onCreateLabel: function(domElement, node){  
-
-=======
-              panning: false,              
-          },  
+          
           onCreateLabel: function(domElement, node){ 
->>>>>>> cesaenzv-master
               domElement.innerHTML = node.name;  
               $jit.util.addEvent(domElement, 'click', function () { 
                   //node.getParents && limpiarArbol(node.getParents()[0]);
@@ -304,17 +296,11 @@
               lineWidth: 2,  
               color: "#0BC0F4"  
           },
-<<<<<<< HEAD
+
           
-          onCreateLabel: function(domElement, node){
-             
-=======
-          Navigation: {  
-              enable: true,  
-              panning: true,            
-          },  
+            
           onCreateLabel: function(domElement, node){             
->>>>>>> cesaenzv-master
+
               domElement.innerHTML = node.name;  
               $jit.util.addEvent(domElement, 'click', function () { 
                   //node.getParents && limpiarArbol(node.getParents()[0]);
@@ -398,7 +384,7 @@
         console.log(ht);
         return ht;
       },
-<<<<<<< HEAD
+
 
        crearSpaceTree = function(json){
           var ht = new $jit.ST({  
@@ -477,11 +463,9 @@
         return ht;
       },
 
-      piesNodoArbol = function (node){// carga los pies de un concepto o categoría
-       
-=======
+
       piesNodoArbol = function (node){// carga los pies de un concepto o categoría       
->>>>>>> 18a8a41b66c13efa1f8c050bbe7c37fbc4cb3d6a
+
       //  ajaxRequest && ajaxRequest.abort();//cancela el pedido ajax de pies si se esta realizando otro.
         if(node.data.title === "is Category"){
           piesModulo.cargarDatos({
