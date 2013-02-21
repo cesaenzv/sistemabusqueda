@@ -1,5 +1,5 @@
-(function($){  
-
+(function($){
+                      /*_____________Modulo manejo de ScrollBar_____________*/  
 		var scrollBar = (function(){
       var crear = function(config){ //el objeto config contiene el div de los pies y una areferencia al modulo
         config.piesCont.mCustomScrollbar({
@@ -9,8 +9,7 @@
           },
           callbacks:{
             onScroll: function(){
-              var npies = config.modulo.pies();//obtiene el arreglo de pies
-              
+              var npies = config.modulo.pies();//obtiene el arreglo de pies              
               if(npies){
                 for (var i = 0; i < npies.length; i++) {
                     npies[i].canvas.getPos(true);
@@ -33,6 +32,7 @@
       }
     })();// fin del modulo ScrollBar
 
+                      /*_____________Modulo Autocompletar_____________*/ 
     var autoCompletar = (function(){
       var terminos = new Array();
       var getTerminos = function(urlTerminos){
@@ -40,8 +40,7 @@
             url:urlTerminos,
             dataType:'json'
         });
-      };
-      
+      };      
       var construirAutoCompletar = function(urlTerminos){
         getTerminos(urlTerminos).done(function(data){         
           terminos =  $.map(data, function(element,index){            
@@ -58,15 +57,14 @@
       }       
     })();//fin del modulo autocompletar
 
+                      /*_____________Modulo Creacion Pies_____________*/ 
     var piesModulo = (function(){//Modulos crear pies
       var piesMarco = $('div.pie'),
       modulo,
       plantilla = $('script#template').html(),// variable para tener la plantilla
       pies = new Array(),
-
       getPies = function(){return pies;},
       setvisModulo = function(nuevoModulo){modulo = nuevoModulo},
-
       cargarDatos = function(config){ //debe cargar todos los pies en esta parte
       pies =[]; //se resetean los pies
       var criterion = getMetadataCriterion(piesMarco); // obtiene los criterios para buscar los metadatos      
@@ -77,20 +75,17 @@
         var idActual = modulo.actual().graph.getByName(termino).id;
         modulo.actual().onClick(idActual);
         return;
-      }
-       
-        criterion.forEach(function(el, i, arr){
+      }       
+      criterion.forEach(function(el, i, arr){
           if(config.searchObj){// si se llamo el metodo con un objeto de busqueda
             config.searchObj.criterio = el
-          }
-          
+          }          
           $.ajax({
           url: config.urlBusqueda,
           data: config.searchObj,
           type: 'post',
           dataType:'json'     
-        }).done(function(data){
-   
+      }).done(function(data){   
           if (config.searchObj){ // si se realiza carga de datos desde otra parte del js
             if(data.mensaje){
              config.dialogo.empty().text(data.mensaje).dialog("open");
@@ -101,18 +96,13 @@
         });
         });   
       },
-
       loadingProgress = function(contenedores){
         contenedores.empty().siblings('div.pieContent').children('div').remove();
         $('<div></div>',{
-            class:'loadingIcon',
-            
+            class:'loadingIcon',            
         }).appendTo(contenedores);
       },
-
       crearPie = function(div,json,results){
-        //var Json = $.parseJSON(json);
-
         var Json = json;
         $('#'+div).empty();
         var Pie = new $jit.PieChart({
@@ -136,11 +126,9 @@
               }
             }
         });
-
         Pie.loadJSON(Json);
         var sb = Pie.sb;    
-        var convenciones = $.map(results,function(n){
-         
+        var convenciones = $.map(results,function(n){         
           var node = sb.graph.getByName(n.column);
           return {
             nombreCampo: n.column,//n[div],
@@ -149,56 +137,44 @@
           }
         });
         $('html, body').animate({scrollTop:150},500,'easeOutQuart');
-
         datosConvenciones = {convenciones:convenciones,
                               criterio:div}
         setConventions(datosConvenciones); 
-
-
-
         return Pie;
       },
-
-
       setConventions = function(datos){ // compila la plantilla handlebars y muestra las convenciones de los pies
        // console.log(datos);
         var contenedor = $('div#'+datos.criterio).siblings('div.pieContent');
         contenedor.children('div').remove();
           
         var template = Handlebars.compile(plantilla),
-          contenido = template(datos);
+        contenido = template(datos);
         contenedor.append(contenido);
         setTimeout(function(){contenedor.children('div').addClass('visible');},500);//time out para que se active la transición css
       },
-
       getMetadataCriterion = function(piesCont){//funcion para obtener los criterios de busuqeda de metadatos
         var criterion = piesCont.map(function(index, dom){
           return dom.id;
-
         });
         return criterion.get();
       } 
-
       return {
         cargarDatos: cargarDatos,
         pies: getPies,
         crearPie:crearPie,
         iniciar:setvisModulo
       };
-
     })();//fin del modulo pies
 
+                      /*_____________Modulo Manejo Visualizacion de Grafos_____________*/ 
     var visModulo = (function(){
       var panelTitulo = $('div#titulo'),
       current,
-      cargarData = function (config){   // inicializa todas las visualizaciones      
-        
-        current = crearRgraph(dataJson); //data json son los datos del arbol importados de los ejemplos que envio el profe
-        
+      cargarData = function (config){   // inicializa todas las visualizaciones
+        current = crearRgraph(dataJson); //data json son los datos del arbol importados de los ejemplos que envio el profe        
         /*es necesario vaciar las otras visualizaciones antes de pintar una nueva
         de otra forma hay conflictos con las id de las etiquetas y no se muestran
         y entonces no hay forma de navegar los arboles*/
-
         $('li#hyperLink').on('click',function(){
           $('div.vis').empty();
          current = crearHyperTree(dataJson);
@@ -207,13 +183,15 @@
           $('div.vis').empty();
          current = crearRgraph(dataJson);
         });
+<<<<<<< HEAD
         $('li#spaceLink').on('click',function(){
           $('div.vis').empty();
          current = crearSpaceTree(dataJson);
         });
 
+=======
+>>>>>>> 18a8a41b66c13efa1f8c050bbe7c37fbc4cb3d6a
       },
-
       getActual = function(){
         return current
       },
@@ -237,6 +215,7 @@
           },
           Navigation: {  
               enable: true,  
+<<<<<<< HEAD
               panning: false,  
             
           },
@@ -265,6 +244,11 @@
 
           onCreateLabel: function(domElement, node){  
 
+=======
+              panning: false,              
+          },  
+          onCreateLabel: function(domElement, node){ 
+>>>>>>> cesaenzv-master
               domElement.innerHTML = node.name;  
               $jit.util.addEvent(domElement, 'click', function () { 
                   //node.getParents && limpiarArbol(node.getParents()[0]);
@@ -294,8 +278,7 @@
             piesNodoArbol(node);
             panelTitulo.html("<p>"+node.name+"</p>"); // se pone el nombre del nodo en  el panel               
           },
-          onAfterCompute:function(node){
-            
+          onAfterCompute:function(node){            
           },
           Events:{
             enable:true,
@@ -321,9 +304,17 @@
               lineWidth: 2,  
               color: "#0BC0F4"  
           },
+<<<<<<< HEAD
           
           onCreateLabel: function(domElement, node){
              
+=======
+          Navigation: {  
+              enable: true,  
+              panning: true,            
+          },  
+          onCreateLabel: function(domElement, node){             
+>>>>>>> cesaenzv-master
               domElement.innerHTML = node.name;  
               $jit.util.addEvent(domElement, 'click', function () { 
                   //node.getParents && limpiarArbol(node.getParents()[0]);
@@ -353,8 +344,7 @@
             piesNodoArbol(node);
             panelTitulo.html("<p>"+node.name+"</p>"); // se pone el nombre del nodo en  el panel               
           },
-          onAfterCompute:function(node){
-            
+          onAfterCompute:function(node){            
           },
           Tips: {  
             enable: true,  
@@ -408,6 +398,7 @@
         console.log(ht);
         return ht;
       },
+<<<<<<< HEAD
 
        crearSpaceTree = function(json){
           var ht = new $jit.ST({  
@@ -488,33 +479,31 @@
 
       piesNodoArbol = function (node){// carga los pies de un concepto o categoría
        
+=======
+      piesNodoArbol = function (node){// carga los pies de un concepto o categoría       
+>>>>>>> 18a8a41b66c13efa1f8c050bbe7c37fbc4cb3d6a
       //  ajaxRequest && ajaxRequest.abort();//cancela el pedido ajax de pies si se esta realizando otro.
         if(node.data.title === "is Category"){
           piesModulo.cargarDatos({
           searchObj:{idTerm:node.id,idColumn:"ParentKey",criterio:""},
           urlBusqueda:'resource/getPies'
         });
-
         }else{
-
         piesModulo.cargarDatos({
           searchObj:{idTerm:node.id,idColumn:"term_id",criterio:""},
           urlBusqueda:'resource/getPies'
         });
         }        
       }
-
       return {
         cargarData:cargarData,
         piesNodoArbol: piesNodoArbol,
         actual:getActual
       };
-
     })();//fin del modulo arbol
 
-
+                      /*_____________Modulo Arrance_____________*/ 
   var init = function (config){
-
     config.dialogo.dialog({ //dialogo modal
       autoOpen: false,
       show: "blind",
@@ -528,16 +517,10 @@
                           .children('ul')
                           .removeClass('ui-corner-all')
                           .removeClass('ui-widget-header'); // preparacion de las tabs de jqery ui
-
-
     config.buscador.on('submit', function(e){// copnfiguracion del buscador
       e.preventDefault();
-      piesModulo.cargarDatos(config);
-      
+      piesModulo.cargarDatos(config);      
     });
-
-
-
     config.scrollToo.on('click',function(){
       $('html, body').animate({scrollTop:0},700,'easeInBack').promise().done(function(){
         config.buscador.find('input').focus();
@@ -549,7 +532,6 @@
     config.buscador.find('input[type="text"]').on('focus',function(){
       $(this).val("");
     });
-
   }
 
     /*-------------------------------------fin modulos-------------------------------------------*/
@@ -576,5 +558,4 @@
       piesCont:$(".piesContainer"),
       modulo:piesModulo      
     });
-
 })(jQuery);

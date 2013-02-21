@@ -18,7 +18,7 @@ class MetadataRepository {
 	*/
 	public function getMetadataResourceList($criterio,$group,$idTerm){
 		$resources = DB::table('metadata128')->where('id_europeana_term','=',$idTerm)->
-							   where($criterio,'=',$group)->get(array('resultName','Title','Description','Subject','EuroType'));
+							   where($criterio,'=',$group)->get(array('resultName AS Link','Title','Description','Subject','EuroType'));
 		return $resources;
 	}
 }
