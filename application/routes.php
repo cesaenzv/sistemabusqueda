@@ -34,6 +34,10 @@
 
 Route::get('/', function()
 {
+	return View::make('home');
+});
+
+Route::get('/resource', function(){
 	return View::make('resource');
 });
 Route::controller('text');
