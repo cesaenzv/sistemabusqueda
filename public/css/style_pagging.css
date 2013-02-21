@@ -2,7 +2,7 @@
 	/* The main container div */
 	position:relative;
 	margin: 10px auto;
-	width:300px;
+	width:70%;
 	background:url('img/main_bg.jpg') repeat-x #aeadad;
 	border:1px solid #CCCCCC;
 	padding:10px 10px 50px 10px;
@@ -35,7 +35,7 @@
 	max-height: 50px;
 	overflow: scroll;
 	overflow-y:hidden;  
-	width: 280px; 
+	width: 70%; 
 	height: auto;
 	scrollCar
 }

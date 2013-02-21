@@ -53,14 +53,14 @@ $(document).ready(function($){
 		},
 		loadPopUp = function (dataBox){
 			var content = dataBox.find('div.data').html(),
-			title = dataBox.find('legend').text();
+			title = dataBox.find('h4.resourceTitle').text();
 			popUp.empty();					
 			popUp.append(content);
 			popUp.dialog('option','title',title);
 			popUp.dialog("open");
 		},
 		bindEvents= function(){				
-			$('.resourceBox fieldset button').on('click',function(){
+			$('.resourceBox article button').on('click',function(){
 				var dataBox = $(this).closest('div.resourceBox');
 				loadPopUp(dataBox);					
 			});			
