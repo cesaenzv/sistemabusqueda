@@ -10,9 +10,19 @@ class Metadata extends Eloquent {
 	public static $key = 'id_metadata_term';
 
 	public function europeanaTerm(){
+		return $this->belongs_to('EuropeanaTerm','id_europeana_term');		
+	}
 
-		return $this->belongs_to('EuropeanaTerm','id_europeana_term');
-		
+	public function mandatory(){
+		return $this->has_one('Mandatory','id_metadata_mandatory');
+	}
+
+	public function recomended(){
+		return $this->has_one('Recomended','id_metadata_recomended');
+	}
+
+	public function optional(){
+		return $this->has_one('Optional','id_metadata_optional');
 	}
 
 }

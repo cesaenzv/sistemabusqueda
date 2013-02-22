@@ -9,7 +9,7 @@ class EuropeanaTerm extends Eloquent {
 	public static $key = 'id_europeana_term'; 
 
 	public function metadata(){
-		return $this->has_many('Metadata','id_europeana_term');
+		return $this->has_many('Metadata','id_europeana_term');		
 	}
 
 	
