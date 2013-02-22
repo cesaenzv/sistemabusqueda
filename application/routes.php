@@ -45,6 +45,11 @@ Route::get('/form', function(){
 	return View::make('form');
 });
 
+Route::get('/prueba',function(){
+	
+	
+});
+
 Route::controller('text');
 Route::controller('resource');
 Route::get('jeez/caramba', 'home@hola');
