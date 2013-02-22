@@ -1,29 +1,41 @@
 $(document).ready(function($){
-	var formDiv, buttonCreate;
-
+	var buttonCreate, formUser,
+	urlGetFields, plantillaForms;
 	var formModule = (function(){
 		var init = function(config){
-			formDiv = config.formDiv;
 			buttonCreate = config.buttonForm;
-			configForm();			
+			urlGetFields = config.url;
+			plantillaForms=config.plantilla;
+			formUser = config.contentF;	
 			bindEvents();
 		},
 		bindEvents = function(){
-			buttonCreate.onclick(loadForm)
+			buttonCreate.on('click',loadForm);
 		},
-		configForm =function(){
-
+		configForm =function(formsUser){
+			var template = Handlebars.compile(plantillaForms);
+			var contenido = template({formM:formsUser});
+			console.log(formUser);
+			formUser.append(contenido);			
 		},
 		loadForm = function(){
-
+			ajaxRequest = $.ajax({
+				url:urlGetFields,
+				type:'post',
+				dataType:'json'
+			}).done(function(data){
+				configForm(data);
+			});
 		};
 		return{
-			init:init;
+			init:init
 		}
 	})();
 
 	formModule.init({
-		formDiv:$('#steps'),
-		buttonForm = $('#callFormButton');
+		plantilla:$('script#formTemplate').html(),
+		contentF:$('#wrapper'),
+		buttonForm:$('#callFormButton'),
+		url:"index.php/formc/getFormFields"
 	});
 });

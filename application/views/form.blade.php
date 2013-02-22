@@ -1,9 +1,7 @@
 @layout('master')
 @section('Content')
-	<div id="steps">
-		<form action="">
-			@include('handlebarsForm')
-		</form>
-	</div>
+	<div id="wrapper">
+		@include('handlebarsForm')
+	</div>	
 	<button id="callFormButton">Agregar Data</button>	
 @endsection

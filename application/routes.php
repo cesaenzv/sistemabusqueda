@@ -45,13 +45,16 @@ Route::get('/form', function(){
 	return View::make('form');
 });
 
+//Route::get('form', 'formc@getFormFields');
+
 Route::get('/prueba',function(){
-	
-	
+	$fields = DB::table('metadataMandatory')->columns();
+	dd($fields);
 });
 
 Route::controller('text');
 Route::controller('resource');
+Route::controller('formc');
 Route::get('jeez/caramba', 'home@hola');
 /*
 |--------------------------------------------------------------------------

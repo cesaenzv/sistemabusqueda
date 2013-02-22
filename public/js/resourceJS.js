@@ -15,7 +15,6 @@ $(document).ready(function($){
 				type:'post',
 				dataType:'json'
 			}).done(function(data){
-				console.log(data);	
 				setResources(data.resources,function(){					
 					activePopup();
 					bindEvents();
@@ -29,7 +28,6 @@ $(document).ready(function($){
 			}); 
 		},
 		setResources = function(items,callback){
-			console.log(items);
 			var template = Handlebars.compile(plantillaResource);
 			var contenido = template({resources:items});
 			listR.append(contenido);
@@ -81,7 +79,7 @@ $(document).ready(function($){
 	
 	resourceModule.init({
 		plantilla:$('script#resourceTemplate').html(),
-		url:"index.php/resource/getResource",
+		url:"index.php/resource/getResource"
 	});
 	resourceModule.loadResource(node,1);	
 });
