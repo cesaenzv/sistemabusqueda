@@ -40,8 +40,20 @@ Route::get('/', function()
 Route::get('/resource', function(){
 	return View::make('resource');
 });
+
+Route::get('/form', function(){
+	return View::make('form');
+});
+
+//Route::get('form', 'formc@getFormFields');
+
+Route::get('/prueba',function(){
+
+});
+
 Route::controller('text');
 Route::controller('resource');
+Route::controller('formc');
 Route::get('jeez/caramba', 'home@hola');
 /*
 |--------------------------------------------------------------------------

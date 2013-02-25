@@ -8,6 +8,7 @@ class PieRepository {
 		-Funcionalidad:
 			Metodo encargado de la creación de los pies, mediante la búsqueda en la BD y con respecto a todos los criterios
 		-Variables:
+			$column -> Representa la columna de la cual se va a construir el pie 
 			$termConsult -> Criterio de busqueda, puede recibir dos tipos de valores:1)Busqueda Textual: Termino textual a buscar
 																					 2)Busqueda Grafica: Id de metadato o de un europenaterm
 			$idColumn -> Identifica cual tipo de id se esta buscando mediante de busqueda: id_europeana_term, id_metadata_term
@@ -21,6 +22,7 @@ class PieRepository {
 		if($idColumn == "null"){			
 			$metadatas = DB::table('metadata128 AS m')
 				->join('europeanaterms128 AS e', 'm.id_europeana_term', '=', 'e.id_europeana_term')
+				->join('metadatamandatory AS ma', 'm.id_metadata_term', '=', 'ma.id_metadata_mandatory')
 				->where_termNameUtf8($termConsult)->group_by($column)
 				->get(array("$column AS column",DB::raw("count($column) AS numresources")));					
 			$pies=array('Column' => $column ,'PieData'=>$this->create_JsonPie($column,$metadatas),'Data'=>$metadatas);			
@@ -28,6 +30,7 @@ class PieRepository {
 		else{			
 			$metadatas = DB::table('metadata128 AS m')
 							->join('europeanaterms128 AS e', 'm.id_europeana_term', '=', 'e.id_europeana_term')
+							->join('metadatamandatory AS ma', 'm.id_metadata_term', '=', 'ma.id_metadata_mandatory')
 							->where($idColumn, '=',$termConsult)
 							->group_by($column)
 							->get(array("$column AS column",DB::raw("count($column) AS numresources")));

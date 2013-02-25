@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">	
 	{{ HTML::style('css/styles.css')}}
 	{{ HTML::style('css/style_pagging.css')}}
+	{{ HTML::style('css/styleForm.css')}}
 	<title>Sistema integrado de búsqueda</title>
 </head>
 <body>
@@ -47,6 +48,9 @@
 	{{ HTML::script('js/resourceJS.js')}}
 	{{ HTML::script('js/initScript.js')}}
 	{{ HTML::script('js/pagginJquery.js')}}   
+	{{ HTML::script('js/sliding.form.js')}}
+	{{ HTML::script('js/formMetadataJS.js')}}  
+
 
 </body>
 </html>

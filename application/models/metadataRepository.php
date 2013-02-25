@@ -7,18 +7,17 @@ class MetadataRepository {
 		Carlos Sáenz
 		<Resumen>
 		-Funcionalidad:
-			Metodo encargado de obtener los recursos asociados a un termino con respecto a un termino, dado un criterio y un subgrupo
-			de este criterio
-		-Variables:
-			$criterio->Criterio que realiza la agrupacion de los metada
-			$group->Sub grupo del criterio por el cual se esta consultado los recursos
-			$idTerm->Id que identifica el termino por el cual se realiza la consulta de los pies
+			Metodo encargado de obtener el id_metadata_term con respecto al id_europena_term
+		-Variables:			
+			$idTerm->Id que identifica el termino por el cual se realiza la consulta de los pies, conocido en la BD
+			como term_id en la tabla de europena terms
 		-Retorno:
-			$resources->Arreglo que contiene la informacion de los recursos recuperados
+			$resources->Arreglo que contiene las id´s de los metadatos relacionados al id del termino termino
 	*/
-	public function getMetadataResourceList($criterio,$group,$idTerm){
-		$resources = DB::table('metadata128')->where('id_europeana_term','=',$idTerm)->
-							   where($criterio,'=',$group)->get(array('resultName AS Link','Title','Description','Subject','EuroType'));
-		return $resources;
+	public function get_MetadataId($idTerm){		
+		$metadatas = DB::table('metadata128 AS m')
+						->join('europeanaterms128 AS e','e.id_europeana_term','=','m.id_europeana_term')
+						->where('e.term_id','=',$idTerm)->get('id_metadata_term');
+		return $metadatas;
 	}
 }
