@@ -122,7 +122,8 @@
             Events:{
               enable:true,
               onClick: function(node, eventInfo, e){
-                console.log(node);
+                console.log(Pie);
+                resourceModule.loadResource(node,1);
               }
             }
         });
@@ -519,8 +520,29 @@
   }
 
     /*-------------------------------------fin modulos-------------------------------------------*/
+
+
+var node = {
+    name:'EuroLanguage',
+    label:'en'
+  };
+  
+  resourceModule.init({
+    plantilla:$('script#resourceTemplate').html(),
+    url:"index.php/resource/getResource",
+  });
+
+  resourceModule.loadResource(node,1);
+
+
+
+
+
+
+
+
 /****Pensar en como se estan cargando los recursos desde el buscador*******/
- 
+
     visModulo.cargarData({
       arbolJson:'index.php/buscador/cargarArbol',
       piesJson:'index.php/buscador/pieArbol'
