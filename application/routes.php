@@ -48,8 +48,7 @@ Route::get('/form', function(){
 //Route::get('form', 'formc@getFormFields');
 
 Route::get('/prueba',function(){
-	$fields = DB::table('metadataMandatory')->columns();
-	dd($fields);
+
 });
 
 Route::controller('text');

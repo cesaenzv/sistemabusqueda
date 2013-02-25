@@ -16,7 +16,7 @@ class MetadataRepository {
 	*/
 	public function get_MetadataId($idTerm){		
 		$metadatas = DB::table('metadata128 AS m')
-						->join('eurpeanaterms128 AS e','e.id_europena_term','m.id_europena_term')
+						->join('europeanaterms128 AS e','e.id_europeana_term','=','m.id_europeana_term')
 						->where('e.term_id','=',$idTerm)->get('id_metadata_term');
 		return $metadatas;
 	}

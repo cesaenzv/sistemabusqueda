@@ -81,7 +81,7 @@ $(document).ready(function($){
 		plantilla:$('script#resourceTemplate').html(),
 		url:"index.php/resource/getResource"
 	});
-	resourceModule.loadResource(node,1);	
+	resourceModule.loadResource(node,1000015647);	
 });
 
 
