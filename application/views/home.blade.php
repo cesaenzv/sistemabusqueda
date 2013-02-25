@@ -22,7 +22,7 @@
 			<div class="piesContainer">
 			@include('handlebarsTemplate')				
 				<div class="pieHolder grid_6 clearfix ">
-					<div class="pie" id="EuroLanguage"></div>
+					<div class="pie" id="Language"></div>
 					<div class="pieContent">
 						
 					</div>
@@ -34,7 +34,7 @@
 					</div>
 				</div>
 				<div class="pieHolder grid_6 clearfix">
-					<div class="pie" id="EuroType"></div>
+					<div class="pie" id="Type"></div>
 					<div class="pieContent">
 						
 					</div>
@@ -46,7 +46,7 @@
 					</div>
 				</div>
 				<div class="pieHolder grid_6 clearfix">
-					<div class="pie" id="EuroRights"></div>
+					<div class="pie" id="Rights"></div>
 					<div class="pieContent">
 												
 					</div>

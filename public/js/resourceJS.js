@@ -14,7 +14,7 @@ $(document).ready(function($){
 				data:{criterio:node.name,group:node.label,idTerm:idTermino},
 				type:'post',
 				dataType:'json'
-			}).done(function(data){														    				
+			}).done(function(data){
 				setResources(data.resources,function(){					
 					activePopup();
 					bindEvents();
@@ -27,11 +27,11 @@ $(document).ready(function($){
 				contentR.show();				
 			}); 
 		},
-		setResources = function(items,callback){						
+		setResources = function(items,callback){
 			var template = Handlebars.compile(plantillaResource);
 			var contenido = template({resources:items});
 			listR.append(contenido);
-			popUp = $('#popUp');
+			popUp = $('#popUp');			
 			callback();
 		},
 		activePopup = function(){
@@ -73,16 +73,15 @@ $(document).ready(function($){
 
 	//Node -> Nodo del pie que se selecciona
 	var node = {
-		name:'EuroLanguage',
+		name:'Language',
 		label:'en'
 	};
 	
 	resourceModule.init({
 		plantilla:$('script#resourceTemplate').html(),
-		url:"index.php/resource/getResource",
+		url:"index.php/resource/getResource"
 	});
-
-	resourceModule.loadResource(node,1);	
+	resourceModule.loadResource(node,1000015647);	
 });
 
 

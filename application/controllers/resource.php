@@ -60,8 +60,10 @@ class Resource_Controller extends Base_Controller {
 	*/
 	public function action_getResource(){		
 		try{
-			$metadataRepository = new MetadataRepository();
-			$datos['resources'] = $metadataRepository->getMetadataResourceList(Input::get('criterio'),Input::get('group'),Input::get('idTerm'));
+			$metadataR = new MetadataRepository();
+			$mandatoryR = new MandatoryRepository();
+			$metadatasId = $metadataR->get_MetadataId(Input::get('idTerm'));
+			$datos['resources'] = $mandatoryR->getMandatoryResourceList($metadatasId,Input::get('criterio'),Input::get('group'));
 			return Response::json($datos);
 		}
 		catch(Exception $error){
