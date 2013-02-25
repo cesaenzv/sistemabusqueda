@@ -1,11 +1,12 @@
 <script type="text/x-handlebars-template" id="resourceTemplate">
 	{{#each resources}}
 		<li>
-			<div class="resourceBox">			
+			<div class="resourceBox">
+						
 				<article>										
 					<h4 class="resourceTitle">{{title}}</h4>
 					<p>{{description}}</p>					
-					<button>Ver mas</button>
+					<button class="ui-state-active">Ver mas</button>
 					<div class="rating">PONER CALIFICACION</div>
 				</article>
 				<div class="data hidden">

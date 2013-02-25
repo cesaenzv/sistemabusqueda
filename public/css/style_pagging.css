@@ -1,16 +1,12 @@
 #contentResource{
 	/* The main container div */
-	position:relative;
-	margin: 10px auto;
-	width:70%;
-	background:url('img/main_bg.jpg') repeat-x #aeadad;
-	border:1px solid #CCCCCC;
-	padding:10px 10px 50px 10px;
 	
-	/* CSS3 rounded cornenrs */	
-	-moz-border-radius:12px;
-	-webkit-border-radius:12px;
-	border-radius:12px;
+	width:70%;
+	background:rgba(200,200,200,0.9);
+	border:1px solid #ffffff;
+	padding:10px 10px 60px 10px;
+	
+	
 }
 
 #listResource{
@@ -19,8 +15,8 @@
 	width:100%;
 	overflow:hidden;
 	position:relative;
-	background:url('img/dark_bg.jpg') repeat #4e5355;
-	padding-bottom:10px;
+	background: rgba(0,0,0,1) url("../img/fondoAuto.png");
+	padding:10px 0;
 	/*	CSS3 inner shadow (the webkit one is commeted, because Google Chrome
 		does not like rounded corners combined with inset shadows): */
 
@@ -75,12 +71,14 @@ a.swShowPage.active{
 }
 
 #listResource li{
-	background-color:#F4F4F4;
+	background-color:rgba(200,200,200,0.7);
 	list-style:none outside none;
-	margin:10px 10px 0;
+	margin:10px 2.5% 0 2.5%;
 	padding:20px;
+	box-sizing:border-box;
 	float:left;
-
+	width:45%;
+	min-height:206px;
 	/* Regular CSS3 box shadows (not inset): */
 
 	-moz-box-shadow:0 0 6px #111111;
@@ -88,13 +86,13 @@ a.swShowPage.active{
 	box-shadow:0 0 6px #111111;
 }
 
-#listResource,
+/*#listResource,
 #listResource li{
-	/* Applying rouded corners to both the holder and the holder lis */
+	
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px;
 	border-radius:8px;
-}
+}*/
 
 #popUp{
 	width:550;

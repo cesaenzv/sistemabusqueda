@@ -1,14 +1,20 @@
-$(document).ready(function($){
-	var listR = $('#listResource'),		
-	contentR = $('#contentResource'),
-	popUp, plantillaResource, urlGetResource;
+
+	
 
 	var resourceModule = (function(){
-		var init = function(config){
+
+		var listR = $('#listResource'),		
+		contentR = $('#contentResource'),
+		popUp, plantillaResource, urlGetResource, template
+
+		init = function(config){
 			plantillaResource = config.plantilla;
 			urlGetResource = config.url;
+			template = Handlebars.compile(plantillaResource);
+			bindEvents();
 		},
-		loadResource = function(node,idTermino){			
+		loadResource = function(node,idTermino){
+					
 			ajaxRequest = $.ajax({
 				url:urlGetResource,
 				data:{criterio:node.name,group:node.label,idTerm:idTermino},
@@ -17,10 +23,10 @@ $(document).ready(function($){
 			}).done(function(data){														    				
 				setResources(data.resources,function(){					
 					activePopup();
-					bindEvents();
+					contentR.addClass('contentVisible');
 				});
 				listR.sweetPages({
-					perPage:5
+					perPage:4
 				});
 				var controls =  $('.swControls').detach();
 				controls.appendTo(contentR);
@@ -28,7 +34,7 @@ $(document).ready(function($){
 			}); 
 		},
 		setResources = function(items,callback){						
-			var template = Handlebars.compile(plantillaResource);
+			
 			var contenido = template({resources:items});
 			listR.append(contenido);
 			popUp = $('#popUp');
@@ -59,8 +65,13 @@ $(document).ready(function($){
 			popUp.dialog('option','title',title);
 			popUp.dialog("open");
 		},
-		bindEvents= function(){				
-			$('.resourceBox article button').on('click',function(){
+		bindEvents= function(){
+		$('.closeTag').on('click',function(){
+			$(this).parent().removeClass('contentVisible');
+			listR.empty();
+			$('.swControls').remove();
+		})				
+			listR.on('click', 'div.resourceBox button',function(){
 				var dataBox = $(this).closest('div.resourceBox');
 				loadPopUp(dataBox);					
 			});			
@@ -72,18 +83,18 @@ $(document).ready(function($){
 	})();
 
 	//Node -> Nodo del pie que se selecciona
-	var node = {
-		name:'EuroLanguage',
-		label:'en'
-	};
+	// var node = {
+	// 	name:'EuroLanguage',
+	// 	label:'en'
+	// };
 	
-	resourceModule.init({
-		plantilla:$('script#resourceTemplate').html(),
-		url:"index.php/resource/getResource",
-	});
+	// resourceModule.init({
+	// 	plantilla:$('script#resourceTemplate').html(),
+	// 	url:"index.php/resource/getResource",
+	// });
 
-	resourceModule.loadResource(node,1);	
-});
+	// resourceModule.loadResource(node,1);	
+
 
 
 
