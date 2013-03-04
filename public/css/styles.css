@@ -242,6 +242,55 @@ div.contentVisible{
 }
 
 
+
+
+
+ span.popupDesc{
+	margin-bottom:1em;
+	font-size: 1.1em;
+	display: inline-block;
+	text-shadow: 0 0 15px #2597b8;
+	font-family: "Century Gothic", "WalkwayBoldRegular";
+	font-weight: bold;
+}
+
+ img.popupImg{
+	float:left;
+	display:inline-block;
+	margin-right: 32px;
+}
+
+p.descParagraph{
+	margin-bottom: 1em;
+	text-transform: lowercase;
+
+}
+
+div.subject{
+	max-height: 9em;
+	overflow-y: scroll;
+	padding:.5em;
+	padding-top: 0;
+	background-color: rgba(0,0,0,0.9);	
+	 
+}
+
+.subject p{
+	line-height:1.4em;
+	-webkit-column-count:2;
+}
+
+div.subject:hover{
+	box-shadow: 0 0 0 1px white,
+				0 0 10px 1px #2597b8;
+}
+
+a.popupLink{
+	color:#2597b8;
+	display: inline-block;
+	margin-top:1.5em;
+}
+
 /* Let's get this party started */
 ::-webkit-scrollbar {
     width: 12px;

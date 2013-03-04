@@ -21,12 +21,13 @@
 				type:'post',
 				dataType:'json'
 			}).done(function(data){
+				console.log(data);
 				setResources(data.resources,function(){					
 					activePopup();
 					contentR.addClass('contentVisible');
 				});
 				listR.sweetPages({
-					perPage:4
+					perPage:6
 				});
 				var controls =  $('.swControls').detach();
 				controls.appendTo(contentR);
@@ -52,10 +53,10 @@
         			duration: 100
 				}
 			});
-			popUp.dialog("option","minWidth",550);
-			popUp.dialog("option","maxWidth",560);
+			popUp.dialog("option","minWidth",750);
+			popUp.dialog("option","maxWidth",750);
 			popUp.dialog("option","minHeight",300);
-			popUp.dialog("option","maxHeight",310);
+			popUp.dialog("option","maxHeight",500);
 		},
 		loadPopUp = function (dataBox){
 			var content = dataBox.find('div.data').html(),
