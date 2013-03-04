@@ -122,8 +122,10 @@
             Events:{
               enable:true,
               onClick: function(node, eventInfo, e){
+
                 
                 resourceModule.loadResource(node,modulo.actual().root);
+
               }
             }
         });
@@ -282,6 +284,7 @@
         });
         ht.loadJSON(json);
         ht.refresh(); 
+        console.log(ht);
         return ht;
       },
       crearHyperTree = function(json){
@@ -382,7 +385,7 @@
         });
         ht.loadJSON(json);
         ht.refresh(); 
-        console.log(ht);
+        
         return ht;
       },
 
