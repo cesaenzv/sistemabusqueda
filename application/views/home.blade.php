@@ -62,5 +62,12 @@
 		<div class="panelBajo grid_3" id="titulo"></div>
 	</div>
 	<div id="dialogo" title="Mensaje importante !!" style="display: none;"></div>
+	<div id="contentResource">
+		<span class="closeTag">X</span>
+	    <ul id="listResource">
+	    	
+	    </ul>
+	    @include('handlebarsResource')
+	</div>
 </section><!-- Fin del panel contenido-->	
 @endsection
