@@ -45,11 +45,12 @@
 	{{ HTML::script('js/jquery.mousewheel.min.js')}}
 	{{ HTML::script('js/handlebars.js')}}
 	{{ HTML::script('js/data.js')}}
-	{{ HTML::script('js/initScript.js')}}
 	{{ HTML::script('js/resourceJS.js')}}
-	{{ HTML::script('js/pagginJquery.js')}}
+	{{ HTML::script('js/initScript.js')}}
+	{{ HTML::script('js/pagginJquery.js')}}   
 	{{ HTML::script('js/sliding.form.js')}}
 	{{ HTML::script('js/formMetadataJS.js')}}  
+
 
 </body>
 </html>
