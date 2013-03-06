@@ -122,8 +122,10 @@
             Events:{
               enable:true,
               onClick: function(node, eventInfo, e){
-                console.log(json);
-                resourceModule.loadResource(node,1);
+
+                
+                resourceModule.loadResource(node,modulo.actual().root);
+
               }
             }
         });
@@ -522,18 +524,19 @@
 
     /*-------------------------------------fin modulos-------------------------------------------*/
 
-
-var node = {
-    name:'EuroLanguage',
-    label:'en'
-  };
+// codigo para probar recursos
+// var node = {
+//     name:'Language',
+//     label:'en'
+//   };
+//   resourceModule.loadResource(node,1000304728);
   
   resourceModule.init({
     plantilla:$('script#resourceTemplate').html(),
-    url:"index.php/resource/getResource",
+    url:"resource/getResource",
   });
 
-  resourceModule.loadResource(node,1);
+
 
 
 

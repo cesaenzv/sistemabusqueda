@@ -73,12 +73,12 @@ a.swShowPage.active{
 #listResource li{
 	background-color:rgba(200,200,200,0.7);
 	list-style:none outside none;
-	margin:10px 2.5% 0 2.5%;
+	margin:10px 1.5% 0 1.5%;
 	padding:20px;
 	box-sizing:border-box;
 	float:left;
-	width:45%;
-	min-height:206px;
+	width:30%;
+	min-height:255px;
 	/* Regular CSS3 box shadows (not inset): */
 
 	-moz-box-shadow:0 0 6px #111111;
@@ -104,7 +104,3 @@ div.hidden{
 	display: none;
 }
 
-div.subject{
-	max-height: 7em;
-	overflow-y: scroll; 
-}
