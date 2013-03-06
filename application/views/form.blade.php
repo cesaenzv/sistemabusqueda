@@ -5,3 +5,9 @@
 	</div>	
 	<button id="callFormButton">Agregar Data</button>	
 @endsection
+
+@section('scriptForm')
+
+	{{ HTML::script('js/formMetadataJS.js')}} 
+	
+@endsection
