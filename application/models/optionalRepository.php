@@ -13,7 +13,7 @@ class OptionalRepository {
 			$fields->Arreglo que contiene la informacion de los atributos de la base de datos
 	*/
 	public function getFormFields(){
-		$fields = DB::table('metadataOptional')->columns();
+		$fields = DB::table('metadataOptional')->columns('id_metadata_optional');
 		return $fields;
 	}
 }

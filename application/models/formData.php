@@ -3,18 +3,22 @@ class FormData {
 
 	public static function checkDataType ($fields){
 		foreach ($fields as $field) {
-			switch ($field->column_type) {
-				case 'int(11)':
-					$field->column_type = "number";
-					$field->attribute = 'min="0"';
+			switch ($field->data_type) {
+				case 'int':
+					$field->tagType = "input";
+					$field->attribute = 'type="number" min="0"';
 					break;
 				case 'longtext':
-					$field->column_type = "textarea";
-					$field->attribute = 'maxlength="500"';
+					$field->tagType = "textarea";
+					$field->attribute = 'maxlength="1000"';
+					break;
+				case 'varchar':
+					$field->tagType = "textarea";
+					$field->attribute = 'maxlength='+$field->character_maximum_length+'"';
 					break;				
 				default:
-					$field->column_type ="text";
-					$field->attribute = ' ';
+					$field->tagType = "input";
+					$field->attribute = 'type="input" maxlength="'+$field->character_maximum_length+'"';
 					break;
 			}			
 		}
