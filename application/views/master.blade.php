@@ -39,17 +39,10 @@
 	</footer><!-- Fin del footer-->	
 
 	{{ HTML::script('js/jquery.js')}}
-	{{ HTML::script('js/jit.js')}}
-	{{ HTML::script('js/jquery-ui/js/jquery-ui.js')}}
-	{{ HTML::script('js/jquery.mCustomScrollbar.js')}}
-	{{ HTML::script('js/jquery.mousewheel.min.js')}}
 	{{ HTML::script('js/handlebars.js')}}
-	{{ HTML::script('js/data.js')}}
-	{{ HTML::script('js/resourceJS.js')}}
-	{{ HTML::script('js/initScript.js')}}
-	{{ HTML::script('js/pagginJquery.js')}}   
-	{{ HTML::script('js/sliding.form.js')}}
-	{{ HTML::script('js/formMetadataJS.js')}}  
+	@yield('mainScripts')   
+	
+	@yield('scriptForm') 
 
 
 </body>
