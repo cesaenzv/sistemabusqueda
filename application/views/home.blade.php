@@ -62,5 +62,25 @@
 		<div class="panelBajo grid_3" id="titulo"></div>
 	</div>
 	<div id="dialogo" title="Mensaje importante !!" style="display: none;"></div>
+	<div id="contentResource">
+		<span class="closeTag">X</span>
+	    <ul id="listResource">
+	    	
+	    </ul>
+	    @include('handlebarsResource')
+	</div>
 </section><!-- Fin del panel contenido-->	
+@endsection
+
+@section('mainScripts')
+	{{ HTML::script('js/jit.js')}}
+	{{ HTML::script('js/jquery-ui/js/jquery-ui.js')}}
+	{{ HTML::script('js/jquery.mCustomScrollbar.js')}}
+	{{ HTML::script('js/jquery.mousewheel.min.js')}}
+	{{ HTML::script('js/handlebars.js')}}
+	{{ HTML::script('js/data.js')}}
+	{{ HTML::script('js/resourceJS.js')}}
+	{{ HTML::script('js/pagginJquery.js')}}
+	{{ HTML::script('js/initScript.js')}}
+	
 @endsection

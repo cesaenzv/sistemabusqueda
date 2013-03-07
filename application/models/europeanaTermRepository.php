@@ -34,7 +34,7 @@ class EuropeanaTermRepository{
 			$terms->Arreglo de nombre de los terminos
 	*/
 	public function get_TermList(){
-		$terms = DB::table('europeanaterms128')->get('termNameUtf8');
+		$terms = DB::table('europeanaterms')->get('termNameUtf8');
 		return $terms;
 	}
 

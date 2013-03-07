@@ -38,7 +38,7 @@ class Resource_Controller extends Base_Controller {
 			return Response::json($datos);
 		}
 		catch(Exception $error){
-			$datos['mensaje'] = "Hubo un problema". $error->getMessage();
+			$datos['mensaje'] = "Hubo un problema resource/getPies". $error->getMessage();
 			return Response::json($datos);
 		}		
 	}
@@ -62,12 +62,12 @@ class Resource_Controller extends Base_Controller {
 		try{
 			$metadataR = new MetadataRepository();
 			$mandatoryR = new MandatoryRepository();
-			$metadatasId = $metadataR->get_MetadataId(Input::get('idTerm'));
+			$metadatasId = $metadataR->get_MetadataId(Input::get('idTerm'),Input::get('idColumn'));
 			$datos['resources'] = $mandatoryR->getMandatoryResourceList($metadatasId,Input::get('criterio'),Input::get('group'));
 			return Response::json($datos);
 		}
 		catch(Exception $error){
-			$datos['mensaje'] = "Hubo un problema";
+			$datos['mensaje'] = "Hubo un problema resource/getResource".$error->getMessage();
 			return Response::json($datos);
 		}
 	}

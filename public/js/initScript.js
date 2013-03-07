@@ -122,7 +122,10 @@
             Events:{
               enable:true,
               onClick: function(node, eventInfo, e){
-                console.log(node);
+
+                
+                resourceModule.loadResource(node,modulo.actual().root);
+
               }
             }
         });
@@ -281,6 +284,7 @@
         });
         ht.loadJSON(json);
         ht.refresh(); 
+        console.log(ht);
         return ht;
       },
       crearHyperTree = function(json){
@@ -381,7 +385,7 @@
         });
         ht.loadJSON(json);
         ht.refresh(); 
-        console.log(ht);
+        
         return ht;
       },
 
@@ -519,8 +523,30 @@
   }
 
     /*-------------------------------------fin modulos-------------------------------------------*/
+
+// codigo para probar recursos
+// var node = {
+//     name:'Language',
+//     label:'en'
+//   };
+//   resourceModule.loadResource(node,1000304728);
+  
+  resourceModule.init({
+    plantilla:$('script#resourceTemplate').html(),
+    url:"resource/getResource",
+  });
+
+
+
+
+
+
+
+
+
+
 /****Pensar en como se estan cargando los recursos desde el buscador*******/
- 
+
     visModulo.cargarData({
       arbolJson:'index.php/buscador/cargarArbol',
       piesJson:'index.php/buscador/pieArbol'
