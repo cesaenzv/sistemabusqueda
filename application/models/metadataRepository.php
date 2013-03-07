@@ -14,10 +14,10 @@ class MetadataRepository {
 		-Retorno:
 			$resources->Arreglo que contiene las id´s de los metadatos relacionados al id del termino termino
 	*/
-	public function get_MetadataId($idTerm){		
-		$metadatas = DB::table('metadata128 AS m')
-						->join('europeanaterms128 AS e','e.id_europeana_term','=','m.id_europeana_term')
-						->where('e.term_id','=',$idTerm)->get('id_metadata_term');
+	public function get_MetadataId($idTerm, $idColumn){		
+		$metadatas = DB::table('metadata AS m')
+						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
+						->where("m.$idColumn",'=',$idTerm)->get('id_metadata_term');
 		return $metadatas;
 	}
 }

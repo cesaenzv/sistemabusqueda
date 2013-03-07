@@ -63,7 +63,7 @@ $.fn.sweetPages = function(opts){
 	swPage.wrapAll('<div class="swSlider" />');
 	
 	// Setting the height of the ul to the height of the tallest page:
-	ul.height(maxHeight);
+	ul.height(maxHeight/3);
 	
 	var swSlider = ul.find('.swSlider');
 	swSlider.append('<div class="clear" />').width(totalWidth);

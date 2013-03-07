@@ -4,8 +4,8 @@ class Recommended extends Eloquent{
 
 	public static $timestamps = false;
 
-	public static $table = 'metadatarecomended';
+	public static $table = 'metadatarecommended';
 
-	public static $key = 'id_metadata_recomended';
+	public static $key = 'id_metadata_recommended';
 	
 }

@@ -39,7 +39,7 @@ class MandatoryRepository {
 			$fields->Arreglo que contiene la informacion de los atributos de la base de datos
 	*/
 	public function getFormFields(){
-		$fields = DB::table('metadataMandatory')->columns();		
+		$fields = DB::table('metadataMandatory')->columns('id_metadata_mandatory');
 		return $fields;
 	}
 }

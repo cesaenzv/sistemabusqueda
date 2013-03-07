@@ -20,16 +20,16 @@ class PieRepository {
 	*/
 	public function generate_Pies($column,$termConsult,$idColumn = "null"){		
 		if($idColumn == "null"){			
-			$metadatas = DB::table('metadata128 AS m')
-				->join('europeanaterms128 AS e', 'm.id_europeana_term', '=', 'e.id_europeana_term')
+			$metadatas = DB::table('metadata AS m')
+				->join('europeanaterms AS e', 'm.id_europeana_term', '=', 'e.id_europeana_term')
 				->join('metadatamandatory AS ma', 'm.id_metadata_term', '=', 'ma.id_metadata_mandatory')
 				->where_termNameUtf8($termConsult)->group_by($column)
 				->get(array("$column AS column",DB::raw("count($column) AS numresources")));					
 			$pies=array('Column' => $column ,'PieData'=>$this->create_JsonPie($column,$metadatas),'Data'=>$metadatas);			
 		}
 		else{			
-			$metadatas = DB::table('metadata128 AS m')
-							->join('europeanaterms128 AS e', 'm.id_europeana_term', '=', 'e.id_europeana_term')
+			$metadatas = DB::table('metadata AS m')
+							->join('europeanaterms AS e', 'm.id_europeana_term', '=', 'e.id_europeana_term')
 							->join('metadatamandatory AS ma', 'm.id_metadata_term', '=', 'ma.id_metadata_mandatory')
 							->where($idColumn, '=',$termConsult)
 							->group_by($column)

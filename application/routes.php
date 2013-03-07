@@ -45,9 +45,21 @@ Route::get('/form', function(){
 	return View::make('form');
 });
 
-//Route::get('form', 'formc@getFormFields');
+/*Route::get('form', 'formc@getFormFields',function($result){
+	
+	dd($result);
+});*/
 
 Route::get('/prueba',function(){
+	function get_MetadataId($idTerm, $idColumn){		
+		$metadatas = DB::table('metadata AS m')
+						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
+						->where("m.$idColumn",'=',$idTerm)->get('id_metadata_term');
+		return $metadatas;
+	}
+
+	$result = get_MetadataId(300111079, 'ParentKey');
+	dd($result);
 
 });
 

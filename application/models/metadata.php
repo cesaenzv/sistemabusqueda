@@ -5,7 +5,7 @@ class Metadata extends Eloquent {
 
 	public static $timestamps = false;
 
-	public static $table = 'metadata128';
+	public static $table = 'metadata';
 
 	public static $key = 'id_metadata_term';
 
@@ -18,7 +18,7 @@ class Metadata extends Eloquent {
 	}
 
 	public function recomended(){
-		return $this->has_one('Recomended','id_metadata_recomended');
+		return $this->has_one('Recommended','id_metadata_recommended');
 	}
 
 	public function optional(){
