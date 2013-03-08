@@ -20,7 +20,7 @@ class MandatoryRepository {
 		$resources = array();
 		foreach ($metadatasId as $metadataId) {
 			$result = Mandatory::where_id_metadata_mandatory($metadataId->id_metadata_term)
-				->where($criterio,'=',$group)->first(array('resultName AS Link','Title','Description','Subject','Type'));	
+				->where($criterio,'=',$group)->first(array('EuropeanaURL','Title','Description','Subject','Type'));	
 			if ($result){
 				$resources[] =$result->to_array();
 			}
@@ -39,7 +39,7 @@ class MandatoryRepository {
 			$fields->Arreglo que contiene la informacion de los atributos de la base de datos
 	*/
 	public function getFormFields(){
-		$fields = DB::table('metadataMandatory')->columns();		
+		$fields = DB::table('metadataMandatory')->columns('id_metadata_mandatory');
 		return $fields;
 	}
 }

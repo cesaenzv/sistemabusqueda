@@ -7,7 +7,7 @@
 					{{#each fieldForm}}
 						<p>
 							<label for="{{column_name}}">{{column_name}}:</label>				
-							<input {{attribute}} type="{{column_type}}" name="{{column_name}}"/>
+							<{{tagType}} {{attribute}} name="{{column_name}}" id="{{column_name}}"/>
 						</p>						
 					{{/each}}
 				</fieldset>

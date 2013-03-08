@@ -14,7 +14,7 @@ class Formc_Controller extends Base_Controller {
 	function action_getFormFields(){
 		$forms = array();
 		$mandatoryR = new MandatoryRepository();
-		$recomendedR = new RecommendedRepository();
+		$recommendedR = new RecommendedRepository();
 		$optionalR = new OptionalRepository();
 
 		$forms[]=array( 'formName' =>'Formulario Obligatorio',
@@ -24,7 +24,7 @@ class Formc_Controller extends Base_Controller {
 		$forms[]=array( 'formName' =>'Formulario Recomendado',
 						'formAttribute' => '',
 						'listAttribute' => '',
-						'fieldForm'=>$recomendedR->getFormFields());
+						'fieldForm'=>$recommendedR->getFormFields());
 		$forms[]=array( 'formName' =>'Formulario Opcional',
 						'formAttribute' => '',
 						'listAttribute' => '',
