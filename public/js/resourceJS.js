@@ -13,11 +13,11 @@
 			template = Handlebars.compile(plantillaResource);
 			bindEvents();
 		},
-		loadResource = function(node,idTermino){
+		loadResource = function(node,idTermino,idColumna){
 					
 			ajaxRequest = $.ajax({
 				url:urlGetResource,
-				data:{criterio:node.name,group:node.label,idTerm:idTermino},
+				data:{criterio:node.name,group:node.label,idTerm:idTermino,idColumn:idColumna},
 				type:'post',
 				dataType:'json'
 			}).done(function(data){

@@ -61,7 +61,7 @@
     var piesModulo = (function(){//Modulos crear pies
       var piesMarco = $('div.pie'),
       modulo,
-      plantilla = $('script#template').html(),// variable para tener la plantilla
+      template = Handlebars.compile($('script#template').html()),// variable para tener la plantilla
       pies = new Array(),
       getPies = function(){return pies;},
       setvisModulo = function(nuevoModulo){modulo = nuevoModulo},
@@ -123,8 +123,17 @@
               enable:true,
               onClick: function(node, eventInfo, e){
 
+                var actualId = modulo.actual().root;
+                var currentNode = modulo.actual().graph.getNode(actualId);
+                if(currentNode.data.title === "is Concept"){
+                  resourceModule.loadResource(node,modulo.actual().root,'term_id');
+
+                }else if(currentNode.data.title === "is Category"){
+                   resourceModule.loadResource(node,modulo.actual().root,'ParentKey');
+                }
+                console.log(currentNode);
                 
-                resourceModule.loadResource(node,modulo.actual().root);
+                
 
               }
             }
@@ -150,7 +159,7 @@
         var contenedor = $('div#'+datos.criterio).siblings('div.pieContent');
         contenedor.children('div').remove();
           
-        var template = Handlebars.compile(plantilla),
+        //var template = Handlebars.compile(plantilla),
         contenido = template(datos);
         contenedor.append(contenido);
         setTimeout(function(){contenedor.children('div').addClass('visible');},500);//time out para que se active la transición css
