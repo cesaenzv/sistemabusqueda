@@ -3,11 +3,12 @@
 
 	var resourceModule = (function(){
 
-		var listR = $('#listResource'),		
+		var listR,		
 		contentR = $('#contentResource'),
 		popUp, plantillaResource, urlGetResource, template
 
 		init = function(config){
+			listR = $('#listResource') ;
 			plantillaResource = config.plantilla;
 			urlGetResource = config.url;
 			template = Handlebars.compile(plantillaResource);
@@ -22,10 +23,10 @@
 				dataType:'json'
 			}).done(function(data){
 				console.log(data);
-				setResources(data.resources,function(){					
-					activePopup();
-					contentR.addClass('contentVisible');
-				});
+				 setResources(data.resources,function(){					
+				 	activePopup();
+				 	contentR.addClass('contentVisible');
+				 });
 				listR.sweetPages({
 					perPage:6
 				});
@@ -37,9 +38,10 @@
 
 		setResources = function(items,callback){						
 			var contenido = template({resources:items});
-			listR.append(contenido);
-			popUp = $('#popUp');			
-			callback();
+			console.log(contenido);
+			 listR.html(contenido);
+			 popUp = $('#popUp');			
+			 callback();
 		},
 		activePopup = function(){
 			popUp.dialog({

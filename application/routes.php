@@ -38,7 +38,18 @@ Route::get('/', function()
 });
 
 Route::get('/resource', function(){
-	return View::make('resource');
+	$metadataR = new MetadataRepository();
+		$mandatoryR = new MandatoryRepository();
+	$metadatasId = $metadataR->get_MetadataId("300111078","ParentKey");
+	$resources = array();
+		foreach ($metadatasId as $metadataId) {
+			$result = Mandatory::where_id_metadata_mandatory($metadataId->id_metadata_term)
+				->where("Language",'=',"en")->first(array('EuropeanaURL','Title','Description','Subject','Type'));	
+			if ($result){
+				$resources[] =$result->to_array();
+			}
+		}				
+		dd($resources);
 });
 
 Route::get('/form', function(){
