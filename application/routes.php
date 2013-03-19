@@ -41,14 +41,14 @@ Route::get('/resource', function(){
 	return View::make('resource');
 });
 
-Route::get('/form', function(){
+/*Route::get('/form', function(){
 	return View::make('form');
-});
+});*/
 
-/*Route::get('form', 'formc@getFormFields',function($result){
+Route::get('form', 'formc@getFormFields',function($result){
 	
 	dd($result);
-});*/
+});
 
 Route::get('/prueba',function(){
 	function get_MetadataId($idTerm, $idColumn){		
