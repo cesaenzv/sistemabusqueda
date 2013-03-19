@@ -26,7 +26,6 @@ class FormData {
 						$options[$i] = trim($options[$i],"'");
 						$options[$i] = '<option value="'.$options[$i].'">'.$options[$i].'</option>';
 					}
-
 					$field->optionsSelect = $options;
 					break;
 				default:
