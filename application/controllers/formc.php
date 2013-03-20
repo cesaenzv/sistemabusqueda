@@ -11,6 +11,15 @@ class Formc_Controller extends Base_Controller {
 		-Retorno: 
 			$forms->Objeto json que contien la informacion de los campos de cada uno de los formularios			
 	*/
+
+
+	function __construct(){
+
+		parent::__construct();
+		$this->filter('before', 'auth')->only(array('index'));
+	}
+
+
 	function action_getFormFields(){
 		$forms = array();
 		$mandatoryR = new MandatoryRepository();
@@ -34,5 +43,9 @@ class Formc_Controller extends Base_Controller {
 			$form['fieldForm'] = FormData::checkDataType($form['fieldForm']);
 		}
 		return Response::json($forms);
+	}
+
+	function action_index(){
+		return View::make('form');
 	}
 }
