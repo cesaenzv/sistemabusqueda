@@ -42,4 +42,32 @@ class MandatoryRepository {
 		$fields = DB::table('metadataMandatory')->columns('id_metadata_mandatory');
 		return $fields;
 	}
+
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
+			Metodo encargado de guardar un nuevo objeto mandatory dentro de la base dedatos relacionado a un metadata
+		-Variables:			
+			
+		-Retorno:
+			$newMetadata-> Objeto de tipo Metadata, el cual es el nuevo recurso ingresado dentro de la base de datos
+	*/
+	public function insert_Mandatory($idMetadata,$europeanaUrl,$title,$description,$language,
+									$dataProvider,$isShownAt, $isShownBy,$provider,$subject,$type,
+									$coverage, $spatial, $rights, $country){
+		try{
+			$newData = array( "EuropeanaURL"=>$europeanaUrl, "Title"=>$title, "Description"=>$description,
+						  "Language"=>$language, "DataProvider"=>$dataProvider,	"IsShownAt"=>$isShownAt,
+						  "IShownBy"=>$isShownBy, "Provider"=>$provider, "Subject"=>$subject, "Type"=>$type,
+						  "Coverage"=>$coverage, "Spatial"=>$spatial, "Rights"=>$rights, "Country"=>$country);
+			$metadata = Metadata::find($idMetadata);
+			$newMandatory = new Mandatory($newData);
+			$newMandatory = $metadata->mandatory->insert($newMandatory);
+			return $newMandatory;
+		}catch(Exception $e){
+			return false;
+		}		
+	}
 }
