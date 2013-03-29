@@ -51,14 +51,35 @@ Route::get('form', 'formc@getFormFields',function($result){
 });
 
 Route::get('/prueba',function(){
-	function get_MetadataId($idTerm, $idColumn){		
-		$metadatas = DB::table('metadata AS m')
+	function get_MetadataId($idTerm, $idColumn){
+		if ($idColumn == "ParentKey"){
+			$metadatas = DB::table('metadata AS m')
 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
 						->where("m.$idColumn",'=',$idTerm)->get('id_metadata_term');
-		return $metadatas;
+			return $metadatas;
+		}
+		else if($idColumn == "term_id"){
+			$metadatas = DB::table('metadata AS m')
+						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
+						->where("e.$idColumn",'=',$idTerm)->get('id_metadata_term');
+			return $metadatas;
+		}		
+		
 	}
 
-	$result = get_MetadataId(300111079, 'ParentKey');
+	function getMandatoryResourceList($metadatasId,$criterio,$group){
+		$resources = array();
+		foreach ($metadatasId as $metadataId) {
+			$result = Mandatory::where_id_metadata_mandatory($metadataId->id_metadata_term)
+				->where($criterio,'=',$group)->first(array('EuropeanaURL','Title','Description','Subject','Type'));	
+			if ($result){
+				$resources[] =$result->to_array();
+			}
+		}				
+		return  $resources;
+	}
+
+	$result = getMandatoryResourceList(get_MetadataId(1000015647, 'term_id'),'Language','en');
 	dd($result);
 
 });
