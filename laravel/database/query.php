@@ -150,7 +150,7 @@ class Query {
     */
  	 
 	public function columns($primaryK){
-		$sql = "SELECT column_name, data_type, character_maximum_length 
+		$sql = "SELECT column_name, data_type, character_maximum_length, column_type 
 						FROM information_schema.columns WHERE table_name ='{$this->from}' AND column_name != '$primaryK'";	
 	    $result = $this->connection->query($sql, $this->bindings);	
 		return $result;	

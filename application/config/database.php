@@ -71,8 +71,13 @@ return array(
 			'driver'   => 'mysql',
 			'host'     => 'localhost',
 			'database' => 'aatnormalizada',
+<<<<<<< HEAD
 			'username' => 'root',
-			'password' => '',
+			'password' => 'root',
+=======
+			'username' => 'prueba',
+			'password' => '123456',
+>>>>>>> modificaciones consulta
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
@@ -82,7 +87,7 @@ return array(
 			'host'     => '127.0.0.1',
 			'database' => 'database',
 			'username' => 'root',
-			'password' => '',
+			'password' => 'root',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',

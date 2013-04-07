@@ -16,4 +16,20 @@ class RecommendedRepository{
 		$fields = DB::table('metadataRecommended')->columns('id_metadata_recommended');
 		return $fields;
 	}
+
+	public function insert_Recommended ($idMetadata,$alternative,$creator,$contributor,$date,$created,$issued,
+										$temporal,$publisher,$source,$isPartOf){
+		try{
+			$newData = array("Alternative"=>$alternative, "Creator"=>$creator, "Contributor"=>$contributor,	
+							 "Date"=>$date,"Created"=>$created,"Issued"=>$issued,"Temporal"=>$temporal,
+							 "Publisher"=>$publisher,"Source"=>$source,"IsPartOf"=>$isPartOf);
+			$metadata = Metadata::find($idMetadata);
+			$newRecommended = new Recommended($newData);
+			$newRecommended = $metadata->optional->insert($newRecommended);
+			return $newRecommended;
+		}catch(Exception $e){
+			return false;
+		}
+	}
+
 }
