@@ -15,7 +15,7 @@ class MetadataRepository {
 			$resources->Arreglo que contiene las id´s de los metadatos relacionados al id del termino
 	*/
 
-	public function get_MetadataId($idTerm, $idColumn,$numConsult){		
+	public function get_MetadataId($idTerm, $idColumn,$numConsult = 0){		
 		if ($idColumn == "ParentKey"){
 			$metadatas = DB::table('metadata AS m')
 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
