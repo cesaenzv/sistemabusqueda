@@ -11,6 +11,15 @@ class Formc_Controller extends Base_Controller {
 		-Retorno: 
 			$forms->Objeto json que contien la informacion de los campos de cada uno de los formularios			
 	*/
+
+
+	function __construct(){
+
+		parent::__construct();
+		$this->filter('before', 'auth')->only(array('index'));
+	}
+
+
 	function action_getFormFields(){
 		$forms = array();
 		$mandatoryR = new MandatoryRepository();
@@ -35,6 +44,11 @@ class Formc_Controller extends Base_Controller {
 		return Response::json($forms);
 	}
 
+
+	function action_index(){
+		return View::make('form');
+	}
+
 	/* Info
 		<Desarrollado>
 		Carlos Sáenz
@@ -52,32 +66,33 @@ class Formc_Controller extends Base_Controller {
 		$newMetadata = $metadataR->insert_Metadata(Input::get('id_europeana_term'), Input::get('ParentKey'));
 		if($newMetadata){			
 			$metadataId = $newMetadata->id_metadata_term;
-			$mensaje[] = "metadata"=>"Ok";						
+			$mensaje["metadata"] = "Ok";						
 		}else{
-			$mensaje[] = "metadata"=>"Problema";
+			$mensaje["metadata"] = "Problema";
 			return Response::json($mensaje);
 		}
 		$mandatoryR = new MandatoryRepository();
-		$resultMandatory = $mandatoryR->insert_Mandatory($metadataId,);
+		$resultMandatory = $mandatoryR->insert_Mandatory($metadataId);
 		if($resultMandatory){
-			$mensaje[] = "mandatory"=> "Ok";
+			$mensaje["mandatory"] =  "Ok";
 		}else{
-			$mensaje[] = "mandatory"=> "Problema";
+			$mensaje["mandatory"] =  "Problema";
 		}
 		$recommendedR = new RecommendedRepository();
-		$resultRecommended = $recommendedR->insert_Recommended($metadataId,);
+		$resultRecommended = $recommendedR->insert_Recommended($metadataId);
 		if($resultRecommended){
-			$mensaje[] = "recommended"=> "Ok";
+			$mensaje["recommended"] =  "Ok";
 		}else{
-			$mensaje[] = "recommended"=> "Problema";
+			$mensaje["recommended"] = "Problema";
 		}
 		$optionalR = new MandatoryRepository();
-		$resultOptional = $optinalR->insert_Optional($metadataId,);
+		$resultOptional = $optinalR->insert_Optional($metadataId);
 		if($resultOptional){
-			$mensaje[] = "optinal"=> "Ok";
+			$mensaje["optinal"] =  "Ok";
 		}else{
-			$mensaje[] = "optional"=> "Problema";
+			$mensaje["optional"] =  "Problema";
 		}
 		return Response::json($mensaje);
+
 	}
 }

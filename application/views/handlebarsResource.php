@@ -15,7 +15,7 @@
 					<img src="img/{{type}}.png" class="popupImg"/>
 					<span class="popupDesc">Subject:</span>
 					<div class="subject"><p>{{subject}}</p></div>
-					<a href={{link}} target="_blank" class="popupLink">Ir a fuente...</a>
+					<a href={{europeanaurl}} target="_blank" class="popupLink">Ir a fuente...</a>
 				</div>			
 			</div>
 		</li>
