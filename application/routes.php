@@ -84,6 +84,8 @@ Route::get('form', 'formc@getFormFields',function($result){
 Route::get('nuevorecurso', 'formc@index');
 
 Route::get('logout', function(){
+
+	
 	Auth::logout();
 	return Redirect::to('account');
 });
