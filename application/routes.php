@@ -37,9 +37,7 @@ Route::get('/', function()
 	return View::make('home');
 });
 
-Route::get('/resource', function(){
-	return View::make('resource');
-});
+
 
 /*Route::get('/form', function(){
 	return View::make('form');
@@ -50,44 +48,69 @@ Route::get('form', 'formc@getFormFields',function($result){
 	dd($result);
 });
 
-Route::get('/prueba',function(){
-	function get_MetadataId($idTerm, $idColumn){
-		if ($idColumn == "ParentKey"){
-			$metadatas = DB::table('metadata AS m')
-						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
-						->where("m.$idColumn",'=',$idTerm)->get('id_metadata_term');
-			return $metadatas;
-		}
-		else if($idColumn == "term_id"){
-			$metadatas = DB::table('metadata AS m')
-						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
-						->where("e.$idColumn",'=',$idTerm)->get('id_metadata_term');
-			return $metadatas;
-		}		
+// Route::get('/prueba',function(){
+// 	function get_MetadataId($idTerm, $idColumn){
+// 		if ($idColumn == "ParentKey"){
+// 			$metadatas = DB::table('metadata AS m')
+// 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
+// 						->where("m.$idColumn",'=',$idTerm)->get('id_metadata_term');
+// 			return $metadatas;
+// 		}
+// 		else if($idColumn == "term_id"){
+// 			$metadatas = DB::table('metadata AS m')
+// 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
+// 						->where("e.$idColumn",'=',$idTerm)->get('id_metadata_term');
+// 			return $metadatas;
+// 		}		
 		
-	}
+// 	}
 
-	function getMandatoryResourceList($metadatasId,$criterio,$group){
-		$resources = array();
-		foreach ($metadatasId as $metadataId) {
-			$result = Mandatory::where_id_metadata_mandatory($metadataId->id_metadata_term)
-				->where($criterio,'=',$group)->first(array('EuropeanaURL','Title','Description','Subject','Type'));	
-			if ($result){
-				$resources[] =$result->to_array();
-			}
-		}				
-		return  $resources;
-	}
+// 	function getMandatoryResourceList($metadatasId,$criterio,$group){
+// 		$resources = array();
+// 		foreach ($metadatasId as $metadataId) {
+// 			$result = Mandatory::where_id_metadata_mandatory($metadataId->id_metadata_term)
+// 				->where($criterio,'=',$group)->first(array('EuropeanaURL','Title','Description','Subject','Type'));	
+// 			if ($result){
+// 				$resources[] =$result->to_array();
+// 			}
+// 		}				
+// 		return  $resources;
+// 	}
 
-	$result = getMandatoryResourceList(get_MetadataId(1000015647, 'term_id'),'Language','en');
-	dd($result);
+// 	$result = getMandatoryResourceList(get_MetadataId(1000015647, 'term_id'),'Language','en');
+// 	dd($result);
 
+
+Route::get('nuevorecurso', 'formc@index');
+
+Route::get('logout', function(){
+
+	
+	Auth::logout();
+	return Redirect::to('account');
 });
 
+
+
+// Route::get('/prueba',function(){
+// 	function get_MetadataId($idTerm, $idColumn){		
+// 		$metadatas = DB::table('metadata AS m')
+// 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
+// 						->where("m.$idColumn",'=',$idTerm)->get('id_metadata_term');
+// 		return $metadatas;
+// 	}
+
+// 	$result = get_MetadataId(300111079, 'ParentKey');
+// 	dd($result);
+
+// });
+
+
+Route::Controller('account');
 Route::controller('text');
 Route::controller('resource');
 Route::controller('formc');
-Route::get('jeez/caramba', 'home@hola');
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
@@ -158,5 +181,5 @@ Route::filter('csrf', function()
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::to('login');
+	if (Auth::guest()) return Redirect::to('account')->with('login_errors','Primero inicie sesión');
 });
