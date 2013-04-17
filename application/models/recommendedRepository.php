@@ -25,7 +25,7 @@ class RecommendedRepository{
 							 "Publisher"=>$publisher,"Source"=>$source,"IsPartOf"=>$isPartOf);
 			$metadata = Metadata::find($idMetadata);
 			$newRecommended = new Recommended($newData);
-			$newRecommended = $metadata->optional->insert($newRecommended);
+			$newRecommended = $metadata->recommended->insert($newRecommended);
 			return $newRecommended;
 		}catch(Exception $e){
 			return false;

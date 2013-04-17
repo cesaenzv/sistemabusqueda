@@ -72,8 +72,8 @@ return array(
 			'host'     => 'localhost',
 			'database' => 'aatnormalizada',
 
-			'username' => 'root',
-			'password' => '',
+			'username' => 'prueba',
+			'password' => '123456',
 
 			'charset'  => 'utf8',
 			'prefix'   => '',

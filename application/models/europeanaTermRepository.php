@@ -19,6 +19,7 @@ class EuropeanaTermRepository{
 		return $Id;
 	}
 
+	/*QUE ES ESTA FUNCION*/
 	public function get_Term_idByTerm($term){
 		$Id = EuropeanaTerm::where_termNameUtf8($term)->first()->id_europeana_term;
 		return array('id'=>$Id);
