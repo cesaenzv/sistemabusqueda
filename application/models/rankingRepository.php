@@ -19,7 +19,7 @@ class RankingRepository{
 		try {
 			$newData = array("id_metadata_term"=>$idMetadata, "qualification"=>$qualification, "idUser" => $idUser);
 			$metadata = Metadata::find($idMetadata);
-			$newRanking = new Ranking($newData)
+			$newRanking = new Ranking($newData);
 			$newRanking = $metadata->ranking->insert($newRanking);
 			return $newRanking;
 		}catch(Exception $e){
@@ -57,7 +57,7 @@ class RankingRepository{
 			$resources-> Array de los recursos recuperados desde la base de datos con el valor agregado del 
 			ranking
 	*/
-	function add_RankingValues($resources){
+	function get_RankingValues($resources){
 		foreach ($resources as $resource) {
 			$resource["ranking"] = $this.get_MetadataRanking($resource->idResource);
 		}

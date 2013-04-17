@@ -41,7 +41,7 @@
 	{{ HTML::script('js/jquery.js')}}
 	{{ HTML::script('js/handlebars.js')}}
 	@yield('mainScripts')   
-	
+	@yield('scriptRanking') 
 	@yield('scriptForm') 
 
 

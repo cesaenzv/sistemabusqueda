@@ -48,6 +48,11 @@ Route::get('form', 'formc@getFormFields',function($result){
 	dd($result);
 });
 
+Route::get('ranking',function()
+{	
+	return View::make('rankingTest');
+});
+
 // Route::get('/prueba',function(){
 // 	function get_MetadataId($idTerm, $idColumn){
 // 		if ($idColumn == "ParentKey"){
@@ -110,6 +115,7 @@ Route::Controller('account');
 Route::controller('text');
 Route::controller('resource');
 Route::controller('formc');
+Route::controller('ranking');
 
 /*
 |--------------------------------------------------------------------------

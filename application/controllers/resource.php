@@ -65,7 +65,7 @@ class Resource_Controller extends Base_Controller {
 			$metadatasId = $metadataR->get_MetadataId(Input::get('idTerm'),Input::get('idColumn'));
 			$resoruces = $mandatoryR->getMandatoryResourceList($metadatasId,Input::get('criterio'),Input::get('group'),Input::get('numConsult'));
 			$rankingR = new RankingRepository();
-			$datos['resources'] = $rankingR ->add_RankingValues($resources);
+			$datos['resources'] = $rankingR ->get_RankingValues($resources);
 
 			return Response::json($datos);
 		}

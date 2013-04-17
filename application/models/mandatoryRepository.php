@@ -22,7 +22,6 @@ class MandatoryRepository {
 			$result = Mandatory::where_id_metadata_mandatory($metadataId->id_metadata_term)
 				->where($criterio,'=',$group)->first(array('EuropeanaURL','Title','Description','Subject','Type'));	
 			if ($result){
-				$resource = array();
 				$resource = $result->to_array();
 				$resource["idResource"] = $metadataId->id_metadata_term;
 				$resources[] = $resource;
