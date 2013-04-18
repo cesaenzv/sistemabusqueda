@@ -1,5 +1,5 @@
 var rankingModule = (function(){
-	urlCalification = "ranking/saveCalification",
+	urlCalification = "index.php/ranking/saveCalification",
 	compliteImg = "completeImg.png",
 	haveImg ="haveImg.png";
 
@@ -19,36 +19,30 @@ var rankingModule = (function(){
 	},calificate = function(){
 		saveCalification($(this));
 	},saveCalification = function(divR){
-		var data = {
+		var dataR = {
 			resourceId : divR.attr("data-resId"),
 			scoreResource : divR.raty('score'),
 			userId : 2
 		}
-		console.log(divR);
-		console.log(data);
 		$.ajax({
 			url : urlCalification,
-			data :data,
-			type:'post',
-			success:successCalificaction(divR),
-			error: failureCalificaction
+			data :dataR,
+			type:'post'
+		}).done(function(result){
+			console.log(result);
+			if (result.msj){
+				console.log(result.msj);
+				divR.raty('readOnly', true);
+				alert("Gracias por la calificacion");
+			}else{
+				console.log(result.msj);
+				alert("No pudimos guardar su calificacion agradecemos su intención, intentelo nuevamente");
+			}
 		});
-	},successCalificaction = function(divR){
-		divR.raty('readOnly', true);
-		alert("Gracias por la calificacion");
-	}, failureCalificaction = function(){
-		alert("No pudimos guardar su calificacion agradecemos su intención, intentelo nuevamente");
-	},getDivData = function(div){
-		return {
-			resourceId : resourceId,
-			scoreResource : divRanking.raty('score'),
-			userId : 2
-		}
 	};
 
 	return {
 		init:init,
-		saveCalification:saveCalification
 	}
 })();
 
