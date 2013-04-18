@@ -1,6 +1,9 @@
 @layout('master')
 @section('Content')
-	<div id="star" style="height:50px;"></div>		
+	<div id="star"></div>		
+	<div id="star1"></div>
+	<div id="star2"></div>
+	<div id="star3"></div>
 @endsection
 
 @section('scriptRanking')
