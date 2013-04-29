@@ -17,10 +17,8 @@ var rankingModule = (function(){
 			path:'../public/img',
 			cancel:false
 		});
-	},calificate = function(score, evt){
-		
+	},calificate = function(score, evt){		
 		saveCalification();		
-
 	},saveCalification = function(){		
 		var data = {
 			resourceId : resourceId,
@@ -40,7 +38,6 @@ var rankingModule = (function(){
 	}, failureCalificaction = function(){
 		alert("No pudimos guardar su calificacion agradecemos su intención, intentelo nuevamente");
 	};
-
 	return {
 		init:init,
 		saveCalification:saveCalification
