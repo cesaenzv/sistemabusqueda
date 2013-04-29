@@ -131,10 +131,6 @@
                 }else if(currentNode.data.title === "is Category"){
                    resourceModule.loadResource(node,modulo.actual().root,'ParentKey',0);
                 }
-                console.log(currentNode);
-                
-                
-
               }
             }
         });
@@ -155,7 +151,6 @@
         return Pie;
       },
       setConventions = function(datos){ // compila la plantilla handlebars y muestra las convenciones de los pies
-       // console.log(datos);
         var contenedor = $('div#'+datos.criterio).siblings('div.pieContent');
         contenedor.children('div').remove();
           
@@ -293,7 +288,6 @@
         });
         ht.loadJSON(json);
         ht.refresh(); 
-        console.log(ht);
         return ht;
       },
       crearHyperTree = function(json){

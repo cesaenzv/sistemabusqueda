@@ -43,9 +43,14 @@ class RankingRepository{
 		-Retorno:
 			$rankingAvg-> Valor numero del promedio de todos los rankings asociados al metadata
 	*/
-	function get_MetadataRanking($idMetadata){
-		$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg();		 
-		return $rankingAvg;
+	function get_MetadataRanking($idMetadata=0){
+		try{
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg();
+			return $rankingAvg;	
+		}
+		catch(Exception $e){
+			return 1;
+		}
 	}
 
 	/* Info
@@ -61,9 +66,11 @@ class RankingRepository{
 			ranking
 	*/
 	function get_RankingValues($resources){
+		$myArry=array();
 		foreach ($resources as $resource) {
-			$resource["ranking"] = $this.get_MetadataRanking($resource->idResource);
-		}
-		return $resources;
+			$resource['ranking'] = $this->get_MetadataRanking($resource['idResource']);
+			$myArry[]=$resource;
+		}		
+		return $myArry;		
 	}
 }

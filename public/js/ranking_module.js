@@ -16,21 +16,13 @@ var rankingModule = (function(){
 			path:'../public/img',
 			cancel:false
 		});
-<<<<<<< HEAD
+
 	},calificate = function(score, evt){		
 		saveCalification();		
 	},saveCalification = function(){		
 		var data = {
 			resourceId : resourceId,
 			scoreResource : divRanking.raty('score'),
-=======
-	},calificate = function(){
-		saveCalification($(this));
-	},saveCalification = function(divR){
-		var dataR = {
-			resourceId : divR.attr("data-resId"),
-			scoreResource : divR.raty('score'),
->>>>>>> d217854ce13c9ffb07226c0121f3b9c37975e709
 			userId : 2
 		}
 		$.ajax({
@@ -54,15 +46,11 @@ var rankingModule = (function(){
 	}
 })();
 
-
 console.log("ranking");
 rankingModule.init({
 	divR:$("#star"),
 	resourceId:1,
 	resourceAvg:3.6
-<<<<<<< HEAD
-});
-=======
 });
 rankingModule.init({
 	divR:$("#star1"),
@@ -79,4 +67,3 @@ rankingModule.init({
 	resourceId:4,
 	resourceAvg:3.8
 });
->>>>>>> d217854ce13c9ffb07226c0121f3b9c37975e709

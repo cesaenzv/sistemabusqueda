@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'ignore' => array(),
+	'ignore' => array(E_ERROR),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -63,7 +63,7 @@ return array(
 
 	'logger' => function($exception)
 	{
-		Log::exception($exception);
+		Log::write('info', $exception);
 	},
 
 );

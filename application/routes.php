@@ -85,6 +85,9 @@ Route::get('ranking',function()
 // 	$result = getMandatoryResourceList(get_MetadataId(1000015647, 'term_id'),'Language','en');
 // 	dd($result);
 
+Route::get('/prueba',function(){
+	
+});
 
 Route::get('nuevorecurso', 'formc@index');
 

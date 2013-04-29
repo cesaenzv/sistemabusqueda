@@ -28,9 +28,8 @@
 				type:'post',
 				dataType:'json'
 			}).done(function(data){
-				console.log(data);
+				console.log(data.resources);
 				 setResources(data.resources,function(){
-
 				 	activePopup();
 				 	contentR.addClass('contentVisible');
 				 	if(data.resources.length < 200){
@@ -50,7 +49,6 @@
 
 		setResources = function(items,callback){						
 			var contenido = template({resources:items});
-			console.log(contenido);
 			 listR.html(contenido);
 			 popUp = $('#popUp');			
 			 callback();

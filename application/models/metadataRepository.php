@@ -20,13 +20,11 @@ class MetadataRepository {
 			$metadatas = DB::table('metadata AS m')
 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
 						->where("m.$idColumn",'=',$idTerm)->skip(200*$numConsult)->take(200)->get('id_metadata_term');
-
 			return $metadatas;
 		}
 		else if($idColumn == "term_id"){
 			$metadatas = DB::table('metadata AS m')
 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
-
 						->where("e.$idColumn",'=',$idTerm)->skip(200*$numConsult)->take(200)->get('id_metadata_term');
 			return $metadatas;
 		}
