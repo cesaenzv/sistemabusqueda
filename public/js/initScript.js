@@ -126,10 +126,10 @@
                 var actualId = modulo.actual().root;
                 var currentNode = modulo.actual().graph.getNode(actualId);
                 if(currentNode.data.title === "is Concept"){
-                  resourceModule.loadResource(node,modulo.actual().root,'term_id');
+                  resourceModule.loadResource(node,modulo.actual().root,'term_id',0);
 
                 }else if(currentNode.data.title === "is Category"){
-                   resourceModule.loadResource(node,modulo.actual().root,'ParentKey');
+                   resourceModule.loadResource(node,modulo.actual().root,'ParentKey',0);
                 }
                 console.log(currentNode);
                 

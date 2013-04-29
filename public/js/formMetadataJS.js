@@ -18,7 +18,7 @@
 			var contenido = template({formM:formsUser});
 			console.log(formUser);
 			formUser.append(contenido);
-			slideForm();			
+			//slideForm();			
 		},
 		loadForm = function(){
 			ajaxRequest = $.ajax({
@@ -26,6 +26,7 @@
 				type:'post',
 				dataType:'json'
 			}).done(function(data){
+				console.log(data);
 				configForm(data);
 			});
 		},

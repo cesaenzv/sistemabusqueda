@@ -2,29 +2,45 @@
 	<div id="steps">
 		<form id="formElem" name="formMetadata" action="" method="post">
 			{{#each formM}}
-				<fieldset class="step">
+				<fieldset class="step" id="{{formName}}">
 					<legend>{{formName}}</legend>
 					{{#each fieldForm}}
+
+						{{#if optionsSelect}}
 						<p>
-							<label for="{{column_name}}">{{column_name}}:</label>				
-							<{{tagType}} {{attribute}} name="{{column_name}}" id="{{column_name}}"/>
-						</p>						
+						<label for="{{column_name}}">{{column_name}}</label>
+						<select {{attribute}} name="{{column_name}}" id="{{column_name}}">
+								{{#each optionsSelect}}
+								{{{this}}}
+								{{/each}}
+						</select>
+						</p>
+							
+
+						{{else}}
+						
+							<p>
+								<label for="{{column_name}}">{{column_name}}:</label>				
+								<{{tagType}} {{attribute}} name="{{column_name}}" id="{{column_name}}"/>
+							</p>
+
+						{{/if}}
 					{{/each}}
 				</fieldset>
 			{{/each}}
-			<fieldset class="step">
+			<div class="Confirm">
                 <legend>Confirm</legend>					
                 <p class="submit">
-                    <button id="registerButton" type="submit">Register</button>
+                    <button id="registerButton" type="submit">Enviar</button>
                 </p>
-            </fieldset>
+            </div>
 		</form>
 	</div>
 	<div id="navigation">
 		<ul>
 			{{#each formM}}
 				<li {{listAttribute}}>
-					<a href="#">{{formName}}</a>
+					<a href="#{{formName}}">{{formName}}</a>
 				</li>
 			{{/each}}
 		</ul>			
