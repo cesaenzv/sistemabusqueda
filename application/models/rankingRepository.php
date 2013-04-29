@@ -17,13 +17,16 @@ class RankingRepository{
 	*/
 	function insert_Ranking($idMetadata, $qualification, $idUser){
 		try {
-			$newData = array("id_metadata_term"=>$idMetadata, "qualification"=>$qualification, "idUser" => $idUser);
-			$metadata = Metadata::find($idMetadata);
-			$newRanking = new Ranking($newData);
-			$newRanking = $metadata->ranking->insert($newRanking);
-			return $newRanking;
+			$newRanking = new Ranking(
+								array("id_metadata_term"=>$idMetadata, 
+									  "qualification"=>$qualification, 
+									  "idUser" => $idUser)
+							);
+			$metadata = Metadata::find($idMetadata);			
+			$newRanking = $metadata->ranking()->insert($newRanking);			
+			return true;
 		}catch(Exception $e){
-			return false;
+			return $e->getMessage();
 		}
 
 	}
