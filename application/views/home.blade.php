@@ -67,6 +67,8 @@
 	    <ul id="listResource">
 	    	
 	    </ul>
+	    <span id="prev">prev</span>
+	    <span id="next">next</span>
 	    @include('handlebarsResource')
 	</div>
 </section><!-- Fin del panel contenido-->	
