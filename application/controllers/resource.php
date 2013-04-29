@@ -62,8 +62,8 @@ class Resource_Controller extends Base_Controller {
 		try{
 			$metadataR = new MetadataRepository();
 			$mandatoryR = new MandatoryRepository();
-			$metadatasId = $metadataR->get_MetadataId(Input::get('idTerm'),Input::get('idColumn'));
-			$datos['resources'] = $mandatoryR->getMandatoryResourceList($metadatasId,Input::get('criterio'),Input::get('group'),Input::get('numConsult'));
+			$metadatasId = $metadataR->get_MetadataId(Input::get('idTerm'),Input::get('idColumn'),Input::get('numConsult'));
+			$datos['resources'] = $mandatoryR->getMandatoryResourceList($metadatasId,Input::get('criterio'),Input::get('group'));
 			return Response::json($datos);
 		}
 		catch(Exception $error){
