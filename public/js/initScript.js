@@ -571,4 +571,7 @@
       piesCont:$(".piesContainer"),
       modulo:piesModulo      
     });
+
+    
+
 })(jQuery);

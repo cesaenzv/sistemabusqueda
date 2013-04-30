@@ -7,7 +7,7 @@
 		contentR = $('#contentResource'),
 		popUp, plantillaResource, urlGetResource, template, currentIndex,
 		prevBtn = $('#prev'), nextBtn = $('#next'),
-		nodeCache, idTermCache, idColumnaCache;
+		nodeCache, idTermCache, idColumnaCache, resources;
 
 		init = function(config){
 			listR = $('#listResource') ;
@@ -28,9 +28,8 @@
 				type:'post',
 				dataType:'json'
 			}).done(function(data){
-				console.log(data.resources);
 				 setResources(data.resources,function(){
-				 	activePopup();
+				 	activePopup();				 	
 				 	contentR.addClass('contentVisible');
 				 	if(data.resources.length < 200){
 				 		console.log(data.resources.length);
@@ -43,15 +42,25 @@
 				});
 				var controls =  $('.swControls').detach();
 				controls.appendTo(contentR);
-				contentR.show();				
-			}); 
+				contentR.show();								
+			});
 		},
 
 		setResources = function(items,callback){						
-			var contenido = template({resources:items});
-			 listR.html(contenido);
-			 popUp = $('#popUp');			
-			 callback();
+			var contenido = template({resources:items});			
+			listR.html(contenido);
+			activeRankings(items);
+			popUp = $('#popUp');						
+			callback();
+		},
+		activeRankings = function(resources){
+			$.each(resources,function(index, resource){
+				rankingModule.init({
+					divR:$("#"+resource.idResource+"R"),
+					resourceId:resource.idResource,
+					resourceAvg:resource.ranking
+				});
+			});		
 		},
 
 		setCurrentIndex = function(index){

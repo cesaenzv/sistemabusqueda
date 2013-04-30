@@ -40,8 +40,9 @@
 
 	{{ HTML::script('js/jquery.js')}}
 	{{ HTML::script('js/handlebars.js')}}
+	{{ HTML::script('js/jquery.raty.js')}} 
+	{{ HTML::script('js/ranking_module.js')}}
 	@yield('mainScripts')   
-	@yield('scriptRanking') 
 	@yield('scriptForm') 
 
 
