@@ -45,7 +45,8 @@ class Account_Controller extends Base_Controller {
 							'password' => Input::get('password'));
 		//dd($credentials);
 		
-		
+		dd(Auth::attempt($credentials));
+		die();
 		if(Auth::attempt($credentials)){
 
 			return Redirect::to('nuevorecurso');

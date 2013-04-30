@@ -6,7 +6,7 @@
 					<h4 class="resourceTitle">{{title}}</h4>
 					<p>{{description}}</p>					
 					<button class="ui-state-active">Ver mas</button>
-					<div class="rating"><div id="{{ranking}}R"></div></div>
+					<div class="rating"><div id="{{id_metadata_mandatory}}"></div></div>
 				</article>
 				<div class="data hidden">
 					<span class="popupDesc">Description:</span>

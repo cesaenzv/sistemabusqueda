@@ -62,7 +62,7 @@ class Resource_Controller extends Base_Controller {
 		try{
 			$metadataR = new MetadataRepository();
 			$mandatoryR = new MandatoryRepository();
-			$metadatasId = $metadataR->get_MetadataId(Input::get('idTerm'),Input::get('idColumn'),Input::get('numConsult'));
+			$metadatasId = $metadataR->get_MetadataId(Input::get('idTerm'),Input::get('idColumn'),Input::get('numConsult'),Input::get('criterio'),Input::get('group'));
 			$resources = $mandatoryR->getMandatoryResourceList($metadatasId,Input::get('criterio'),Input::get('group'));
 			$rankingR = new RankingRepository();
 			$datos['resources'] = $rankingR ->get_RankingValues($resources);

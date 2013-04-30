@@ -20,13 +20,12 @@ class MandatoryRepository {
 		$resources = array();
 		foreach ($metadatasId as $metadataId) {
 			$result = Mandatory::where_id_metadata_mandatory($metadataId->id_metadata_term)
-				->where($criterio,'=',$group)->first(array('EuropeanaURL','Title','Description','Subject','Type'));	
-			if ($result){
-				$resource = $result->to_array();
-				$resource["idResource"] = $metadataId->id_metadata_term;
+				->where($criterio,'=',$group)->first(array('id_metadata_mandatory','EuropeanaURL','Title','Description','Subject','Type'));	
+			if ($result){				
+				$resource = $result->to_array();										
 				$resources[] = $resource;
 			}
-		}				
+		}						
 		return  $resources;
 	}
 

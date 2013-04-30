@@ -86,7 +86,17 @@ Route::get('ranking',function()
 // 	dd($result);
 
 Route::get('/prueba',function(){
-	
+	function get_MetadataRanking($idMetadata=0){
+		try{
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
+			return $rankingAvg;	
+		}
+		catch(Exception $e){
+			return 1;
+		}
+	}
+	dd(get_MetadataRanking(455));
+
 });
 
 Route::get('nuevorecurso', 'formc@index');

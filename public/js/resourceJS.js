@@ -20,14 +20,14 @@
 			nodeCache = node;
 			idTermCache = idTermino;
 			idColumnaCache = idColumna;
-			currentIndex = resultIndex; 
-					
+			currentIndex = resultIndex;
 			ajaxRequest = $.ajax({
 				url:urlGetResource,
 				data:{criterio:node.name,group:node.label,idTerm:idTermino,idColumn:idColumna,numConsult:resultIndex},
 				type:'post',
 				dataType:'json'
 			}).done(function(data){
+				console.log(data.resources);
 				 setResources(data.resources,function(){
 				 	activePopup();				 	
 				 	contentR.addClass('contentVisible');
@@ -56,8 +56,8 @@
 		activeRankings = function(resources){
 			$.each(resources,function(index, resource){
 				rankingModule.init({
-					divR:$("#"+resource.idResource+"R"),
-					resourceId:resource.idResource,
+					divR:$("#"+resource.id_metadata_mandatory),
+					resourceId:resource.id_metadata_mandatory,
 					resourceAvg:resource.ranking
 				});
 			});		

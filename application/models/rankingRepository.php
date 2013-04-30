@@ -45,7 +45,7 @@ class RankingRepository{
 	*/
 	function get_MetadataRanking($idMetadata=0){
 		try{
-			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg();
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
 			return $rankingAvg;	
 		}
 		catch(Exception $e){
@@ -66,11 +66,11 @@ class RankingRepository{
 			ranking
 	*/
 	function get_RankingValues($resources){
-		$myArry=array();
-		foreach ($resources as $resource) {
-			$resource['ranking'] = $this->get_MetadataRanking($resource['idResource']);
-			$myArry[]=$resource;
-		}		
-		return $myArry;		
+
+		foreach ($resources as $i=>$resource) {
+			$resource['ranking'] = $this->get_MetadataRanking($resource['id_metadata_mandatory']);
+			$resources[$i] = $resource;		
+		}
+		return $resources;		
 	}
 }
