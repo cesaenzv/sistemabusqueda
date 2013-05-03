@@ -20,7 +20,7 @@ class RankingRepository{
 			$newRanking = new Ranking(
 								array("id_metadata_term"=>$idMetadata, 
 									  "qualification"=>$qualification, 
-									  "idUser" => $idUser)
+									  "id" => $idUser)
 							);
 			$metadata = Metadata::find($idMetadata);			
 			$newRanking = $metadata->ranking()->insert($newRanking);			

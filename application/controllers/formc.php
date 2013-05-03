@@ -60,6 +60,8 @@ class Formc_Controller extends Base_Controller {
 			$mensaje->Respuesta de mensaje de exito o fallo de la insercion del nuevo metadato
 	*/
 	function action_saveFormData(){
+		dd(Input::all());
+		die();
 		$metadataId;
 		$mensaje =array();
 		$metadataR = new MetadataRepository();

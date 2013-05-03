@@ -13,7 +13,7 @@ class RecommendedRepository{
 			$fields->Arreglo que contiene la informacion de los atributos de la base de datos
 	*/
 	public function getFormFields(){
-		$fields = DB::table('metadataRecommended')->columns('id_metadata_recommended');
+		$fields = DB::table('metadataRecommended')->columns('id_metadata_recommended','aatnormalizada');
 		return $fields;
 	}
 
