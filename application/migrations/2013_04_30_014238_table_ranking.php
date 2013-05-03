@@ -17,7 +17,7 @@ class Table_Ranking {
 			$table->integer('id_metadata_term')->unsigned();						
 			
 			$table->foreign('id_metadata_term')->references('id_metadata_Term')->on('metadata')->on_delete('cascade');
-			$table->foreign('idUser')->references('idUser')->on('user')->on_delete('cascade');
+			$table->foreign('idUser')->references('id')->on('user')->on_delete('cascade');
 		});
 	}
 

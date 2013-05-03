@@ -11,7 +11,7 @@ class Table_User_Metadata {
 	{
 		Schema::create('user', function($table) {
 			$table->engine = 'InnoDB';
-		    $table->increments('idUser');
+		    $table->increments('id');
 		    $table->string('username', 128);
 		    $table->string('password', 64);
 		});
