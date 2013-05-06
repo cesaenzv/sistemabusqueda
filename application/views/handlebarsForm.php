@@ -1,6 +1,6 @@
 <script type="text/x-handlebars-template" id="formTemplate">
 	<div id="steps">
-		<form id="formElem" name="formMetadata" action="" method="post">
+		<form id="formElem" name="formMetadata" action="formc/saveFormData" method="post">
 			{{#each formM}}
 				<fieldset class="step" id="{{formName}}">
 					<legend>{{formName}}</legend>

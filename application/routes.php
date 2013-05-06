@@ -48,6 +48,11 @@ Route::get('form', 'formc@getFormFields',function($result){
 	dd($result);
 });
 
+Route::get('ranking',function()
+{	
+	return View::make('rankingTest');
+});
+
 // Route::get('/prueba',function(){
 // 	function get_MetadataId($idTerm, $idColumn){
 // 		if ($idColumn == "ParentKey"){
@@ -80,6 +85,19 @@ Route::get('form', 'formc@getFormFields',function($result){
 // 	$result = getMandatoryResourceList(get_MetadataId(1000015647, 'term_id'),'Language','en');
 // 	dd($result);
 
+Route::get('/prueba',function(){
+	function get_MetadataRanking($idMetadata=0){
+		try{
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
+			return $rankingAvg;	
+		}
+		catch(Exception $e){
+			return 1;
+		}
+	}
+	dd(get_MetadataRanking(455));
+
+});
 
 Route::get('nuevorecurso', 'formc@index');
 
@@ -110,6 +128,7 @@ Route::Controller('account');
 Route::controller('text');
 Route::controller('resource');
 Route::controller('formc');
+Route::controller('ranking');
 
 /*
 |--------------------------------------------------------------------------
