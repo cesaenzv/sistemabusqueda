@@ -1,4 +1,4 @@
-(function($){
+//(function($){
                       /*_____________Modulo manejo de ScrollBar_____________*/  
 		var scrollBar = (function(){
       var crear = function(config){ //el objeto config contiene el div de los pies y una areferencia al modulo
@@ -125,6 +125,7 @@
 
                 var actualId = modulo.actual().root;
                 var currentNode = modulo.actual().graph.getNode(actualId);
+                console.log(currentNode);
                 if(currentNode.data.title === "is Concept"){
                   resourceModule.loadResource(node,modulo.actual().root,'term_id',0);
 
@@ -429,6 +430,7 @@
                   ht.onClick(node.id, {  
                       onComplete: function() {  
                           ht.controller.onComplete();  
+                          ht.root= node.id;
                       }  
                   });  
               });
@@ -458,10 +460,8 @@
             
           },
           Events:{
-            enable:true,
-            onClick:function(){
-             //limpiarArbol(node.getParents());  
-            }
+            enable:false
+
           }        
         });
         ht.loadJSON(json);
@@ -572,6 +572,6 @@
       modulo:piesModulo      
     });
 
-    
+  
 
-})(jQuery);
+//})(jQuery);
