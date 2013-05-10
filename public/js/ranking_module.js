@@ -21,8 +21,7 @@ var rankingModule = (function(){
 	},saveCalification = function(div){		
 		var data = {
 			resourceId : $(div).attr("data-resId"),
-			scoreResource : $(div).raty('score'),
-			userId : 2
+			scoreResource : $(div).raty('score')
 		}
 		console.log(data);
 		$.ajax({
@@ -30,7 +29,7 @@ var rankingModule = (function(){
 			data :data,
 			type:'post'
 		}).done(function(result){
-			if (result.msj){
+			if (result.msj === "Exito"){
 				$(div).raty('readOnly', true);
 				alert("Gracias por la calificacion");
 			}else{

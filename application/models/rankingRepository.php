@@ -15,12 +15,11 @@ class RankingRepository{
 		-Retorno:
 			$newRanking-> Objeto de tipo ranking, el cual es una nueva calificacion de un recurso especifico
 	*/
-	function insert_Ranking($idMetadata, $qualification, $idUser){
+	function insert_Ranking($idMetadata, $qualification){
 		try {
 			$newRanking = new Ranking(
 								array("id_metadata_term"=>$idMetadata, 
-									  "qualification"=>$qualification, 
-									  "id" => $idUser)
+									  "qualification"=>$qualification)
 							);
 			$metadata = Metadata::find($idMetadata);			
 			$newRanking = $metadata->ranking()->insert($newRanking);			
