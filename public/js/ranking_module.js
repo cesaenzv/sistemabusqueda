@@ -29,6 +29,7 @@ var rankingModule = (function(){
 			data :data,
 			type:'post'
 		}).done(function(result){
+			console.log(result);
 			if (result.msj === "Exito"){
 				$(div).raty('readOnly', true);
 				alert("Gracias por la calificacion");

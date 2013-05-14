@@ -46,7 +46,10 @@ class Formc_Controller extends Base_Controller {
 
 
 	function action_index(){
-		return View::make('form');
+
+		$terminos = EuropeanaTerm::lists('termnameutf8','id_europeana_term');
+		//dd($terminos);
+		return View::make('form')->with('terminos',$terminos);
 	}
 
 	/* Info

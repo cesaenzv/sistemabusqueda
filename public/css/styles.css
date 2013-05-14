@@ -109,12 +109,15 @@ div.color{
 	width:1em;
 	height:1em;
 	margin-right:5px;
-	float:left;
+	position: absolute;
+	left: 0;
 }
 
 .pieContent li{
-	padding:5px 0;
+	position: relative;
 	overflow:hidden;
+	padding-left: 22px;
+	margin: 7px 0;
 }
 .pieContent li p{
 	float:left;
@@ -188,8 +191,9 @@ div.color{
 	position:absolute;
 }
 .resourceTitle{
-	font-family: 'WalkwayBlackRegular';
-	font-size:1.2em;	
+	font-family: 'WalkwayblackRegular';
+	font-size: 1.3em;	
+	min-height: 57px;
 }
 .rating{
 	margin-top:1em;
@@ -208,6 +212,7 @@ div.resourceBox button{
 	font-family: 'WalkwayBoldRegular';
 	padding:8px;
 
+	margin-top: 2em;
 }
 
 div#titulo{
@@ -234,7 +239,7 @@ div#contentResource{
 	cursor:pointer;
 	text-align: center;
 	position: absolute;
-	bottom: 5px;
+	bottom: 3px;
 	width: 55px;
 	height: 55px;
 	border-radius: 50%;
@@ -244,6 +249,9 @@ div#contentResource{
 	line-height: 50px;
 }
 
+#next:hover, #prev:hover{
+    background-color:black;
+} 
 
 
 #next{
@@ -392,6 +400,11 @@ section#contentPanel{
 	background:#dedede url("../img/downFondo.png") repeat-x;
 	padding:35px 0;
 
+} 
+
+div.bottom{
+    position:absolute;
+    bottom:20px;
 }
 
 

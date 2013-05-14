@@ -12,6 +12,7 @@
 		},
 		bindEvents = function(){
 			buttonCreate.on('click',loadForm);
+
 		},
 		configForm =function(formsUser){
 			var template = Handlebars.compile(plantillaForms);
@@ -21,6 +22,10 @@
 			//slideForm();			
 		},
 		loadForm = function(){
+			$(this).remove();
+			var valorMetadata = $('#europeana_term').remove().val();
+			
+			
 			ajaxRequest = $.ajax({
 				url:urlGetFields,
 				type:'post',
@@ -28,6 +33,7 @@
 			}).done(function(data){
 				console.log(data);
 				configForm(data);
+				$("#id_europeana_term").val(valorMetadata);
 			});
 		},
 		slideForm = function(){
