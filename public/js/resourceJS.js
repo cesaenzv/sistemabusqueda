@@ -31,11 +31,19 @@
 				 setResources(data.resources,function(){
 				 	activePopup();				 	
 				 	contentR.addClass('contentVisible');
+
 				 	if(data.resources.length < 200){
+				 		nextBtn.fadeOut();
 				 		console.log(data.resources.length);
 				 	}else{
 				 		nextBtn.fadeIn();
 				 	}
+
+				 	if(currentIndex <= 0){
+				 		prevBtn.fadeOut();
+				 	}else {
+				 		prevBtn.fadeIn();
+				 	}	
 				 });
 				listR.sweetPages({
 					perPage:6
@@ -117,8 +125,9 @@
 			});
 
 			prevBtn.on('click' , function(){
-				$('.swControls').remove();
+				
 				if(!currentIndex <= 0){
+					$('.swControls').remove();
 					loadResource(nodeCache, idTermCache, idColumnaCache, --currentIndex);
 				}
 			});

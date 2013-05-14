@@ -84,6 +84,7 @@ a.swShowPage.active{
 	-moz-box-shadow:0 0 6px #111111;
 	-webkit-box-shadow:0 0 6px #111111;
 	box-shadow:0 0 6px #111111;
+	position: relative;
 }
 
 /*#listResource,

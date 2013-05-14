@@ -1,4 +1,4 @@
-//(function($){
+(function($){
                       /*_____________Modulo manejo de ScrollBar_____________*/  
 		var scrollBar = (function(){
       var crear = function(config){ //el objeto config contiene el div de los pies y una areferencia al modulo
@@ -145,7 +145,7 @@
             color:node.getData('colorArray')[0]
           }
         });
-        $('html, body').animate({scrollTop:150},500,'easeOutQuart');
+        $('html, body').animate({scrollTop:150},300,'easeOutQuart');
         datosConvenciones = {convenciones:convenciones,
                               criterio:div}
         setConventions(datosConvenciones); 
@@ -513,7 +513,7 @@
       piesModulo.cargarDatos(config);      
     });
     config.scrollToo.on('click',function(){
-      $('html, body').animate({scrollTop:0},700,'easeInBack').promise().done(function(){
+      $('html, body').animate({scrollTop:0},300,'easeInBack').promise().done(function(){
         config.buscador.find('input').focus();
       });
     });
@@ -574,4 +574,4 @@
 
   
 
-//})(jQuery);
+})(jQuery);
