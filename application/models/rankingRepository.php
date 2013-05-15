@@ -15,7 +15,7 @@ class RankingRepository{
 		-Retorno:
 			$newRanking-> Objeto de tipo ranking, el cual es una nueva calificacion de un recurso especifico
 	*/
-	function insert_Ranking($idMetadata, $qualification){
+	public function insert_Ranking($idMetadata, $qualification=1){
 		try {
 			$newRanking = new Ranking(
 								array("id_metadata_term"=>$idMetadata, 
@@ -42,7 +42,7 @@ class RankingRepository{
 		-Retorno:
 			$rankingAvg-> Valor numero del promedio de todos los rankings asociados al metadata
 	*/
-	function get_MetadataRanking($idMetadata=0){
+	private function get_MetadataRanking($idMetadata=0){
 		try{
 			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
 			return $rankingAvg;	
@@ -64,7 +64,7 @@ class RankingRepository{
 			$resources-> Array de los recursos recuperados desde la base de datos con el valor agregado del 
 			ranking
 	*/
-	function get_RankingValues($resources){
+	public function get_RankingValues($resources){
 
 		foreach ($resources as $i=>$resource) {
 			$resource['ranking'] = $this->get_MetadataRanking($resource['id_metadata_mandatory']);

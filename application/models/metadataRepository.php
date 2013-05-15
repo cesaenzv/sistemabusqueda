@@ -15,23 +15,23 @@ class MetadataRepository {
 			$resources->Arreglo que contiene las id´s de los metadatos relacionados al id del termino
 	*/
 
-	public function get_MetadataId($idTerm, $idColumn,$numConsult = 0, $criterio, $group){		
-		if ($idColumn == "ParentKey"){			
-			$metadatas = DB::table('metadata AS m')
+	public function get_MetadataId($idTerm, $columnType,$numConsult = 0, $criterio, $group){		
+		if ($columnType == "ParentKey"){			
+			$metadatasId = DB::table('metadata AS m')
 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
 						->join('metadatamandatory AS mm','m.id_metadata_term','=','mm.id_metadata_mandatory')
 						->where("m.$idColumn",'=',$idTerm)->where("mm.$criterio","=",$group)->order_by("mm.id_metadata_mandatory")
 						->skip(200*$numConsult)->take(200)->get('id_metadata_term');
-			return $metadatas;
+			return $metadatasId;
 			
 		}
-		else if($idColumn == "term_id"){
-			$metadatas = DB::table('metadata AS m')
+		else if($columnType == "term_id"){
+			$metadatasId = DB::table('metadata AS m')
 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
 						->join('metadatamandatory AS mm','m.id_metadata_term','=','mm.id_metadata_mandatory')
 						->where("e.$idColumn",'=',$idTerm)->where("mm.$criterio","=",$group)->order_by("mm.id_metadata_mandatory")
 						->skip(200*$numConsult)->take(200)->get('id_metadata_term');
-			return $metadatas;
+			return $metadatasId;
 			
 		}
 		
