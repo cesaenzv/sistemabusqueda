@@ -20,7 +20,7 @@ class MetadataRepository {
 			$metadatasId = DB::table('metadata AS m')
 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
 						->join('metadatamandatory AS mm','m.id_metadata_term','=','mm.id_metadata_mandatory')
-						->where("m.$idColumn",'=',$idTerm)->where("mm.$criterio","=",$group)->order_by("mm.id_metadata_mandatory")
+						->where("m.$columnType",'=',$idTerm)->where("mm.$criterio","=",$group)->order_by("mm.id_metadata_mandatory")
 						->skip(200*$numConsult)->take(200)->get('id_metadata_term');
 			return $metadatasId;
 			
@@ -29,7 +29,7 @@ class MetadataRepository {
 			$metadatasId = DB::table('metadata AS m')
 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
 						->join('metadatamandatory AS mm','m.id_metadata_term','=','mm.id_metadata_mandatory')
-						->where("e.$idColumn",'=',$idTerm)->where("mm.$criterio","=",$group)->order_by("mm.id_metadata_mandatory")
+						->where("e.$columnType",'=',$idTerm)->where("mm.$criterio","=",$group)->order_by("mm.id_metadata_mandatory")
 						->skip(200*$numConsult)->take(200)->get('id_metadata_term');
 			return $metadatasId;
 			

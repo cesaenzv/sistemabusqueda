@@ -57,6 +57,27 @@ class RankingRepository{
 		Carlos Sáenz
 		<Resumen>
 		-Funcionalidad:
+			Metodo encargado de la obtencion del numero de votos realizados a un unico recurso
+		-Variables:			
+			$idMetadata->Id del recurso del cual quiere identifcar su promedio de calificacion
+		-Retorno:
+			$rankingCount-> Valor numerico del numero de votos realizados a un recuros
+	*/
+	private function get_numVotes($idMetadata=0){
+		try{
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->count();
+			return $rankingAvg;	
+		}
+		catch(Exception $e){
+			return 0;
+		}
+	}
+
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
 			Metodo encargado de la recoleccion del valor promedio de las calificaciones asociados 
 		-Variables:			
 			$resources->Array de los recursos recuperados desde la base de datos
@@ -68,6 +89,7 @@ class RankingRepository{
 
 		foreach ($resources as $i=>$resource) {
 			$resource['ranking'] = $this->get_MetadataRanking($resource['id_metadata_mandatory']);
+			$resource['numVotes'] = $this->get_numVotes($resource['id_metadata_mandatory']);
 			$resources[$i] = $resource;		
 		}
 		return $resources;		
