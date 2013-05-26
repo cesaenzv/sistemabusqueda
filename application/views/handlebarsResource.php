@@ -10,6 +10,10 @@
 					<div class="rating"><div id="{{id_metadata_mandatory}}"></div>
 					</div>
 					</div>
+					<div class="rating">
+						<div id="{{id_metadata_mandatory}}"></div>
+						<span><strong>Votos:</strong>{{numVotes}}</span>
+					</div>
 				</article>
 				<div class="data hidden">
 					<span class="popupDesc">Description:</span>
