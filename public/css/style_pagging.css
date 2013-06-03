@@ -78,7 +78,7 @@ a.swShowPage.active{
 	box-sizing:border-box;
 	float:left;
 	width:30%;
-	min-height:255px;
+	min-height: 214px;
 	/* Regular CSS3 box shadows (not inset): */
 
 	-moz-box-shadow:0 0 6px #111111;

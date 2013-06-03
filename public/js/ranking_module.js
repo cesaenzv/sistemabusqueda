@@ -1,7 +1,6 @@
 var rankingModule = (function(){
-	urlCalification = "index.php/ranking/saveCalification",
-	compliteImg = "completeImg.png",
-	haveImg ="haveImg.png";
+	var urlCalification = "index.php/ranking/saveCalification";
+	
 
 	var init = function(config){		
 		var divRanking = config.divR;
