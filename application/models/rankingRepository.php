@@ -15,7 +15,11 @@ class RankingRepository{
 		-Retorno:
 			$newRanking-> Objeto de tipo ranking, el cual es una nueva calificacion de un recurso especifico
 	*/
+<<<<<<< HEAD
 	public function insert_Ranking($idMetadata, $qualification){
+=======
+	public function insert_Ranking($idMetadata, $qualification=1){
+>>>>>>> 9edb6f6bb4e50430a74e3458657c7b94dd73a5fe
 		try {
 			$newRanking = new Ranking(
 								array("id_metadata_term"=>$idMetadata, 
@@ -43,6 +47,7 @@ class RankingRepository{
 			$rankingAvg-> Valor numero del promedio de todos los rankings asociados al metadata
 	*/
 	private function get_MetadataRanking($idMetadata=0){
+<<<<<<< HEAD
 		
 		$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
 		if ($rankingAvg)
@@ -51,6 +56,36 @@ class RankingRepository{
 			return 0;
 		
 		
+=======
+		try{
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
+			return $rankingAvg;	
+		}
+		catch(Exception $e){
+			return 1;
+		}
+>>>>>>> 9edb6f6bb4e50430a74e3458657c7b94dd73a5fe
+	}
+
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
+			Metodo encargado de la obtencion del numero de votos realizados a un unico recurso
+		-Variables:			
+			$idMetadata->Id del recurso del cual quiere identifcar su promedio de calificacion
+		-Retorno:
+			$rankingCount-> Valor numerico del numero de votos realizados a un recuros
+	*/
+	private function get_numVotes($idMetadata=0){
+		try{
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->count();
+			return $rankingAvg;	
+		}
+		catch(Exception $e){
+			return 0;
+		}
 	}
 
 	/* Info
@@ -69,6 +104,7 @@ class RankingRepository{
 
 		foreach ($resources as $i=>$resource) {
 			$resource['ranking'] = $this->get_MetadataRanking($resource['id_metadata_mandatory']);
+			$resource['numVotes'] = $this->get_numVotes($resource['id_metadata_mandatory']);
 			$resources[$i] = $resource;		
 		}
 		usort($resources, array("RankingRepository", "cmp"));
