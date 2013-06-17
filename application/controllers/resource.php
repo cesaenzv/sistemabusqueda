@@ -73,5 +73,6 @@ class Resource_Controller extends Base_Controller {
 			return Response::json($datos);
 		}
 	}
+
 	
 }
