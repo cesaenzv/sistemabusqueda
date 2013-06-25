@@ -12,6 +12,7 @@
 		},
 		bindEvents = function(){
 			buttonCreate.on('click',loadForm);
+			
 
 		},
 		configForm =function(formsUser){

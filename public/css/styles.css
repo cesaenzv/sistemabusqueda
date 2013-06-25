@@ -351,8 +351,18 @@ a.popupLink{
 }
 
 
+.niceSelect{
+    
+    display:block;
+    padding:1em;
+    font-size: 1.2em;
+}
 
-
+.niceLabel{
+    display:block;
+    font-size:1.3em;
+    margin:1em 0;
+}
 
 
 

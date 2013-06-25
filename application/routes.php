@@ -86,6 +86,9 @@ Route::get('ranking',function()
 // 	dd($result);
 
 Route::get('/prueba',function(){
+
+	// User::create(array('username' => 'root' , 'password' => Hash::make('root')));
+	// die;
 	function get_MetadataRanking($idMetadata=0){
 		try{
 			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
