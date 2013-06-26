@@ -43,12 +43,18 @@
 a.swShowPage{
 
 	/* The links that initiate the page slide */
+	
+
 	background-color:#444444;
 	float:left;
-	height:15px;
+	
+
+	height: 19px;
 	margin:4px 3px;
-	text-indent:-9999px;
-	width:15px;
+	
+	
+
+	width: 26px;
 	display: inline;
 	/*border:1px solid #ccc;*/
 	
@@ -57,6 +63,14 @@ a.swShowPage{
 	-moz-border-radius:7px;
 	-webkit-border-radius:7px;
 	border-radius:7px;
+	
+
+	text-align: center;
+
+	color: white;
+
+	text-decoration: none;
+
 }
 
 a.swShowPage:hover,
@@ -78,12 +92,13 @@ a.swShowPage.active{
 	box-sizing:border-box;
 	float:left;
 	width:30%;
-	min-height:255px;
+	min-height: 214px;
 	/* Regular CSS3 box shadows (not inset): */
 
 	-moz-box-shadow:0 0 6px #111111;
 	-webkit-box-shadow:0 0 6px #111111;
 	box-shadow:0 0 6px #111111;
+	position: relative;
 }
 
 /*#listResource,

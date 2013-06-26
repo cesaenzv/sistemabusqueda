@@ -125,6 +125,7 @@
 
                 var actualId = modulo.actual().root;
                 var currentNode = modulo.actual().graph.getNode(actualId);
+                console.log(currentNode);
                 if(currentNode.data.title === "is Concept"){
                   resourceModule.loadResource(node,modulo.actual().root,'term_id',0);
 
@@ -144,7 +145,7 @@
             color:node.getData('colorArray')[0]
           }
         });
-        $('html, body').animate({scrollTop:150},500,'easeOutQuart');
+        $('html, body').animate({scrollTop:150},300,'easeOutQuart');
         datosConvenciones = {convenciones:convenciones,
                               criterio:div}
         setConventions(datosConvenciones); 
@@ -429,6 +430,7 @@
                   ht.onClick(node.id, {  
                       onComplete: function() {  
                           ht.controller.onComplete();  
+                          ht.root= node.id;
                       }  
                   });  
               });
@@ -458,10 +460,8 @@
             
           },
           Events:{
-            enable:true,
-            onClick:function(){
-             //limpiarArbol(node.getParents());  
-            }
+            enable:false
+
           }        
         });
         ht.loadJSON(json);
@@ -513,7 +513,7 @@
       piesModulo.cargarDatos(config);      
     });
     config.scrollToo.on('click',function(){
-      $('html, body').animate({scrollTop:0},700,'easeInBack').promise().done(function(){
+      $('html, body').animate({scrollTop:0},300,'easeInBack').promise().done(function(){
         config.buscador.find('input').focus();
       });
     });
@@ -572,6 +572,6 @@
       modulo:piesModulo      
     });
 
-    
+  
 
 })(jQuery);

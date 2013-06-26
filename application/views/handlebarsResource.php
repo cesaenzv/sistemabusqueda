@@ -4,8 +4,12 @@
 			<div class="resourceBox">						
 				<article>										
 					<h4 class="resourceTitle">{{title}}</h4>
-					<p>{{description}}</p>					
+					<p>{{description}}</p>
+					<div class="bottom">					
 					<button class="ui-state-active">Ver mas</button>
+					<div class="rating"><div id="{{id_metadata_mandatory}}"></div>
+					</div>
+					</div>
 					<div class="rating">
 						<div id="{{id_metadata_mandatory}}"></div>
 						<span><strong>Votos:</strong>{{numVotes}}</span>
