@@ -46,7 +46,10 @@ class Formc_Controller extends Base_Controller {
 
 
 	function action_index(){
-		return View::make('form');
+
+		$terminos = EuropeanaTerm::lists('termnameutf8','id_europeana_term');
+		//dd($terminos);
+		return View::make('form')->with('terminos',$terminos);
 	}
 
 	/* Info
@@ -60,6 +63,7 @@ class Formc_Controller extends Base_Controller {
 			$mensaje->Respuesta de mensaje de exito o fallo de la insercion del nuevo metadato
 	*/
 	function action_saveFormData(){
+		//dd(Input::all());
 		$metadataId;
 		$mensaje =array();
 		$metadataR = new MetadataRepository();
