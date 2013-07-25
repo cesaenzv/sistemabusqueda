@@ -42,11 +42,8 @@ class Account_Controller extends Base_Controller {
 	{
 		
 		$credentials = array('username' => Input::get('username'), 
-							'password' => Input::get('password'));
-		//dd($credentials);
-		
-		//dd(Auth::attempt($credentials));
-		//die();
+							 'password' => Input::get('password'));
+
 		if(Auth::attempt($credentials)){
 
 			return Redirect::to('nuevorecurso');
