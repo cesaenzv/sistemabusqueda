@@ -5,6 +5,7 @@
 	{{ HTML::style('css/styles.css')}}
 	{{ HTML::style('css/style_pagging.css')}}
 	{{ HTML::style('css/styleForm.css')}}
+
 	<title>Sistema integrado de búsqueda</title>
 </head>
 <body>
@@ -40,6 +41,7 @@
 
 	{{ HTML::script('js/jquery.js')}}
 	{{ HTML::script('js/handlebars.js')}}
+	{{ HTML::script('js/circleloading.js')}}
 	{{ HTML::script('js/jquery.raty.js')}} 
 	{{ HTML::script('js/ranking_module.js')}}
 	@yield('mainScripts')   
