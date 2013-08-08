@@ -63,6 +63,7 @@
 	</div>
 	<div id="dialogo" title="Mensaje importante !!" style="display: none;"></div>
 	<div id="contentResource">
+		<span id="numOfResources"></span>
 		<span class="closeTag">X</span>
 	    <ul id="listResource">
 	    	

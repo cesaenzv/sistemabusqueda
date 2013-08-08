@@ -5,6 +5,7 @@
 
 		var listR,		
 		contentR = $('#contentResource'),
+		numOfResources = $('#numOfResources'),
 		popUp, plantillaResource, urlGetResource, template, currentIndex,
 		prevBtn = $('#prev'), nextBtn = $('#next'),
 		nodeCache, idTermCache, idColumnaCache, resources;
@@ -28,6 +29,7 @@
 				dataType:'json'
 			}).done(function(data){
 				console.log(data.resources);
+				numOfResources.html('Viewing ' +data.resources.length + ' Resources. Page '+parseInt(currentIndex+1));
 				 setResources(data.resources,function(){
 				 	activePopup();				 	
 				 	contentR.addClass('contentVisible');
@@ -50,7 +52,9 @@
 				});
 				var controls =  $('.swControls').detach();
 				controls.appendTo(contentR);
-				contentR.show();								
+				contentR.show();
+				contentR.circleLoading({action:'hide'});
+
 			});
 		},
 
@@ -118,6 +122,8 @@
 		prevNextResource = function(){
 
 			nextBtn.on('click' , function(){
+				contentR.circleLoading();
+
 				$('.swControls').remove();
 				loadResource(nodeCache, idTermCache, idColumnaCache, ++currentIndex);
 
@@ -128,6 +134,8 @@
 				
 				if(!currentIndex <= 0){
 					$('.swControls').remove();
+					contentR.circleLoading();
+
 					loadResource(nodeCache, idTermCache, idColumnaCache, --currentIndex);
 				}
 			});
