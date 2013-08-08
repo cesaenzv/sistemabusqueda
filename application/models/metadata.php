@@ -25,4 +25,7 @@ class Metadata extends Eloquent {
 		return $this->has_one('Optional','id_metadata_optional');
 	}
 
+	public function ranking (){
+		return $this->has_many('Ranking','id_metadata_term');
+	}
 }

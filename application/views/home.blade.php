@@ -67,6 +67,8 @@
 	    <ul id="listResource">
 	    	
 	    </ul>
+	    <span id="prev">prev</span>
+	    <span id="next">next</span>
 	    @include('handlebarsResource')
 	</div>
 </section><!-- Fin del panel contenido-->	
@@ -77,10 +79,11 @@
 	{{ HTML::script('js/jquery-ui/js/jquery-ui.js')}}
 	{{ HTML::script('js/jquery.mCustomScrollbar.js')}}
 	{{ HTML::script('js/jquery.mousewheel.min.js')}}
+	{{ HTML::script('js/jquery.raty.js')}}	
 	{{ HTML::script('js/handlebars.js')}}
 	{{ HTML::script('js/data.js')}}
 	{{ HTML::script('js/resourceJS.js')}}
-	{{ HTML::script('js/pagginJquery.js')}}
-	{{ HTML::script('js/initScript.js')}}
-	
+	{{ HTML::script('js/ranking_module.js')}} 
+	{{ HTML::script('js/pagginJquery.js')}}	
+	{{ HTML::script('js/initScript.js')}}	
 @endsection

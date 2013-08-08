@@ -11,8 +11,5 @@ class EuropeanaTerm extends Eloquent {
 	public function metadata(){
 		return $this->has_many('Metadata','id_europeana_term');		
 	}
-
-	
-
 }
 
