@@ -32,10 +32,12 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('home');
-});
+// Route::get('/', function()
+// {
+// 	return View::make('home');
+// });
+
+Route::get('/', 'HomeController');
 
 
 
@@ -132,6 +134,7 @@ Route::controller('text');
 Route::controller('resource');
 Route::controller('formc');
 Route::controller('ranking');
+Route::controller('home');
 
 /*
 |--------------------------------------------------------------------------

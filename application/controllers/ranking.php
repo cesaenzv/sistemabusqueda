@@ -2,11 +2,20 @@
 
 class Ranking_Controller extends Controller {
 
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
+			Metodo encargado de guarda un nuevo ranking, que realiza una persona que usa la aplicacion		
+		-Retorno: 
+			$data -> Envia el exito o fracaso del proceso		
+	*/
 	function action_saveCalification(){
 		$userR = new UserRepository();
-		$userIp = $userR->create_VisitorUser();		
+		$user = $userR->create_VisitorUser();		
 		$rankingR = new RankingRepository();		
-		$result = $rankingR->insert_Ranking(Input::get('resourceId'),Input::get('scoreResource'),$userIp);
+		$result = $rankingR->insert_Ranking(Input::get('resourceId'),Input::get('scoreResource'),$user->id);
 		if($result === true){
 			$data['msj'] = "Exito";
 		}else {

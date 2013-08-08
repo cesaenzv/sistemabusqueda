@@ -29,7 +29,7 @@ class Home_Controller extends Base_Controller {
 	|		}
 	|
 	*/
-
+	
 	public function action_index()
 	{
 		$userR = new UserRepository();
@@ -44,6 +44,6 @@ class Home_Controller extends Base_Controller {
 				$data['authenticated'] = false;
 			}
 		}		
-		return View::make('home.index',$data);		
+		return View::make('home');		
 	}
 }

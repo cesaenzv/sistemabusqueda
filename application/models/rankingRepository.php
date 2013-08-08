@@ -15,16 +15,16 @@ class RankingRepository{
 		-Retorno:
 			$newRanking-> Objeto de tipo ranking, el cual es una nueva calificacion de un recurso especifico
 	*/
-	public function insert_Ranking($idMetadata, $qualification=1, $userIp="0.0.0.0"){
+	public function insert_Ranking($idMetadata, $qualification=1, $userId=1){
 		try {
-			$user = User::where_username($userIp)->get('id');
 			$newRanking = new Ranking(
 								array("id_metadata_term"=>$idMetadata,
-									  "idUser"=> $user,
+									  "idUser"=> $userId,
 									  "qualification"=>$qualification)
 							);
 			$metadata = Metadata::find($idMetadata);			
-			$newRanking = $metadata->ranking()->insert($newRanking);			
+			$newRanking = $metadata->ranking()->insert($newRanking);
+						
 			return true;
 		}catch(Exception $e){
 			return $e->getMessage();
