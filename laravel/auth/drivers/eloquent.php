@@ -31,7 +31,7 @@ class Eloquent extends Driver {
 	 * @return void
 	 */
 	public function attempt($arguments = array())
-	{
+	{	
 		$user = $this->model()->where(function($query) use($arguments)
 		{
 			$username = Config::get('auth.username');

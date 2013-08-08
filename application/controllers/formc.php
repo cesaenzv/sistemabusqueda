@@ -1,6 +1,14 @@
 <?php 
 
 class Formc_Controller extends Base_Controller {
+	
+
+	function __construct(){
+
+		parent::__construct();
+		$this->filter('before', 'auth')->only(array('index'));
+	}
+
 	/* Info
 		<Desarrollado>
 		Carlos Sáenz
@@ -16,7 +24,6 @@ class Formc_Controller extends Base_Controller {
 		$mandatoryR = new MandatoryRepository();
 		$recommendedR = new RecommendedRepository();
 		$optionalR = new OptionalRepository();
-
 		$forms[]=array( 'formName' =>'Formulario Obligatorio',
 						'formAttribute' => 'class=step',
 						'listAttribute' => 'class=selected',
@@ -34,5 +41,61 @@ class Formc_Controller extends Base_Controller {
 			$form['fieldForm'] = FormData::checkDataType($form['fieldForm']);
 		}
 		return Response::json($forms);
+	}
+
+
+	function action_index(){
+
+		$terminos = EuropeanaTerm::lists('termnameutf8','id_europeana_term');
+		//dd($terminos);
+		return View::make('form')->with('terminos',$terminos);
+	}
+
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
+			Metodo encargado de la creacion de un nuevo metadatado, partiendo de la creacion del mismo 
+			y si esto es realizado se realiza la insercion de las tablas asociadas al metadato
+		-Retorno: 
+			$mensaje->Respuesta de mensaje de exito o fallo de la insercion del nuevo metadato
+	*/
+	function action_saveFormData(){
+		//dd(Input::all());
+		$metadataId;
+		$mensaje =array();
+		$metadataR = new MetadataRepository();
+		$newMetadata = $metadataR->insert_Metadata(Input::get('id_europeana_term'), Input::get('ParentKey'));
+		if($newMetadata){			
+			$metadataId = $newMetadata->id_metadata_term;
+			$mensaje["metadata"] = "Ok";						
+		}else{
+			$mensaje["metadata"] = "Problema";
+			return Response::json($mensaje);
+		}
+		$mandatoryR = new MandatoryRepository();
+		$resultMandatory = $mandatoryR->insert_Mandatory($metadataId);
+		if($resultMandatory){
+			$mensaje["mandatory"] =  "Ok";
+		}else{
+			$mensaje["mandatory"] =  "Problema";
+		}
+		$recommendedR = new RecommendedRepository();
+		$resultRecommended = $recommendedR->insert_Recommended($metadataId);
+		if($resultRecommended){
+			$mensaje["recommended"] =  "Ok";
+		}else{
+			$mensaje["recommended"] = "Problema";
+		}
+		$optionalR = new MandatoryRepository();
+		$resultOptional = $optinalR->insert_Optional($metadataId);
+		if($resultOptional){
+			$mensaje["optinal"] =  "Ok";
+		}else{
+			$mensaje["optional"] =  "Problema";
+		}
+		return Response::json($mensaje);
+
 	}
 }

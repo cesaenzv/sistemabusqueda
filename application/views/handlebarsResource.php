@@ -1,13 +1,19 @@
 <script type="text/x-handlebars-template" id="resourceTemplate">
 	{{#each resources}}
 		<li>
-			<div class="resourceBox">
-						
+			<div class="resourceBox">						
 				<article>										
 					<h4 class="resourceTitle">{{title}}</h4>
-					<p>{{description}}</p>					
+					<p>{{description}}</p>
+					<div class="bottom">					
 					<button class="ui-state-active">Ver mas</button>
-					<div class="rating">PONER CALIFICACION</div>
+					<div class="rating"><div id="{{id_metadata_mandatory}}"></div>
+					</div>
+					</div>
+					<div class="rating">
+						<div id="{{id_metadata_mandatory}}"></div>
+						<span><strong>Votos:</strong>{{numVotes}}</span>
+					</div>
 				</article>
 				<div class="data hidden">
 					<span class="popupDesc">Description:</span>
@@ -15,7 +21,7 @@
 					<img src="img/{{type}}.png" class="popupImg"/>
 					<span class="popupDesc">Subject:</span>
 					<div class="subject"><p>{{subject}}</p></div>
-					<a href={{link}} target="_blank" class="popupLink">Ir a fuente...</a>
+					<a href={{europeanaurl}} target="_blank" class="popupLink">Ir a fuente...</a>
 				</div>			
 			</div>
 		</li>

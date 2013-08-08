@@ -14,11 +14,23 @@ class FormData {
 					break;
 				case 'varchar':
 					$field->tagType = "textarea";
-					$field->attribute = 'maxlength='+$field->character_maximum_length+'"';
-					break;				
+					$field->attribute = 'maxlength="'.$field->character_maximum_length.'"';
+					break;
+				case 'set':
+					$field->tagType = "select";
+					$options = substr($field->column_type, 4);
+					$options = trim($options,")");
+					$options = explode(",",$options);
+					
+					for($i=0; $i<count($options);$i++){
+						$options[$i] = trim($options[$i],"'");
+						$options[$i] = '<option value="'.$options[$i].'">'.$options[$i].'</option>';
+					}
+					$field->optionsSelect = $options;
+					break;
 				default:
 					$field->tagType = "input";
-					$field->attribute = 'type="input" maxlength="'+$field->character_maximum_length+'"';
+					$field->attribute = 'type="input" maxlength="'.$field->character_maximum_length.'"';
 					break;
 			}			
 		}

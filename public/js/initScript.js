@@ -61,7 +61,7 @@
     var piesModulo = (function(){//Modulos crear pies
       var piesMarco = $('div.pie'),
       modulo,
-      plantilla = $('script#template').html(),// variable para tener la plantilla
+      template = Handlebars.compile($('script#template').html()),// variable para tener la plantilla
       pies = new Array(),
       getPies = function(){return pies;},
       setvisModulo = function(nuevoModulo){modulo = nuevoModulo},
@@ -123,9 +123,15 @@
               enable:true,
               onClick: function(node, eventInfo, e){
 
-                
-                resourceModule.loadResource(node,modulo.actual().root);
+                var actualId = modulo.actual().root;
+                var currentNode = modulo.actual().graph.getNode(actualId);
+                console.log(currentNode);
+                if(currentNode.data.title === "is Concept"){
+                  resourceModule.loadResource(node,modulo.actual().root,'term_id',0);
 
+                }else if(currentNode.data.title === "is Category"){
+                   resourceModule.loadResource(node,modulo.actual().root,'ParentKey',0);
+                }
               }
             }
         });
@@ -139,18 +145,17 @@
             color:node.getData('colorArray')[0]
           }
         });
-        $('html, body').animate({scrollTop:150},500,'easeOutQuart');
+        $('html, body').animate({scrollTop:150},300,'easeOutQuart');
         datosConvenciones = {convenciones:convenciones,
                               criterio:div}
         setConventions(datosConvenciones); 
         return Pie;
       },
       setConventions = function(datos){ // compila la plantilla handlebars y muestra las convenciones de los pies
-       // console.log(datos);
         var contenedor = $('div#'+datos.criterio).siblings('div.pieContent');
         contenedor.children('div').remove();
           
-        var template = Handlebars.compile(plantilla),
+        //var template = Handlebars.compile(plantilla),
         contenido = template(datos);
         contenedor.append(contenido);
         setTimeout(function(){contenedor.children('div').addClass('visible');},500);//time out para que se active la transición css
@@ -284,7 +289,6 @@
         });
         ht.loadJSON(json);
         ht.refresh(); 
-        console.log(ht);
         return ht;
       },
       crearHyperTree = function(json){
@@ -426,6 +430,7 @@
                   ht.onClick(node.id, {  
                       onComplete: function() {  
                           ht.controller.onComplete();  
+                          ht.root= node.id;
                       }  
                   });  
               });
@@ -455,10 +460,8 @@
             
           },
           Events:{
-            enable:true,
-            onClick:function(){
-             //limpiarArbol(node.getParents());  
-            }
+            enable:false
+
           }        
         });
         ht.loadJSON(json);
@@ -510,7 +513,7 @@
       piesModulo.cargarDatos(config);      
     });
     config.scrollToo.on('click',function(){
-      $('html, body').animate({scrollTop:0},700,'easeInBack').promise().done(function(){
+      $('html, body').animate({scrollTop:0},300,'easeInBack').promise().done(function(){
         config.buscador.find('input').focus();
       });
     });
@@ -568,4 +571,7 @@
       piesCont:$(".piesContainer"),
       modulo:piesModulo      
     });
+
+  
+
 })(jQuery);

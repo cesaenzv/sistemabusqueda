@@ -1,7 +1,9 @@
-<?php
+<?php 
 
-class Home_Controller extends Base_Controller {
+class Account_Controller extends Base_Controller {
 
+
+	public $restful = true;
 	/*
 	|--------------------------------------------------------------------------
 	| The Default Controller
@@ -29,21 +31,27 @@ class Home_Controller extends Base_Controller {
 	|		}
 	|
 	*/
-	
-	public function action_index()
+
+	public function get_index()
 	{
-		$userR = new UserRepository();
-		$data['user'] = $userR->create_VisitorUser();
-		if($data['user'] != null){
-			$credentials = array('username' => Input::get('username'), 
-							'password' => Input::get('password'));
-			if(Auth::attempt($credentials)){
-				$data['authenticated'] = true;					
-			}
-			else{
-				$data['authenticated'] = false;
-			}
-		}		
-		return View::make('home');		
+		
+		return View::make('account.index');
 	}
+
+	public function post_login()
+	{
+		
+		$credentials = array('username' => Input::get('username'), 
+							 'password' => Input::get('password'));
+
+		if(Auth::attempt($credentials)){
+
+			return Redirect::to('nuevorecurso');
+
+		}else{
+			return Redirect::to('account/index')->with('login_errors','Autenticación fallida');
+		}
+	 }
+
+	
 }
