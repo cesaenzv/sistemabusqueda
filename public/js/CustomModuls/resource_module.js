@@ -1,6 +1,4 @@
 
-	
-
 	var resourceModule = (function(){
 
 		var listR,		
@@ -28,15 +26,12 @@
 				type:'post',
 				dataType:'json'
 			}).done(function(data){
-				console.log(data.resources);
 				numOfResources.html('Viewing ' +data.resources.length + ' Resources. Page '+parseInt(currentIndex+1));
 				 setResources(data.resources,function(){
 				 	activePopup();				 	
 				 	contentR.addClass('contentVisible');
-
 				 	if(data.resources.length < 200){
 				 		nextBtn.fadeOut();
-				 		console.log(data.resources.length);
 				 	}else{
 				 		nextBtn.fadeIn();
 				 	}
@@ -54,7 +49,6 @@
 				controls.appendTo(contentR);
 				contentR.show();
 				contentR.circleLoading({action:'hide'});
-
 			});
 		},
 
@@ -148,20 +142,6 @@
 			getCurrentIndex:getCurrentIndex
 		}
 	})();
-
-	//Node -> Nodo del pie que se selecciona
-
-	// var node = {
-	// 	name:'EuroLanguage',
-	// 	label:'en'
-	// };
-	
-	// resourceModule.init({
-	// 	plantilla:$('script#resourceTemplate').html(),
-	// 	url:"index.php/resource/getResource",
-	// });
-
-	// resourceModule.loadResource(node,1);	
 
 
 

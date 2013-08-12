@@ -24,17 +24,16 @@ class Resource_Controller extends Base_Controller {
 			PD:Si la busqueda fue por medio textual, regresa un dato mas el cual contiene el ID de este termino
 	*/
 	public function action_getPies(){
-		$pieRepository = new PieRepository();
-		$termRepository = new europeanaTermRepository();
+		$pieR = new PieRepository();
 		$datos = array();
 		try{		
 			if(Input::get('term')){
-				$datos['pie'] = $pieRepository->generate_Pies(Input::get('criterio'),Input::get('term'));	
-				$europeanaTermRepository = new EuropeanaTermRepository();
-				$datos['id'] = $europeanaTermRepository->get_IdByTerm(Input::get('term'));
+				$datos['pie'] = $pieR->generate_Pies(Input::get('criterio'),Input::get('term'));	
+				$europeanaTR = new EuropeanaTermRepository();
+				$datos['id'] = $europeanaTR->get_IdByTerm(Input::get('term'));
 				return Response::json($datos);		
 			}
-			$datos['pie'] = $pieRepository->generate_Pies(Input::get('criterio'),Input::get('idTerm'),Input::get('idColumn'));			
+			$datos['pie'] = $pieR->generate_Pies(Input::get('criterio'),Input::get('idTerm'),Input::get('idColumn'));			
 			return Response::json($datos);
 		}
 		catch(Exception $error){
