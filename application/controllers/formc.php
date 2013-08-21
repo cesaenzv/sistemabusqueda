@@ -1,6 +1,14 @@
 <?php 
 
 class Formc_Controller extends Base_Controller {
+	
+
+	function __construct(){
+
+		parent::__construct();
+		$this->filter('before', 'auth')->only(array('index'));
+	}
+
 	/* Info
 		<Desarrollado>
 		Carlos Sáenz
@@ -11,15 +19,6 @@ class Formc_Controller extends Base_Controller {
 		-Retorno: 
 			$forms->Objeto json que contien la informacion de los campos de cada uno de los formularios			
 	*/
-
-
-	function __construct(){
-
-		parent::__construct();
-		$this->filter('before', 'auth')->only(array('index'));
-	}
-
-
 	function action_getFormFields(){
 		$forms = array();
 		$mandatoryR = new MandatoryRepository();
@@ -46,7 +45,10 @@ class Formc_Controller extends Base_Controller {
 
 
 	function action_index(){
-		return View::make('form');
+
+		$terminos = EuropeanaTerm::lists('termnameutf8','id_europeana_term');
+		//dd($terminos);
+		return View::make('form')->with('terminos',$terminos);
 	}
 
 	/* Info
@@ -60,6 +62,7 @@ class Formc_Controller extends Base_Controller {
 			$mensaje->Respuesta de mensaje de exito o fallo de la insercion del nuevo metadato
 	*/
 	function action_saveFormData(){
+		//dd(Input::all());
 		$metadataId;
 		$mensaje =array();
 		$metadataR = new MetadataRepository();

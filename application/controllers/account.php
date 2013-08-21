@@ -34,19 +34,16 @@ class Account_Controller extends Base_Controller {
 
 	public function get_index()
 	{
-
+		
 		return View::make('account.index');
 	}
 
 	public function post_login()
 	{
-	
-		$credentials = array('username' => Input::get('username'), 
-							'password' => Input::get('password'));
-		//dd($credentials);
 		
-		dd(Auth::attempt($credentials));
-		die();
+		$credentials = array('username' => Input::get('username'), 
+							 'password' => Input::get('password'));
+
 		if(Auth::attempt($credentials)){
 
 			return Redirect::to('nuevorecurso');

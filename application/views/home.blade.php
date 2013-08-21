@@ -63,6 +63,7 @@
 	</div>
 	<div id="dialogo" title="Mensaje importante !!" style="display: none;"></div>
 	<div id="contentResource">
+		<span id="numOfResources"></span>
 		<span class="closeTag">X</span>
 	    <ul id="listResource">
 	    	
@@ -82,8 +83,8 @@
 	{{ HTML::script('js/jquery.raty.js')}}	
 	{{ HTML::script('js/handlebars.js')}}
 	{{ HTML::script('js/data.js')}}
-	{{ HTML::script('js/resourceJS.js')}}
-	{{ HTML::script('js/ranking_module.js')}} 
+	{{ HTML::script('js/CustomModuls/resource_module.js')}}
+	{{ HTML::script('js/CustomModuls/ranking_module.js')}} 
 	{{ HTML::script('js/pagginJquery.js')}}	
 	{{ HTML::script('js/initScript.js')}}	
 @endsection

@@ -66,34 +66,34 @@
       getPies = function(){return pies;},
       setvisModulo = function(nuevoModulo){modulo = nuevoModulo},
       cargarDatos = function(config){ //debe cargar todos los pies en esta parte
-      pies =[]; //se resetean los pies
-      var criterion = getMetadataCriterion(piesMarco); // obtiene los criterios para buscar los metadatos      
-      loadingProgress(piesMarco);  
-      if(config.buscador){// si se hace la busqueda desde el forulario, se busca el nodo con nombre correspondiente
-        //al centrar el nodo se vuelve a llamar el metodo para que cargue los pies.
-        var termino = config.buscador.find('input[type="text"]').val();
-        var idActual = modulo.actual().graph.getByName(termino).id;
-        modulo.actual().onClick(idActual);
-        return;
-      }       
-      criterion.forEach(function(el, i, arr){
-          if(config.searchObj){// si se llamo el metodo con un objeto de busqueda
-            config.searchObj.criterio = el
-          }          
-          $.ajax({
-          url: config.urlBusqueda,
-          data: config.searchObj,
-          type: 'post',
-          dataType:'json'     
-      }).done(function(data){   
-          if (config.searchObj){ // si se realiza carga de datos desde otra parte del js
-            if(data.mensaje){
-             config.dialogo.empty().text(data.mensaje).dialog("open");
-             return;
-            }
-            pies.push(crearPie(data.pie.Column,data.pie.PieData, data.pie.Data));                         
-          }                 
-        });
+        pies =[]; //se resetean los pies
+        var criterion = getMetadataCriterion(piesMarco); // obtiene los criterios para buscar los metadatos      
+        loadingProgress(piesMarco);  
+        if(config.buscador){// si se hace la busqueda desde el formulario, se busca el nodo con nombre correspondiente
+          //al centrar el nodo se vuelve a llamar el metodo para que cargue los pies.
+          var termino = config.buscador.find('input[type="text"]').val();
+          var idActual = modulo.actual().graph.getByName(termino).id;
+          modulo.actual().onClick(idActual);
+          return;
+        }       
+        criterion.forEach(function(el, i, arr){
+            if(config.searchObj){// si se llamo el metodo con un objeto de busqueda
+              config.searchObj.criterio = el
+            }          
+            $.ajax({
+              url: config.urlBusqueda,
+              data: config.searchObj,
+              type: 'post',
+              dataType:'json'     
+            }).done(function(data){   
+              if (config.searchObj){ // si se realiza carga de datos desde otra parte del js
+                if(data.mensaje){
+                 config.dialogo.empty().text(data.mensaje).dialog("open");
+                 return;
+                }
+                pies.push(crearPie(data.pie.Column,data.pie.PieData, data.pie.Data));                         
+              }                 
+          });
         });   
       },
       loadingProgress = function(contenedores){
@@ -144,7 +144,7 @@
             color:node.getData('colorArray')[0]
           }
         });
-        $('html, body').animate({scrollTop:150},500,'easeOutQuart');
+        $('html, body').animate({scrollTop:150},300,'easeOutQuart');
         datosConvenciones = {convenciones:convenciones,
                               criterio:div}
         setConventions(datosConvenciones); 
@@ -159,7 +159,7 @@
         contenedor.append(contenido);
         setTimeout(function(){contenedor.children('div').addClass('visible');},500);//time out para que se active la transición css
       },
-      getMetadataCriterion = function(piesCont){//funcion para obtener los criterios de busuqeda de metadatos
+      getMetadataCriterion = function(piesCont){//funcion para obtener los criterios de busqueda de metadatos
         var criterion = piesCont.map(function(index, dom){
           return dom.id;
         });
@@ -184,7 +184,7 @@
         y entonces no hay forma de navegar los arboles*/
         $('li#hyperLink').on('click',function(){
           $('div.vis').empty();
-         current = crearHyperTree(dataJson);
+          current = crearHyperTree(dataJson);
         });
         $('li#arbolLink').on('click',function(){
           $('div.vis').empty();
@@ -245,8 +245,6 @@
                
             }  
           },
-
-          
           onCreateLabel: function(domElement, node){ 
               domElement.innerHTML = node.name;  
               $jit.util.addEvent(domElement, 'click', function () { 
@@ -303,9 +301,6 @@
               lineWidth: 2,  
               color: "#0BC0F4"  
           },
-
-          
-            
           onCreateLabel: function(domElement, node){             
 
               domElement.innerHTML = node.name;  
@@ -362,25 +357,23 @@
           Events:{
             enable:true,
             onMouseEnter: function(node) {  
-      //add border and replot node  
+            //add border and replot node  
             node.setData('border', '#33dddd');  
             ht.fx.plotNode(node, ht.canvas);  
             ht.labels.plotLabel(ht.canvas, node, ht.controller);  
           },
-
-           onMouseLeave: function(node) {  
+          onMouseLeave: function(node) {  
             node.removeData('border');  
             ht.fx.plot();  
           },  
             onClick:function(node){
              if (node) {  
-        //hide tips and selections  
-               
-             if(ht.events.hovered)  
-             this.onMouseLeave(ht.events.hovered);  
-          //perform the enter animation  
-             ht.enter(node);  
-            }  
+              //hide tips and selections               
+              if(ht.events.hovered)  
+                this.onMouseLeave(ht.events.hovered);  
+                //perform the enter animation  
+              ht.enter(node);  
+              }  
             }
           }
 
@@ -429,6 +422,7 @@
                   ht.onClick(node.id, {  
                       onComplete: function() {  
                           ht.controller.onComplete();  
+                          ht.root= node.id;
                       }  
                   });  
               });
@@ -458,10 +452,7 @@
             
           },
           Events:{
-            enable:true,
-            onClick:function(){
-             //limpiarArbol(node.getParents());  
-            }
+            enable:false
           }        
         });
         ht.loadJSON(json);
@@ -470,20 +461,18 @@
         return ht;
       },
 
-
       piesNodoArbol = function (node){// carga los pies de un concepto o categoría       
-
       //  ajaxRequest && ajaxRequest.abort();//cancela el pedido ajax de pies si se esta realizando otro.
         if(node.data.title === "is Category"){
           piesModulo.cargarDatos({
-          searchObj:{idTerm:node.id,idColumn:"ParentKey",criterio:""},
-          urlBusqueda:'resource/getPies'
-        });
+            searchObj:{idTerm:node.id,idColumn:"ParentKey",criterio:""},
+            urlBusqueda:'resource/getPies'
+          });
         }else{
-        piesModulo.cargarDatos({
-          searchObj:{idTerm:node.id,idColumn:"term_id",criterio:""},
-          urlBusqueda:'resource/getPies'
-        });
+          piesModulo.cargarDatos({
+            searchObj:{idTerm:node.id,idColumn:"term_id",criterio:""},
+            urlBusqueda:'resource/getPies'
+          });
         }        
       }
       return {
@@ -494,36 +483,36 @@
     })();//fin del modulo arbol
 
                       /*_____________Modulo Arrance_____________*/ 
-  var init = function (config){
-    config.dialogo.dialog({ //dialogo modal
-      autoOpen: false,
-      show: "blind",
-      hide: "explode",
-      modal:true,
-      zIndex: 9898
-    });
-    config.tabs.tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-    config.tabs.find('li').removeClass( "ui-corner-top" )
-                          .end()
-                          .children('ul')
-                          .removeClass('ui-corner-all')
-                          .removeClass('ui-widget-header'); // preparacion de las tabs de jqery ui
-    config.buscador.on('submit', function(e){// copnfiguracion del buscador
-      e.preventDefault();
-      piesModulo.cargarDatos(config);      
-    });
-    config.scrollToo.on('click',function(){
-      $('html, body').animate({scrollTop:0},700,'easeInBack').promise().done(function(){
-        config.buscador.find('input').focus();
+    var init = function (config){
+      config.dialogo.dialog({ //dialogo modal
+        autoOpen: false,
+        show: "blind",
+        hide: "explode",
+        modal:true,
+        zIndex: 9898
       });
-    });
-    $(window).on('scroll', function(){
-      $(window).scrollTop() > 100 ? config.scrollToo.slideDown():config.scrollToo.slideUp();
-    });
-    config.buscador.find('input[type="text"]').on('focus',function(){
-      $(this).val("");
-    });
-  }
+      config.tabs.tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+      config.tabs.find('li').removeClass( "ui-corner-top" )
+                            .end()
+                            .children('ul')
+                            .removeClass('ui-corner-all')
+                            .removeClass('ui-widget-header'); // preparacion de las tabs de jqery ui
+      config.buscador.on('submit', function(e){// configuracion del buscador
+        e.preventDefault();
+        piesModulo.cargarDatos(config);      
+      });
+      config.scrollToo.on('click',function(){
+        $('html, body').animate({scrollTop:0},300,'easeInBack').promise().done(function(){
+          config.buscador.find('input').focus();
+        });
+      });
+      $(window).on('scroll', function(){
+        $(window).scrollTop() > 100 ? config.scrollToo.slideDown():config.scrollToo.slideUp();
+      });
+      config.buscador.find('input[type="text"]').on('focus',function(){
+        $(this).val("");
+      });
+    }
 
     /*-------------------------------------fin modulos-------------------------------------------*/
 
@@ -538,16 +527,7 @@
     plantilla:$('script#resourceTemplate').html(),
     url:"resource/getResource",
   });
-
-
-
-
-
-
-
-
-
-
+  
 /****Pensar en como se estan cargando los recursos desde el buscador*******/
 
     visModulo.cargarData({
@@ -572,6 +552,6 @@
       modulo:piesModulo      
     });
 
-    
+  
 
 })(jQuery);

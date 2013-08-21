@@ -32,71 +32,26 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('home');
-});
+// Route::get('/', function()
+// {
+// 	return View::make('home');
+// });
+
+Route::get('/', 'HomeController');
 
 
 
-/*Route::get('/form', function(){
+Route::get('/form', function(){
 	return View::make('form');
-});*/
-
-Route::get('form', 'formc@getFormFields',function($result){
-	
-	dd($result);
 });
+
+// Route::get('form', 'formc@getFormFields',function($result){	
+// 	dd($result);
+// });
 
 Route::get('ranking',function()
 {	
 	return View::make('rankingTest');
-});
-
-// Route::get('/prueba',function(){
-// 	function get_MetadataId($idTerm, $idColumn){
-// 		if ($idColumn == "ParentKey"){
-// 			$metadatas = DB::table('metadata AS m')
-// 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
-// 						->where("m.$idColumn",'=',$idTerm)->get('id_metadata_term');
-// 			return $metadatas;
-// 		}
-// 		else if($idColumn == "term_id"){
-// 			$metadatas = DB::table('metadata AS m')
-// 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
-// 						->where("e.$idColumn",'=',$idTerm)->get('id_metadata_term');
-// 			return $metadatas;
-// 		}		
-		
-// 	}
-
-// 	function getMandatoryResourceList($metadatasId,$criterio,$group){
-// 		$resources = array();
-// 		foreach ($metadatasId as $metadataId) {
-// 			$result = Mandatory::where_id_metadata_mandatory($metadataId->id_metadata_term)
-// 				->where($criterio,'=',$group)->first(array('EuropeanaURL','Title','Description','Subject','Type'));	
-// 			if ($result){
-// 				$resources[] =$result->to_array();
-// 			}
-// 		}				
-// 		return  $resources;
-// 	}
-
-// 	$result = getMandatoryResourceList(get_MetadataId(1000015647, 'term_id'),'Language','en');
-// 	dd($result);
-
-Route::get('/prueba',function(){
-	function get_MetadataRanking($idMetadata=0){
-		try{
-			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
-			return $rankingAvg;	
-		}
-		catch(Exception $e){
-			return 1;
-		}
-	}
-	dd(get_MetadataRanking(455));
-
 });
 
 Route::get('nuevorecurso', 'formc@index');
@@ -108,27 +63,12 @@ Route::get('logout', function(){
 	return Redirect::to('account');
 });
 
-
-
-// Route::get('/prueba',function(){
-// 	function get_MetadataId($idTerm, $idColumn){		
-// 		$metadatas = DB::table('metadata AS m')
-// 						->join('europeanaterms AS e','e.id_europeana_term','=','m.id_europeana_term')
-// 						->where("m.$idColumn",'=',$idTerm)->get('id_metadata_term');
-// 		return $metadatas;
-// 	}
-
-// 	$result = get_MetadataId(300111079, 'ParentKey');
-// 	dd($result);
-
-// });
-
-
 Route::Controller('account');
 Route::controller('text');
 Route::controller('resource');
 Route::controller('formc');
 Route::controller('ranking');
+Route::controller('home');
 
 /*
 |--------------------------------------------------------------------------

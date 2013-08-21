@@ -1,10 +1,9 @@
 
-	
-
 	var resourceModule = (function(){
 
 		var listR,		
 		contentR = $('#contentResource'),
+		numOfResources = $('#numOfResources'),
 		popUp, plantillaResource, urlGetResource, template, currentIndex,
 		prevBtn = $('#prev'), nextBtn = $('#next'),
 		nodeCache, idTermCache, idColumnaCache, resources;
@@ -27,22 +26,29 @@
 				type:'post',
 				dataType:'json'
 			}).done(function(data){
-				console.log(data.resources);
+				numOfResources.html('Viewing ' +data.resources.length + ' Resources. Page '+parseInt(currentIndex+1));
 				 setResources(data.resources,function(){
 				 	activePopup();				 	
 				 	contentR.addClass('contentVisible');
 				 	if(data.resources.length < 200){
-				 		console.log(data.resources.length);
+				 		nextBtn.fadeOut();
 				 	}else{
 				 		nextBtn.fadeIn();
 				 	}
+
+				 	if(currentIndex <= 0){
+				 		prevBtn.fadeOut();
+				 	}else {
+				 		prevBtn.fadeIn();
+				 	}	
 				 });
 				listR.sweetPages({
 					perPage:6
 				});
 				var controls =  $('.swControls').detach();
 				controls.appendTo(contentR);
-				contentR.show();								
+				contentR.show();
+				contentR.circleLoading({action:'hide'});
 			});
 		},
 
@@ -110,6 +116,8 @@
 		prevNextResource = function(){
 
 			nextBtn.on('click' , function(){
+				contentR.circleLoading();
+
 				$('.swControls').remove();
 				loadResource(nodeCache, idTermCache, idColumnaCache, ++currentIndex);
 
@@ -117,8 +125,11 @@
 			});
 
 			prevBtn.on('click' , function(){
-				$('.swControls').remove();
+				
 				if(!currentIndex <= 0){
+					$('.swControls').remove();
+					contentR.circleLoading();
+
 					loadResource(nodeCache, idTermCache, idColumnaCache, --currentIndex);
 				}
 			});
@@ -131,20 +142,6 @@
 			getCurrentIndex:getCurrentIndex
 		}
 	})();
-
-	//Node -> Nodo del pie que se selecciona
-
-	// var node = {
-	// 	name:'EuroLanguage',
-	// 	label:'en'
-	// };
-	
-	// resourceModule.init({
-	// 	plantilla:$('script#resourceTemplate').html(),
-	// 	url:"index.php/resource/getResource",
-	// });
-
-	// resourceModule.loadResource(node,1);	
 
 
 

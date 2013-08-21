@@ -29,9 +29,21 @@ class Home_Controller extends Base_Controller {
 	|		}
 	|
 	*/
-
+	
 	public function action_index()
 	{
-		return View::make('home.index');
+		$userR = new UserRepository();
+		$data['user'] = $userR->create_VisitorUser();
+		if($data['user'] != null){
+			$credentials = array('username' => Input::get('username'), 
+							'password' => Input::get('password'));
+			if(Auth::attempt($credentials)){
+				$data['authenticated'] = true;					
+			}
+			else{
+				$data['authenticated'] = false;
+			}
+		}		
+		return View::make('home');		
 	}
 }
