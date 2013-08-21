@@ -22,13 +22,11 @@ var rankingModule = (function(){
 			resourceId : $(div).attr("data-resId"),
 			scoreResource : $(div).raty('score')
 		}
-		console.log(data);
 		$.ajax({
 			url : urlCalification,
 			data :data,
 			type:'post'
 		}).done(function(result){
-			console.log(result);
 			if (result.msj === "Exito"){
 				$(div).raty('readOnly', true);
 				alert("Gracias por la calificacion");
