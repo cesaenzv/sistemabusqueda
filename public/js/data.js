@@ -409,7 +409,7 @@ var dataJson = {
 		},
 		{
 		"id": "1000021854",
-		"name": "Oceanic",
+		"name": "Ocean",
 		"children": [],
 		"data": {
 			"$area": 30,
