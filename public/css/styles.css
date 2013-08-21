@@ -374,7 +374,7 @@ a.popupLink{
 /*----------------------area visual--------------------------------------------------*/
 section#visualArea{
 	height:727px;/*altura calculada restando el padding*/
-	background:#dedede url("../img/FondoDiv.jpg") repeat-x;
+	background: #8B7777 url("../img/FondoDiv.jpg") repeat-x;
 	padding: 30px 0;
 	z-index:-1;
 	
@@ -701,3 +701,43 @@ div.bottom{
 
 
 /*fin estilos loading*/
+
+.semanticMain{
+	font-size:2em;
+	color:white;
+}
+
+.resultados h3{
+	color:white;
+	margin-bottom:1em;
+}
+#containerRes{
+
+	min-height: 500px;
+	max-height:650px;
+	overflow:auto;
+	color:white;
+}
+
+
+div.recurso{
+	width:400px;
+	float:left;
+	margin-bottom:1em;
+
+}
+
+div.imgCont{
+	width:100px;
+	float:left;
+}
+
+div.metaCont{
+	width:250px;
+	float:left;
+}
+
+.metaCont a{
+	color:white;
+	text-decoration: none;
+}

@@ -113,6 +113,11 @@ Route::get('logout', function(){
 
 
 
+Route::get('semantic' , function(){
+
+	return View::make('semantic');
+});
+
 // Route::get('/prueba',function(){
 // 	function get_MetadataId($idTerm, $idColumn){		
 // 		$metadatas = DB::table('metadata AS m')

@@ -17,10 +17,14 @@
 				Integrado <br>
 				de búsqueda</h1>
 
+			@section('searchbar')
+
 			<form action="{{url('resource/getPies')}}" class="grid_4 push_5" id="form_buscador" method="POST">
 				<button type ='submit' class="ico"></button>
 				<input type="text" class="inputField" required  name="term">
 			</form>
+
+			@yield_section
 		</div>		
 	</header><!-- Fin del Header -->
 	<div class="separator"></div>
