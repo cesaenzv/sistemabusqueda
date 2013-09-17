@@ -15,6 +15,7 @@
 			template = Handlebars.compile(plantillaResource);
 			bindEvents();
 		},
+		
 		loadResource = function(node,idTermino,idColumna, resultIndex){
 			nodeCache = node;
 			idTermCache = idTermino;
@@ -35,7 +36,6 @@
 				 	}else{
 				 		nextBtn.fadeIn();
 				 	}
-
 				 	if(currentIndex <= 0){
 				 		prevBtn.fadeOut();
 				 	}else {
@@ -51,7 +51,6 @@
 				contentR.circleLoading({action:'hide'});
 			});
 		},
-
 		setResources = function(items,callback){						
 			var contenido = template({resources:items});			
 			listR.html(contenido);
@@ -68,7 +67,6 @@
 				});
 			});		
 		},
-
 		setCurrentIndex = function(index){
 			currentIndex = index;
 		},

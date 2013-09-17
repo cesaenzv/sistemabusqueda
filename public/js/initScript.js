@@ -69,7 +69,8 @@
         pies =[]; //se resetean los pies
         var criterion = getMetadataCriterion(piesMarco); // obtiene los criterios para buscar los metadatos      
         loadingProgress(piesMarco);  
-        if(config.buscador){// si se hace la busqueda desde el formulario, se busca el nodo con nombre correspondiente
+        if(config.buscador){
+          // si se hace la busqueda desde el formulario, se busca el nodo con nombre correspondiente
           //al centrar el nodo se vuelve a llamar el metodo para que cargue los pies.
           var termino = config.buscador.find('input[type="text"]').val();
           var idActual = modulo.actual().graph.getByName(termino).id;
@@ -78,7 +79,7 @@
         }       
         criterion.forEach(function(el, i, arr){
             if(config.searchObj){// si se llamo el metodo con un objeto de busqueda
-              config.searchObj.criterio = el
+              config.searchObj.criterio = el;
             }          
             $.ajax({
               url: config.urlBusqueda,
@@ -88,8 +89,8 @@
             }).done(function(data){   
               if (config.searchObj){ // si se realiza carga de datos desde otra parte del js
                 if(data.mensaje){
-                 config.dialogo.empty().text(data.mensaje).dialog("open");
-                 return;
+                  config.dialogo.empty().text(data.mensaje).dialog("open");
+                  return;
                 }
                 pies.push(crearPie(data.pie.Column,data.pie.PieData, data.pie.Data));                         
               }                 

@@ -32,9 +32,11 @@ class Resource_Controller extends Base_Controller {
 				$europeanaTR = new EuropeanaTermRepository();
 				$datos['id'] = $europeanaTR->get_IdByTerm(Input::get('term'));
 				return Response::json($datos);		
+			}else{
+				$datos['pie'] = $pieR->generate_Pies(Input::get('criterio'),Input::get('idTerm'),Input::get('idColumn'));			
+				return Response::json($datos);	
 			}
-			$datos['pie'] = $pieR->generate_Pies(Input::get('criterio'),Input::get('idTerm'),Input::get('idColumn'));			
-			return Response::json($datos);
+			
 		}
 		catch(Exception $error){
 			$datos['mensaje'] = "Hubo un problema resource/getPies". $error->getMessage();

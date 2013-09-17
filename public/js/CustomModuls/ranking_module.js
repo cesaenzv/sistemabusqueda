@@ -1,7 +1,5 @@
 var rankingModule = (function(){
 	var urlCalification = "index.php/ranking/saveCalification";
-	
-
 	var init = function(config){		
 		var divRanking = config.divR;
 		divRanking.attr("data-resId",config.resourceId);
