@@ -72,6 +72,11 @@ Route::get('semantic' , function(){
 	return View::make('semantic');
 });
 
+
+Route::get('d3' , function(){
+	return View::make('d3visuals');
+});
+
 // Route::get('/prueba',function(){
 // 	function get_MetadataId($idTerm, $idColumn){		
 // 		$metadatas = DB::table('metadata AS m')
