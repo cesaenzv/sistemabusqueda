@@ -365,6 +365,13 @@ a.popupLink{
 }
 
 
+.white{
+    background: rgb(238, 238, 238) !important;
+    background-color:white;
+    height: 720px!important;
+    overflow: auto !important;
+}
+
 
 
 /*----------------------Fin Clases--------------------------------------------------*/
@@ -381,9 +388,9 @@ section#visualArea{
 }
 div.vis{
 	position:relative;
-	height: 480px !important;
+	height: 480px;
 	width:100% !important; 
-	background: rgba(0,0,0,0.9)!important;
+	background: rgba(0,0,0,0.9);
 	position:relative;
 	z-index:10;
 	overflow: hidden;
@@ -740,4 +747,9 @@ div.metaCont{
 .metaCont a{
 	color:white;
 	text-decoration: none;
+}
+
+.container_large{
+	width:1200px;
+	margin: 0 auto;
 }
