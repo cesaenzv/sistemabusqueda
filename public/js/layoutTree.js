@@ -1,20 +1,20 @@
 (function(){
 
   var m = [20, 120, 20, 120],
-    w = 1000 - m[1] - m[3],
-    h = 700 - m[0] - m[2],
+    w = 940 - m[1] - m[3],
+    h = 480 - m[0] - m[2],
     i = 0,
     root;
 
-var tree = d3.layout.tree()
-    .size([h, w]);
+var tree = d3.layout.tree().size([h, w]); //Representa el tamaño en X y Y del diagrama
 
-var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+var diagonal = d3.svg.diagonal().projection(function(d) { return [d.y, d.x]; });//Se encarga de la proyeccion de los 
+                                                                                //nodos entre si, para apertura y cierre
 
-var vis = d3.select("#arbol").append("svg:svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
+var vis = d3.select("#arbol")
+  .append("svg:svg")
+    .attr("width", (w + m[1] + m[3])*(1.6))
+    .attr("height",h + m[0] + m[2])
   .append("svg:g")
     .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
@@ -36,7 +36,14 @@ d3.json("js/flare.json", function(json) {
 
 
   update(root);
+
 });
+
+function activeBackbone(){
+  $("#arbol").find('g.node').each(function(){
+    new App.views.Node({el:this});
+  });
+}
 
 function update(source) {
   var duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -126,6 +133,7 @@ function update(source) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
+  activeBackbone();
 }
 
 // Toggle children.

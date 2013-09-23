@@ -54,33 +54,47 @@
     </style>
 <section id="visualArea">
 	<div class="container_large">
-		<div id="tabs" class="grid_12" style="width:100%">
-			<ul>
+		<div id="tabs" class="grid_12">
+			<ul>	
 				<li id ="arbolLink">
 					<a href="#arbol">Layout tree</a>
-				</li>
-				<li id="hyperLink">
-					<a href="#circles">Circles</a>
-				</li>	
+				</li>				
 				<li id="spaceLink">
 					<a href="#partition">Partition</a>
 				</li>
+				<li id="hyperLink">
+					<a href="#circles">Circles</a>
+				</li>				
 			</ul>
-			<div id="arbol"class="vis white"></div>
-			<div id="circles" class="vis white"></div>
-			<div id="partition" class="vis white"></div>
+			<div id="arbol" class="grid_8 vis white"></div>
+			<div id="partition" class="grid_8 vis white"></div>
+			<div id="circles" class="grid_8 vis white"></div>					
 		</div>
 	</div>	
 </section><!-- Fin de la seccion visual -->
 <div class="separator"></div>
+<section id="visualArea">
+	<div class="container_12">
+		<h1 class="semanticMain">Busqueda semantica</h1>					
+		
+		<br>
+		
+		<div class="grid_12">
+			<div class="resultados">
+				<h3>resultados de la busqueda</h3>
+
+				<div id="containerRes" class="clearfix">
+				</div>
+			</div>
+		</div>
+			
+	</div>
+</section><!-- Fin de la seccion visual -->
+<div class="separator"></div>
 <!-- Fin del panel contenido-->	
 
-
-
-
-
 @endsection
-
+@include('semantichandlebars')
 @section('mainScripts')
 	
 	{{ HTML::script('js/jquery-ui/js/jquery-ui.js')}}
@@ -96,7 +110,14 @@
     <script src="http://mbostock.github.io/d3/talk/20111018/d3/d3.layout.js"></script>
 	
 	
-	
+	{{ HTML::script('js/jquery-ui/js/jquery-ui.js')}}
+	{{ HTML::script('js/jquery.mCustomScrollbar.js')}}
+	{{ HTML::script('js/jquery.mousewheel.min.js')}}
+	{{ HTML::script('js/circleloading.js')}}
+	{{ HTML::script('js/underscore.js')}}
+	{{ HTML::script('js/backbone.js')}}
+	{{ HTML::script('js/handlebars.js')}}
+	{{ HTML::script('js/semanticsearch.js')}}
 	{{ HTML::script('js/layoutTree.js')}}
 	{{ HTML::script('js/circles.js')}}
 	{{ HTML::script('js/partition.js')}}

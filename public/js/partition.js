@@ -2,22 +2,23 @@
 
 
   var w = 960,
-    h = 800,
+    h = 480,
     i = 0,
     barHeight = 20,
-    barWidth = w * .8,
+    barWidth = w * .7,
     duration = 400,
     root;
 
 var tree = d3.layout.tree()
-    .size([h, 100]);
+    .size([h*3, 300]);
 
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
 
 var vis = d3.select("#partition").append("svg:svg")
     .attr("width", w)
-    .attr("height", h)
+    .attr("height", h*6)
+    .attr("overflow-y",'scroll')
   .append("svg:g")
     .attr("transform", "translate(20,30)");
 
@@ -26,6 +27,12 @@ d3.json("js/flare.json", function(json) {
   json.y0 = 0;
   update(root = json);
 });
+
+function activeBackbone(){
+  $("#partition").find('g.node').each(function(){
+    new App.views.Node({el:this});
+  });
+}
 
 function update(source) {
 
@@ -113,6 +120,7 @@ function update(source) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
+  activeBackbone();
 }
 
 // Toggle children on click.

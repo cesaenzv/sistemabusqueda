@@ -1,32 +1,36 @@
 (function(){
 
+function activeBackbone(){
+  $("#circles").find('g.node').each(function(){
+    new App.views.Node({el:this});
+  });
+}
+
   var w = 900,
-    h = 700,
+    h = 480,
     rx = w / 2,
-    ry = h / 2,
     m0,
     rotate = 0;
 
 var cluster = d3.layout.cluster()
-    .size([360, ry - 120])
-    ;
+    .size([360, rx]);
 
 var diagonal = d3.svg.diagonal.radial()
     .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
 var svg = d3.select("#circles").append("div")
     .style("width", w + "px")
-    .style("height", w + "px");
+    .style("height", h + "px");
 
 var vis = svg.append("svg:svg")
-    .attr("width", w)
-    .attr("height", w)
+    .attr("width", w*1.5)
+    .attr("height", w*1.5)
   .append("svg:g")
-    .attr("transform", "translate(" + rx + "," + ry + ")");
+    .attr("transform", "translate(" + w*(0.75) + "," + h*(1.25) + ")");
 
 vis.append("svg:path")
     .attr("class", "arc")
-    .attr("d", d3.svg.arc().innerRadius(ry - 120).outerRadius(ry).startAngle(0).endAngle(2 * Math.PI))
+    .attr("d", d3.svg.arc().innerRadius(rx - 120).outerRadius(rx).startAngle(0).endAngle(2 * Math.PI))
     .on("mousedown", mousedown);
 
 d3.json("js/flare.json", function(json) {
@@ -53,6 +57,7 @@ d3.json("js/flare.json", function(json) {
       .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
       .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
       .text(function(d) { return d.name; });
+  activeBackbone();
 });
 
 d3.select(window)
@@ -60,7 +65,7 @@ d3.select(window)
     .on("mouseup", mouseup);
 
 function mouse(e) {
-  return [e.pageX - rx, e.pageY - ry];
+  return [e.pageX - rx, e.pageY - rx];
 }
 
 function mousedown() {
@@ -72,7 +77,7 @@ function mousemove() {
   if (m0) {
     var m1 = mouse(d3.event),
         dm = Math.atan2(cross(m0, m1), dot(m0, m1)) * 180 / Math.PI,
-        tx = "translate3d(0," + (ry - rx) + "px,0)rotate3d(0,0,0," + dm + "deg)translate3d(0," + (rx - ry) + "px,0)";
+        tx = "translate3d(0," + (rx - rx) + "px,0)rotate3d(0,0,0," + dm + "deg)translate3d(0," + (rx - rx) + "px,0)";
     svg
         .style("-moz-transform", tx)
         .style("-ms-transform", tx)
@@ -97,7 +102,7 @@ function mouseup() {
         .style("-webkit-transform", tx);
 
     vis
-        .attr("transform", "translate(" + rx + "," + ry + ")rotate(" + rotate + ")")
+        .attr("transform", "translate(" + rx + "," + rx + ")rotate(" + rotate + ")")
       .selectAll("g.node text")
         .attr("dx", function(d) { return (d.x + rotate) % 360 < 180 ? 8 : -8; })
         .attr("text-anchor", function(d) { return (d.x + rotate) % 360 < 180 ? "start" : "end"; })
@@ -112,6 +117,8 @@ function cross(a, b) {
 function dot(a, b) {
   return a[0] * b[0] + a[1] * b[1];
 }
+
+
 
 })();
 

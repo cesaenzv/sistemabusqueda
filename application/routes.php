@@ -57,15 +57,10 @@ Route::get('ranking',function()
 Route::get('nuevorecurso', 'formc@index');
 
 Route::get('logout', function(){
-
 	
 	Auth::logout();
 	return Redirect::to('account');
 });
-
-<<<<<<< HEAD
-=======
-
 
 Route::get('semantic' , function(){
 
@@ -90,8 +85,6 @@ Route::get('d3' , function(){
 
 // });
 
-
->>>>>>> pr/13
 Route::Controller('account');
 Route::controller('text');
 Route::controller('resource');
