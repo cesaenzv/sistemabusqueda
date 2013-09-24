@@ -46,5 +46,5 @@
 	{{ HTML::script('js/backbone.js')}}
 	{{ HTML::script('js/handlebars.js')}}
 	{{ HTML::script('js/semanticsearch.js')}}
-	
+
 @endsection

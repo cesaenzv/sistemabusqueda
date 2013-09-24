@@ -84,11 +84,11 @@ App.views.Node = Backbone.View.extend({
 	},
 	dataNode : function (){				
 		$('#containerRes').circleLoading();
-		console
 		var that = this;
 		this.search($(this.el).text()).done(function(data){
 			that.results.reset(data.items);
 		});
+		$("#semanticResult").dialog("open");
 	},
 	search: function(searchQuery){
 		var searchQuery = encodeURIComponent(searchQuery);
@@ -113,10 +113,17 @@ var semanticModule =(function(){
 })();
 
 (function(){
-	// $('#form_buscador').on('submit' , function(e){
-	// 	e.preventDefault();
-	// 	var search = $('#term').val();
-	// 	semanticModule.search(encodeURIComponent(search)).done(function(data){console.log(data)});
-	// });
+	$("#semanticResult").dialog({autoOpen:false,
+		show:{
+			effect: "blind",
+			duration: 100
+		},
+		hide:{
+			effect: "blind",
+			duration: 100
+		}
+	});
+	$("#semanticResult").dialog("option","width",1100);
+	$("#semanticResult").dialog("option","height",800);
 	new App.views.formView();	
 })();

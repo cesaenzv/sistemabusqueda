@@ -1,5 +1,4 @@
-(function(){
-
+$("#circlesBtn").click(function(){
 function activeBackbone(){
   $("#circles").find('g.node').each(function(){
     new App.views.Node({el:this});
@@ -120,6 +119,6 @@ function dot(a, b) {
 
 
 
-})();
+});
 
 

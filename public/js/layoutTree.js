@@ -1,4 +1,4 @@
-(function(){
+$("#arbolLayoutBtn").click(function(){
 
   var m = [20, 120, 20, 120],
     w = 940 - m[1] - m[3],
@@ -6,22 +6,22 @@
     i = 0,
     root;
 
-var tree = d3.layout.tree().size([h, w]); //Representa el tamaño en X y Y del diagrama
+  var tree = d3.layout.tree().size([h, w]); //Representa el tamaño en X y Y del diagrama
 
-var diagonal = d3.svg.diagonal().projection(function(d) { return [d.y, d.x]; });//Se encarga de la proyeccion de los 
-                                                                                //nodos entre si, para apertura y cierre
+  var diagonal = d3.svg.diagonal().projection(function(d) { return [d.y, d.x]; });//Se encarga de la proyeccion de los 
+                                                                                  //nodos entre si, para apertura y cierre
 
-var vis = d3.select("#arbol")
-  .append("svg:svg")
-    .attr("width", (w + m[1] + m[3])*(1.6))
-    .attr("height",h + m[0] + m[2])
-  .append("svg:g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+  var vis = d3.select("#arbolLayout")
+    .append("svg:svg")
+      .attr("width", (w + m[1] + m[3])*(1.6))
+      .attr("height",h + m[0] + m[2])
+    .append("svg:g")
+      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-d3.json("js/flare.json", function(json) {
-  root = json;
-  root.x0 = h / 2;
-  root.y0 = 0;
+  d3.json("js/flare.json", function(json) {
+    root = json;
+    root.x0 = h / 2;
+    root.y0 = 0;
 
   function toggleAll(d) {
     
@@ -40,7 +40,7 @@ d3.json("js/flare.json", function(json) {
 });
 
 function activeBackbone(){
-  $("#arbol").find('g.node').each(function(){
+  $("#arbolLayout").find('g.node').each(function(){
     new App.views.Node({el:this});
   });
 }
@@ -147,5 +147,5 @@ function toggle(d) {
   }
 }
   
-})();
+});
 

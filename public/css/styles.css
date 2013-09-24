@@ -388,12 +388,12 @@ section#visualArea{
 }
 div.vis{
 	position:relative;
-	height: 500px !important;
-	width:980px !important; 
+	height: 480px !important;
+	width:930px !important; 
 	background: rgba(0,0,0,0.9);
-	position:relative;
 	z-index:10;
 	overflow: hidden;
+	float: left !important;
 }
 
 

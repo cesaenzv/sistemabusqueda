@@ -68,7 +68,8 @@
 			</ul>
 			<div id="arbol" class="grid_8 vis white"></div>
 			<div id="partition" class="grid_8 vis white"></div>
-			<div id="circles" class="grid_8 vis white"></div>					
+			<div id="circles" class="grid_8 vis white"></div>
+
 		</div>
 	</div>	
 </section><!-- Fin de la seccion visual -->
