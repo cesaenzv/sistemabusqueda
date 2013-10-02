@@ -351,8 +351,7 @@ a.popupLink{
 }
 
 
-.niceSelect{
-    
+.niceSelect{    
     display:block;
     padding:1em;
     font-size: 1.2em;
@@ -372,6 +371,85 @@ a.popupLink{
     overflow: auto !important;
 }
 
+/*----------------------- Clases Semanticas -----------------------------*/
+#semanticContent{	
+	top: 50px; right: 0%;
+	background-color: white; border-radius: 10px;
+	position: fixed; z-index: 300;
+}
+
+#semanticContent a.btnView{
+	height: 1.5em;
+	width: 1.5em;
+	border: 1px solid #eee;
+	display: inline-block;
+	border-radius: 2em;
+	position: relative;
+}
+#semanticContent > form {
+	height: 70%;
+}
+#semanticContent > div {
+	height: 15%;	
+}
+
+#semanticContent > form, #semanticContent > div{	
+	display: block;	width: 98%;	padding: 2%;
+}
+
+#semanticContent a.btnView#openSearcher{
+	background-color: green;
+	float:left;	
+}
+
+#semanticContent a.btnView#closeSearcher{
+	background-color: red;
+	float:right;	
+}
+
+#semanticContent.show-semantic{
+	width: 300px; height: 150px;	
+	animation: show-semantic 1s;
+	-webkit-animation:show-semantic 1s; /* Safari and Chrome */	
+}
+
+#semanticContent.hide-semantic{
+	width: 1.6em; height: 1.6em;
+	animation: hide-semantic 1s;
+	-webkit-animation:hide-semantic 1s; /* Safari and Chrome */	
+}
+
+#semanticContent.hide-semantic > form {
+	display: none;
+}
+
+/*Animations*/
+/*Mostrar div semantico*/
+@keyframes show-semantic
+{	
+	from{  width: 1.6em; height: 1.6em;}
+	to{  width: 300px; height: 150px;}
+}
+
+@-webkit-keyframes show-semantic
+{
+	from{  width: 1.6em; height: 1.6em;}	
+	to{ width: 300px; height: 150px;}
+}
+
+@keyframes hide-semantic
+{	
+	from{ width: 300px; height: 150px;}
+	to{  width: 1.6em; height: 1.6em;}	
+}
+
+@-webkit-keyframes hide-semantic
+{	
+	from{ width: 300px; height: 150px;}	
+	to{ width: 1.6em; height: 1.6em;}	
+}
+
+/*----------------------- Clases Semanticas Fin -------------------------*/
 
 
 /*----------------------Fin Clases--------------------------------------------------*/

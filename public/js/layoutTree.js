@@ -1,3 +1,5 @@
+var NodeLayoutTreeArray = new Array();
+
 $("#arbolLayoutBtn").click(function(){
 
   var m = [20, 120, 20, 120],
@@ -30,18 +32,24 @@ $("#arbolLayoutBtn").click(function(){
       toggle(d);
     }
   }
-
   // Initialize the display to show a few nodes.
   root.children.forEach(toggleAll);
-
-
   update(root);
-
+  activeBackbone();
 });
 
 function activeBackbone(){
   $("#arbolLayout").find('g.node').each(function(){
-    new App.views.Node({el:this});
+    var flag = true;    
+    for(var i=0; i<NodeLayoutTreeArray.length;i++){
+      if(NodeLayoutTreeArray[i] === this){
+        flag = false;
+      }
+    }
+    if(flag === true){
+      NodeLayoutTreeArray.push(this);
+      new App.views.Node({el:this});
+    }
   });
 }
 
@@ -62,7 +70,7 @@ function update(source) {
   var nodeEnter = node.enter().append("svg:g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", function(d) { console.log('potato'); toggle(d); update(d); });
+      .on("click", function(d) { toggle(d); update(d); activeBackbone()});
 
   nodeEnter.append("svg:circle")
       .attr("r", 1e-6)
@@ -133,7 +141,7 @@ function update(source) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
-  activeBackbone();
+  
 }
 
 // Toggle children.

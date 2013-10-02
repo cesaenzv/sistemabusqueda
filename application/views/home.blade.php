@@ -44,7 +44,32 @@
 	}
 </style>
 
+<section id="semanticContent" class="shide-semantic" style="display:none;">
+	<div>
+	 	<a class="btnView" id="openSearcher"></a>
+	 	<a class="btnView" id="closeSearcher"></a>
+	</div>
+	<form action="{{url('semantic/searchTerm')}}" method="POST">
+		<label for:"term">Termino:</label>
+		<input id="term" name="term"  placeholder="busqueda semantica">
+		<br/>
+		<label>Categoria:</label>
+		<select id="category">
+			<option value=""></option>
+			<option value=""></option>
+			<option value=""></option>
+			<option value=""></option>
+			<option value=""></option>
+		</select>
+		<br/>
+		<button type ='submit'>Buscar</button>
+
+	</form>
+</section>
+
 <section id="visualArea">
+
+
 	<div class="container_12">
 		<div id="tabs" class="grid_12">
 			<ul>

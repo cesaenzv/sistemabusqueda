@@ -1,3 +1,4 @@
+var NodesPartitionArray = new Array();
 $("#partitionBtn").click(function(){
   var w = 960,
     h = 480,
@@ -28,7 +29,16 @@ $("#partitionBtn").click(function(){
 
 function activeBackbone(){
   $("#partition").find('g.node').each(function(){
-    new App.views.Node({el:this});
+    var flag = true;    
+    for(var i=0; i<NodesPartitionArray.length;i++){
+      if(NodesPartitionArray[i] === this){
+        flag = false;
+      }
+    }
+    if(flag === true){
+      NodesPartitionArray.push(this);
+      new App.views.Node({el:this});
+    }
   });
 }
 
