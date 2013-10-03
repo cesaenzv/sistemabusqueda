@@ -37,12 +37,13 @@ App.views.recursosView = Backbone.View.extend({
 	initialize: function(){
 		this.collection.on('reset' , this.render, this);
 	},
-	render: function(){		
+	render: function(){	
 		this.$el.empty();
 		this.collection.each( function(result, el){
 			var vista = new App.views.recursoView({model:result});
 			this.$el.append(vista.$el);
 		}, this);
+		$("#semanticResult").dialog("open");
 	}		
 }) ;
 
@@ -56,6 +57,7 @@ App.views.formView = Backbone.View.extend({
 	initialize:function(){
 		this.results = new App.collections.recursos();
 		this.recursosView = new App.views.recursosView({collection:this.results});
+		this.tipoRecurso = this.$el.find("#facet");
 	},
 	newSearch : function(e, ev){
 		e.preventDefault();
@@ -69,6 +71,7 @@ App.views.formView = Backbone.View.extend({
 		searchQuery = encodeURIComponent(searchQuery);
 		return $.ajax({
 			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&start=1&rows=100&profile=standard',
+			//url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&qf='+this.tipoRecurso.val()+'&start=1&rows=100&profile=standard',
 			dataType: "jsonp",
 		});
 	}
@@ -78,11 +81,6 @@ App.views.formView = Backbone.View.extend({
 App.views.Node = Backbone.View.extend({
 	events:{
 		'click':'dataNode'
-	},
-	initialize :  function(config){			
-		this.destroy = config.destroy;
-		this.results = new App.collections.recursos();
-		this.recursosView = new App.views.recursosView({collection:this.results});
 	},
 	dataNode : function (){			
 		$('#containerRes').circleLoading();
@@ -97,69 +95,87 @@ App.views.SemanticFinder = Backbone.View.extend({
 	viewState:false,
 	events:{
 		'submit':'semanticConsult',
-		'click a#openSearcher':'openView',
-		'click a#closeSearcher':'closeView',		
+		'click a.btnView':'manageView',
+		'change select#facet': 'appendFacetsOptions'
 	},
 	initialize:function(){
+		this.selectFacet = this.$el.find("select#facet");
+		this.facetOptions = this.$el.find("select#facetOptions");
+		this.results = new App.collections.recursos();
+		this.recursosView = new App.views.recursosView({collection:this.results});
 		this.listenTo(Backbone, 'semanticTerm', this.chargueSearchView);
 	},
 	chargueSearchView:function(data){
-		this.term = data.searchQuery;
-		console.log("chargueSearchView -> "+this.term);
+		this.term = data.searchQuery;		
 		this.$el.find('#term').val(this.term);
-		this.openView();		
+		if(this.viewState == false)
+			this.manageView();		
 	},
-	semanticConsult : function(){
-
+	semanticConsult : function(e){
+		e.preventDefault();		
+		if(this.$el.find('#term').val() != this.term)
+			this.term = this.$el.find('#term').val();
+		var that = this;
+		$('#containerRes').circleLoading();
+		this.search().done(function(data){
+			that.appendFacets(data.facets);
+			that.results.reset(data.items);
+		});
 	},
-	openView:function(){
-		console.log("open");	
-		if(this.viewState == false){
-			this.$el.removeClass('hide-semantic').addClass('show-semantic');
-			this.$el.attr('style','');
-			this.$el.find("a#openSearcher").css('display','none');
-			this.$el.find("a#closeSearcher").css('display','inline-block');
+	appendFacets: function(facets){
+		this.facets = facets;		
+		this.selectFacet.html('');
+		$('<option value="-1">Todos</option>').appendTo(this.selectFacet);
+		for(var i=0; i<facets.length; i++)
+			$('<option value="'+i+'"">'+facets[i].name+'</option>').appendTo(this.selectFacet);		
+	},
+	appendFacetsOptions: function(){
+		if(this.facets == undefined || this.facets == null)
+			return false;		
+		var selectedId = this.selectFacet.val();
+		if(selectedId > -1){
+			var facet = this.facets[selectedId];
+			this.facetOptions.html('');
+			$('<option value="-1">Todos</option>').appendTo(this.facetOptions);
+			for(var i=0; i<facet.fields.length; i++)
+				$('<option value="'+facet.fields[i].label+'"">'+facet.fields[i].label+'</option>').appendTo(this.facetOptions);	
 		}
-		this.viewState = true;
 	},
-	closeView:function(){
-		console.log("close");			
-		if(this.viewState == true){
-			this.$el.removeClass('show-semantic').addClass('hide-semantic');
-			this.$el.attr('style','');
-			this.$el.find("a#openSearcher").css('display','inline-block');
-			this.$el.find("a#closeSearcher").css('display','none');		
-		}
-		this.viewState = false;
+	search: function(){
+		var searchQuery = encodeURIComponent(this.term);
+		var facet ="";
+		if(this.selectFacet.val()>-1 && this.selectFacet.val() != undefined ){
+			facet+='&qf='+this.selectFacet.find('option:selected').html();
+			if(this.facetOptions.val()!= -1){
+				facet += ':'+encodeURIComponent(this.facetOptions.val());
+			}
+		}		
+		return $.ajax({
+			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&start=1&rows=100&profile=facets'+facet,
+			dataType: "jsonp",
+		});	
+				
+		
+	},
+	manageView:function(){
+		this.$el.removeClass(this.viewState==true?'show-semantic':'hide-semantic')
+			.addClass(this.viewState==true?'hide-semantic':'show-semantic');
+		this.$el.attr('style','');
+		this.$el.find("a#openSearcher").css('display',this.viewState==true?'inline-block':'none');
+		this.$el.find("a#closeSearcher").css('display',this.viewState==true?'none':'inline-block');		
+		this.viewState = !this.viewState;
 	}
 });
 
 var semanticModule =(function(){
 	var searchTerms  = function(searchQuery){
 		searchQuery = encodeURIComponent(searchQuery);
+		
 		return $.ajax({
-			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&start=1&rows=100&profile=standard',
+			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&start=1&rows=100&profile=facets',
 			dataType: "jsonp",
 		});
-	}/*,
-	activeBackbone = function(div, array){
-		if(array == null || array == undefined){
-			array = new Array();
-		}
-	  	$(div).find('g.node').each(function(){
-		    var flag = true;    
-		    for(var i=0; i<array.length;i++){
-		      	if(array[i] === this){
-		        	flag = false;
-		      	}		
-		    }
-		    if(flag === true){
-		      	array.push(this);
-		      	new App.views.Node({el:this});
-		    }
-	 	});
-	  	return array;
-	}*/;
+	};
 	return {
 		search : searchTerms,
 		//activeBackbone:activeBackbone

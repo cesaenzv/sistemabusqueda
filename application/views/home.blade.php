@@ -53,13 +53,10 @@
 		<label for:"term">Termino:</label>
 		<input id="term" name="term"  placeholder="busqueda semantica">
 		<br/>
-		<label>Categoria:</label>
-		<select id="category">
-			<option value=""></option>
-			<option value=""></option>
-			<option value=""></option>
-			<option value=""></option>
-			<option value=""></option>
+		<label>Discriminar recurso por:</label>
+		<select id="facet">
+		</select>
+		<select id="facetOptions">
 		</select>
 		<br/>
 		<button type ='submit'>Buscar</button>
