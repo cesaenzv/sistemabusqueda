@@ -80,34 +80,44 @@ App.views.recursosView = Backbone.View.extend({
 
 App.views.Node = Backbone.View.extend({
 	hoverNode :("#hoverNodes"),
+	ajaxCall : null,
 	events:{
 		'click':'dataNode',
-		'hover':'showNumResources',
-		'blur':'hideNumResources'
+		'mouseenter':'showNumResources',
+		'mouseleave':'hideNumResources'
 	},
 	dataNode : function (){			
 		$('#containerRes').circleLoading();
 		Backbone.trigger('semanticTerm',{searchQuery:$(this.el).text()});
 	},
 	hideNumResources: function(){
-		that.$hoverNode.css('display','none !important');	
+		$("#hoverNodes").css('display','none');
+		if(this.ajaxCall !== null){
+			this.ajaxCall.abort();
+			this.ajaxCall =  null;						
+		}	
 	},
-	showNumResources : function(evt){
-		var that = this;
-		this.search().done(function(data){
-			document.body.style.cursor = "auto";
-			$("#hoverNodes").css('top',evt.pageX);
-			$("#hoverNodes").css('left',evt.pageY);			
-			$("#hoverNodes").css('display','block !important');	
+	showNumResources : function(evt){		
+		if(this.ajaxCall !== null)
+			return false;
+		this.ajaxCall = this.search();
+		this.ajaxCall.done(function(data){
+			$("#hoverNodes").css('top',evt.pageY);
+			$("#hoverNodes").css('left',evt.pageX+15);		
+			$("#hoverNodes").css('display','block');	
 			$("#hoverNodes").html(data.totalResults);		
 		});
 	},
 	search :function(){
 		var searchQuery = encodeURIComponent($(this.el).text());
-		document.body.style.cursor = "wait";
 		return $.ajax({
-			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&profile=facets',
+			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery,
 			dataType: "jsonp",
+			error: function(jqXHR,status,error){
+        		if (status != "abort") {
+                    get_data_from_server();  // Try request again.
+                }
+    		},
 			async:false
 		});
 	}
