@@ -44,29 +44,32 @@
 	}
 </style>
 
+<div id="hoverNodes"></div>
 <section id="semanticContent" class="shide-semantic" style="display:none;">
 	<div>
 	 	<a class="btnView" id="openSearcher"></a>
 	 	<a class="btnView" id="closeSearcher"></a>
 	</div>
-	<form action="{{url('semantic/searchTerm')}}" method="POST">
-		<label for:"term">Termino:</label>
-		<input id="term" name="term"  placeholder="busqueda semantica">
+	<div>
+		<label for:"term">Termino:<input id="term" name="term"  placeholder="busqueda semantica"></label>
+		
+		<button type='submit'>Buscar</button>
 		<br/>
-		<label>Discriminar recurso por:</label>
-		<select id="facet">
-		</select>
-		<select id="facetOptions">
-		</select>
-		<br/>
-		<button type ='submit'>Buscar</button>
-
-	</form>
+		<label>
+			Discriminar recurso por:
+			<select id="facet"></select>
+		</label>
+		<label>
+			Tipo:
+			<select id="facetOptions"></select>	
+		</label>
+	</div>
+	<div>
+		<label>Total Resultados: <span id="totalRecords"></span></label>
+	</div>	
 </section>
 
 <section id="visualArea">
-
-
 	<div class="container_12">
 		<div id="tabs" class="grid_12">
 			<ul>
@@ -170,7 +173,9 @@
 	    @include('handlebarsResource')
 
 	</div>
-</section><!-- Fin del panel contenido-->	
+</section>
+
+<!-- Fin del panel contenido-->	
 @endsection
 
 @section('mainScripts')

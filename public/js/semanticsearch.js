@@ -48,7 +48,7 @@ App.views.recursosView = Backbone.View.extend({
 }) ;
 
 
-App.views.formView = Backbone.View.extend({	
+/*App.views.formView = Backbone.View.extend({	
 	el:"#form_buscador",
 	searchBox : $('#term'),
 	events:{
@@ -75,16 +75,41 @@ App.views.formView = Backbone.View.extend({
 			dataType: "jsonp",
 		});
 	}
-});
+});*/
 
 
 App.views.Node = Backbone.View.extend({
+	hoverNode :("#hoverNodes"),
 	events:{
-		'click':'dataNode'
+		'click':'dataNode',
+		'hover':'showNumResources',
+		'blur':'hideNumResources'
 	},
 	dataNode : function (){			
 		$('#containerRes').circleLoading();
 		Backbone.trigger('semanticTerm',{searchQuery:$(this.el).text()});
+	},
+	hideNumResources: function(){
+		that.$hoverNode.css('display','none !important');	
+	},
+	showNumResources : function(evt){
+		var that = this;
+		this.search().done(function(data){
+			document.body.style.cursor = "auto";
+			$("#hoverNodes").css('top',evt.pageX);
+			$("#hoverNodes").css('left',evt.pageY);			
+			$("#hoverNodes").css('display','block !important');	
+			$("#hoverNodes").html(data.totalResults);		
+		});
+	},
+	search :function(){
+		var searchQuery = encodeURIComponent($(this.el).text());
+		document.body.style.cursor = "wait";
+		return $.ajax({
+			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&profile=facets',
+			dataType: "jsonp",
+			async:false
+		});
 	}
 });
 
@@ -94,18 +119,27 @@ App.views.SemanticFinder = Backbone.View.extend({
 	term:'',
 	viewState:false,
 	events:{
-		'submit':'semanticConsult',
+		'click button':'semanticConsult',
 		'click a.btnView':'manageView',
-		'change select#facet': 'appendFacetsOptions'
+		'change select#facet': 'appendFacetsOptions',
+		'change #term':'resetView'
 	},
 	initialize:function(){
 		this.selectFacet = this.$el.find("select#facet");
 		this.facetOptions = this.$el.find("select#facetOptions");
+		this.totalRecords = this.$el.find("span#totalRecords");
 		this.results = new App.collections.recursos();
 		this.recursosView = new App.views.recursosView({collection:this.results});
 		this.listenTo(Backbone, 'semanticTerm', this.chargueSearchView);
+		this.resetView();
+	},
+	resetView:function(){
+		this.selectFacet.html('').append($('<option value="-1">Todos</option>')).parent('label').css('display','none');
+		this.facetOptions.html('').append($('<option value="-1">Todos</option>')).parent('label').css('display','none');
+		this.totalRecords.text('').parent('label').css('display','none');
 	},
 	chargueSearchView:function(data){
+		this.resetView();
 		this.term = data.searchQuery;		
 		this.$el.find('#term').val(this.term);
 		if(this.viewState == false)
@@ -114,18 +148,18 @@ App.views.SemanticFinder = Backbone.View.extend({
 	semanticConsult : function(e){
 		e.preventDefault();		
 		if(this.$el.find('#term').val() != this.term)
-			this.term = this.$el.find('#term').val();
+			this.term = this.$el.find('#term').val();		
 		var that = this;
-		$('#containerRes').circleLoading();
+		$('#containerRes').circleLoading();		
 		this.search().done(function(data){
+			that.totalRecords.text(data.totalResults).parent('label').css('display','block');
 			that.appendFacets(data.facets);
 			that.results.reset(data.items);
 		});
 	},
 	appendFacets: function(facets){
 		this.facets = facets;		
-		this.selectFacet.html('');
-		$('<option value="-1">Todos</option>').appendTo(this.selectFacet);
+		this.selectFacet.parent('label').css('display','block');		
 		for(var i=0; i<facets.length; i++)
 			$('<option value="'+i+'"">'+facets[i].name+'</option>').appendTo(this.selectFacet);		
 	},
@@ -134,9 +168,8 @@ App.views.SemanticFinder = Backbone.View.extend({
 			return false;		
 		var selectedId = this.selectFacet.val();
 		if(selectedId > -1){
-			var facet = this.facets[selectedId];
-			this.facetOptions.html('');
-			$('<option value="-1">Todos</option>').appendTo(this.facetOptions);
+			this.facetOptions.parent('label').css('display','block');
+			var facet = this.facets[selectedId];						
 			for(var i=0; i<facet.fields.length; i++)
 				$('<option value="'+facet.fields[i].label+'"">'+facet.fields[i].label+'</option>').appendTo(this.facetOptions);	
 		}
@@ -154,8 +187,6 @@ App.views.SemanticFinder = Backbone.View.extend({
 			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&start=1&rows=100&profile=facets'+facet,
 			dataType: "jsonp",
 		});	
-				
-		
 	},
 	manageView:function(){
 		this.$el.removeClass(this.viewState==true?'show-semantic':'hide-semantic')
@@ -169,16 +200,14 @@ App.views.SemanticFinder = Backbone.View.extend({
 
 var semanticModule =(function(){
 	var searchTerms  = function(searchQuery){
-		searchQuery = encodeURIComponent(searchQuery);
-		
+		searchQuery = encodeURIComponent(searchQuery);		
 		return $.ajax({
 			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&start=1&rows=100&profile=facets',
 			dataType: "jsonp",
 		});
 	};
 	return {
-		search : searchTerms,
-		//activeBackbone:activeBackbone
+		search : searchTerms
 	}
 })();
 
@@ -195,6 +224,6 @@ var semanticModule =(function(){
 	});
 	$("#semanticResult").dialog("option","width",1100);
 	$("#semanticResult").dialog("option","height",800);
-	new App.views.formView();	
+	//new App.views.formView();	
 	new App.views.SemanticFinder();
 })();

@@ -376,6 +376,7 @@ a.popupLink{
 	top: 50px; right: 0%;
 	background-color: white; border-radius: 10px;
 	position: fixed; z-index: 300;
+	min-height: 65px;
 }
 
 #semanticContent a.btnView{
@@ -386,15 +387,16 @@ a.popupLink{
 	border-radius: 2em;
 	position: relative;
 }
-#semanticContent > form {
-	height: 70%;
+
+/*#semanticContent > div:nth-child(2) {
+	height: 50%;
 }
 #semanticContent > div {
 	height: 15%;	
-}
+}*/
 
-#semanticContent > form, #semanticContent > div{	
-	display: block;	width: 98%;	padding: 2%;
+#semanticContent > div{	
+	display: block;	width: 96%;	padding: 2%;
 }
 
 #semanticContent a.btnView#openSearcher{
@@ -408,44 +410,57 @@ a.popupLink{
 }
 
 #semanticContent.show-semantic{
-	width: 300px; height: 150px;	
+	width: 350px; /*height: 200px;*/	
 	animation: show-semantic 1s;
 	-webkit-animation:show-semantic 1s; /* Safari and Chrome */	
 }
 
 #semanticContent.hide-semantic{
 	width: 1.6em; height: 1.6em;
+	min-height:  1.6em !important;	
 	animation: hide-semantic 1s;
 	-webkit-animation:hide-semantic 1s; /* Safari and Chrome */	
 }
 
-#semanticContent.hide-semantic > form {
+#semanticContent.hide-semantic > div:nth-child(2) {
 	display: none;
 }
 
+#hoverNodes{
+	height:2em;
+	position: absolute; 
+	z-index: 300;
+	background-color: yellow;
+	color:red;
+	font-weight: 900;
+}
 /*Animations*/
 /*Mostrar div semantico*/
 @keyframes show-semantic
 {	
 	from{  width: 1.6em; height: 1.6em;}
-	to{  width: 300px; height: 150px;}
+	/*to{ width: 350px; height: 200px;}*/
+	to{ width: 350px;}
 }
 
 @-webkit-keyframes show-semantic
 {
 	from{  width: 1.6em; height: 1.6em;}	
-	to{ width: 300px; height: 150px;}
+	/*to{ width: 350px; height: 200px;}*/
+	to{ width: 350px;}
 }
 
 @keyframes hide-semantic
 {	
-	from{ width: 300px; height: 150px;}
+	/*from{ width: 350px; height: 200px;}*/
+	from{width: 350px;}
 	to{  width: 1.6em; height: 1.6em;}	
 }
 
 @-webkit-keyframes hide-semantic
 {	
-	from{ width: 300px; height: 150px;}	
+	/*from{ width: 350px; height: 200px;}*/
+	from{width: 350px;}	
 	to{ width: 1.6em; height: 1.6em;}	
 }
 
