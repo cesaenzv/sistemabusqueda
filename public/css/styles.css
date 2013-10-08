@@ -422,8 +422,12 @@ a.popupLink{
 	-webkit-animation:hide-semantic 1s; /* Safari and Chrome */	
 }
 
-#semanticContent.hide-semantic > div:nth-child(2) {
+#semanticContent.hide-semantic > div {
 	display: none;
+}
+
+#semanticContent.hide-semantic > div:first-child {
+	display: block; !important;
 }
 
 #hoverNodes{

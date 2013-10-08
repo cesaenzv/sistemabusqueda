@@ -1,7 +1,5 @@
-
-
 var App = {}
-
+var semanticaF;
 App.models = {};
 App.views = {};
 App.collections = {};
@@ -31,7 +29,6 @@ App.views.recursoView = Backbone.View.extend({
 	}	
 }) ;
 
-
 App.views.recursosView = Backbone.View.extend({
 	el: '#containerRes',
 	initialize: function(){
@@ -45,38 +42,7 @@ App.views.recursosView = Backbone.View.extend({
 		}, this);
 		$("#semanticResult").dialog("open");
 	}		
-}) ;
-
-
-/*App.views.formView = Backbone.View.extend({	
-	el:"#form_buscador",
-	searchBox : $('#term'),
-	events:{
-		'submit' : 'newSearch'
-	},
-	initialize:function(){
-		this.results = new App.collections.recursos();
-		this.recursosView = new App.views.recursosView({collection:this.results});
-		this.tipoRecurso = this.$el.find("#facet");
-	},
-	newSearch : function(e, ev){
-		e.preventDefault();
-		var that = this;
-		$('#containerRes').circleLoading();
-		this.search(this.searchBox.val()).done(function(data){
-			that.results.reset(data.items);
-		});
-	},
-	search: function(searchQuery){
-		searchQuery = encodeURIComponent(searchQuery);
-		return $.ajax({
-			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&start=1&rows=100&profile=standard',
-			//url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&qf='+this.tipoRecurso.val()+'&start=1&rows=100&profile=standard',
-			dataType: "jsonp",
-		});
-	}
-});*/
-
+});
 
 App.views.Node = Backbone.View.extend({
 	hoverNode :("#hoverNodes"),
@@ -92,6 +58,7 @@ App.views.Node = Backbone.View.extend({
 	},
 	hideNumResources: function(){
 		$("#hoverNodes").css('display','none');
+		this.$el.css('cursor',"pointer !important");
 		if(this.ajaxCall !== null){
 			this.ajaxCall.abort();
 			this.ajaxCall =  null;						
@@ -110,6 +77,7 @@ App.views.Node = Backbone.View.extend({
 	},
 	search :function(){
 		var searchQuery = encodeURIComponent($(this.el).text());
+		$(this.el).css('cursor',"progress !important");		
 		return $.ajax({
 			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery,
 			dataType: "jsonp",
@@ -126,32 +94,37 @@ App.views.Node = Backbone.View.extend({
 App.views.SemanticFinder = Backbone.View.extend({
 	el:'#semanticContent',
 	buttonControl: '#btnView',
+	template:Handlebars.compile($("#semanticFinder").html()),
 	term:'',
 	viewState:false,
 	events:{
 		'click button':'semanticConsult',
 		'click a.btnView':'manageView',
-		'change select#facet': 'appendFacetsOptions',
+		'change select#facets': 'addFacetOptions',
 		'change #term':'resetView'
 	},
 	initialize:function(){
-		this.selectFacet = this.$el.find("select#facet");
-		this.facetOptions = this.$el.find("select#facetOptions");
-		this.totalRecords = this.$el.find("span#totalRecords");
 		this.results = new App.collections.recursos();
 		this.recursosView = new App.views.recursosView({collection:this.results});
 		this.listenTo(Backbone, 'semanticTerm', this.chargueSearchView);
-		this.resetView();
+	},
+	render:function(){
+		this.$el.empty();
+		var html = this.template(this.data);
+		this.$el.html(html);
+		if(this.viewState == false)
+			this.manageView();		
 	},
 	resetView:function(){
-		this.selectFacet.html('').append($('<option value="-1">Todos</option>')).parent('label').css('display','none');
-		this.facetOptions.html('').append($('<option value="-1">Todos</option>')).parent('label').css('display','none');
-		this.totalRecords.text('').parent('label').css('display','none');
+		this.term = this.$el.find('#term').val();
+		this.data = {term:this.term};
+		this.render();
 	},
 	chargueSearchView:function(data){
-		this.resetView();
 		this.term = data.searchQuery;		
+		this.data = {term:this.term};		
 		this.$el.find('#term').val(this.term);
+		this.render();
 		if(this.viewState == false)
 			this.manageView();		
 	},
@@ -162,35 +135,28 @@ App.views.SemanticFinder = Backbone.View.extend({
 		var that = this;
 		$('#containerRes').circleLoading();		
 		this.search().done(function(data){
-			that.totalRecords.text(data.totalResults).parent('label').css('display','block');
-			that.appendFacets(data.facets);
 			that.results.reset(data.items);
+			var idSelected = that.data.idSelected;
+			that.data = {facets:data.facets, idSelected : that.data.idSelected,term:that.term, totalResults:data.totalResults};
+			if(that.viewState == true)
+				that.data.viewState = that.viewState;
+			that.render();
 		});
 	},
-	appendFacets: function(facets){
-		this.facets = facets;		
-		this.selectFacet.parent('label').css('display','block');		
-		for(var i=0; i<facets.length; i++)
-			$('<option value="'+i+'"">'+facets[i].name+'</option>').appendTo(this.selectFacet);		
-	},
-	appendFacetsOptions: function(){
-		if(this.facets == undefined || this.facets == null)
+	addFacetOptions: function(){	
+		if(this.data.facets == undefined || this.data.facets == null)
 			return false;		
-		var selectedId = this.selectFacet.val();
-		if(selectedId > -1){
-			this.facetOptions.parent('label').css('display','block');
-			var facet = this.facets[selectedId];						
-			for(var i=0; i<facet.fields.length; i++)
-				$('<option value="'+facet.fields[i].label+'"">'+facet.fields[i].label+'</option>').appendTo(this.facetOptions);	
-		}
+		this.data.idSelected = this.$el.find("select#facets").val();
+		this.data.facetData = this.data.facets[this.data.idSelected].fields; 
+		this.render();
 	},
 	search: function(){
 		var searchQuery = encodeURIComponent(this.term);
 		var facet ="";
-		if(this.selectFacet.val()>-1 && this.selectFacet.val() != undefined ){
-			facet+='&qf='+this.selectFacet.find('option:selected').html();
-			if(this.facetOptions.val()!= -1){
-				facet += ':'+encodeURIComponent(this.facetOptions.val());
+		if(this.$el.find("select#facets")>-1 && this.$el.find("select#facets") != undefined ){
+			facet+='&qf='+this.$el.find("select#facets option:selected").html();
+			if(this.$el.find("select#facetData").val()!= -1){
+				facet += ':'+encodeURIComponent(this.$el.find("select#facetData").val());
 			}
 		}		
 		return $.ajax({
@@ -234,6 +200,5 @@ var semanticModule =(function(){
 	});
 	$("#semanticResult").dialog("option","width",1100);
 	$("#semanticResult").dialog("option","height",800);
-	//new App.views.formView();	
 	new App.views.SemanticFinder();
 })();
