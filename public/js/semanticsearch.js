@@ -100,8 +100,8 @@ App.views.SemanticFinder = Backbone.View.extend({
 	events:{
 		'click button':'semanticConsult',
 		'click a.btnView':'manageView',
-		'change select#facets': 'addFacetOptions',
-		'change #term':'resetView'
+		'select select#facets': 'addFacetOptions',
+		'select #term':'resetView'
 	},
 	initialize:function(){
 		this.results = new App.collections.recursos();
@@ -137,7 +137,9 @@ App.views.SemanticFinder = Backbone.View.extend({
 		this.search().done(function(data){
 			that.results.reset(data.items);
 			var idSelected = that.data.idSelected;
-			that.data = {facets:data.facets, idSelected : that.data.idSelected,term:that.term, totalResults:data.totalResults};
+			if(that.data.facetData != undefined && that.data.facetData != null)
+				var facetData = that.data.facetData
+			that.data = {facetData:facetData,facets:data.facets, idSelected : that.data.idSelected,term:that.term, totalResults:data.totalResults};
 			if(that.viewState == true)
 				that.data.viewState = that.viewState;
 			that.render();

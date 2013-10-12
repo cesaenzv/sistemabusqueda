@@ -1,7 +1,9 @@
 var NodeLayoutTreeArray = new Array();
+var selected = false;
 
 $("#arbolLayoutBtn").click(function(){
-
+  if(selected ==  true)
+    return false;
   var m = [20, 120, 20, 120],
     w = 940 - m[1] - m[3],
     h = 480 - m[0] - m[2],
@@ -36,6 +38,7 @@ $("#arbolLayoutBtn").click(function(){
   root.children.forEach(toggleAll);
   update(root);
   activeBackbone();
+  selected = true;
 });
 
 function activeBackbone(){

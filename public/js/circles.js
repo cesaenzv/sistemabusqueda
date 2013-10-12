@@ -1,4 +1,6 @@
+var SelectedCircles = false;
 $("#circlesBtn").click(function(){
+if(SelectedCircles == false){
 function activeBackbone(){
   $("#circles").find('g.node').each(function(){
     new App.views.Node({el:this});
@@ -33,30 +35,32 @@ vis.append("svg:path")
     .on("mousedown", mousedown);
 
 d3.json("js/flare.json", function(json) {
-  var nodes = cluster.nodes(json);
+  
+    var nodes = cluster.nodes(json);
 
-  var link = vis.selectAll("path.link")
-      .data(cluster.links(nodes))
-    .enter().append("svg:path")
-      .attr("class", "link")
-      .attr("d", diagonal);
+    var link = vis.selectAll("path.link")
+        .data(cluster.links(nodes))
+      .enter().append("svg:path")
+        .attr("class", "link")
+        .attr("d", diagonal);
 
-  var node = vis.selectAll("g.node")
-      .data(nodes)
-    .enter().append("svg:g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+    var node = vis.selectAll("g.node")
+        .data(nodes)
+      .enter().append("svg:g")
+        .attr("class", "node")
+        .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
 
-  node.append("svg:circle")
-      .attr("r", 3);
+    node.append("svg:circle")
+        .attr("r", 3);
 
-  node.append("svg:text")
-      .attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
-      .attr("dy", ".31em")
-      .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-      .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-      .text(function(d) { return d.name; });
-  activeBackbone();
+    node.append("svg:text")
+        .attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
+        .attr("dy", ".31em")
+        .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+        .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
+        .text(function(d) { return d.name; });
+    activeBackbone();
+    
 });
 
 d3.select(window)
@@ -118,7 +122,8 @@ function dot(a, b) {
 }
 
 
-
+SelectedCircles = true;
+  }
 });
 
 
