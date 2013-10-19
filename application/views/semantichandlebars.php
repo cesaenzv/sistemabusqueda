@@ -18,8 +18,8 @@
 
 <script type="text/x-handlebars-template" id="semanticFinder">
 	<div>
-	 	<a class="btnView" id="openSearcher" {{#if viewState}}style="display:none;"{{else}}style="display:inline-block;"{{/if}}></a>
-	 	<a class="btnView" id="closeSearcher" style={{#if viewState}}style="display:inline-block;"{{else}}style="display:none;"{{/if}}></a>
+	 	<a class="btnView" id="openSearcher"></a>
+	 	<a class="btnView" id="closeSearcher"></a>
 	</div>
 	<div>
 		<label for:"term">Termino:<input id="term" name="term" {{#if term}}value="{{term}}"{{/if}} placeholder="busqueda semantica"></label>

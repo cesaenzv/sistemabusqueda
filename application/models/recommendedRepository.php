@@ -17,6 +17,15 @@ class RecommendedRepository{
 		return $fields;
 	}
 
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
+			Metdo encargado de realizar la insercion de un nuevo objeto dentro de la base de datos				
+		-Retorno:
+			$newRecommended->Nuevo recurso creado
+	*/
 	public function insert_Recommended ($idMetadata,$alternative,$creator,$contributor,$date,$created,$issued,
 										$temporal,$publisher,$source,$isPartOf){
 		try{

@@ -1,5 +1,4 @@
 var App = {}
-var semanticaF;
 App.models = {};
 App.views = {};
 App.collections = {};
@@ -96,12 +95,11 @@ App.views.SemanticFinder = Backbone.View.extend({
 	buttonControl: '#btnView',
 	template:Handlebars.compile($("#semanticFinder").html()),
 	term:'',
-	viewState:false,
 	events:{
 		'click button':'semanticConsult',
 		'click a.btnView':'manageView',
-		'select select#facets': 'addFacetOptions',
-		'select #term':'resetView'
+		'change select#facets': 'addFacetOptions',
+		'change #term':'resetView'
 	},
 	initialize:function(){
 		this.results = new App.collections.recursos();
@@ -112,8 +110,7 @@ App.views.SemanticFinder = Backbone.View.extend({
 		this.$el.empty();
 		var html = this.template(this.data);
 		this.$el.html(html);
-		if(this.viewState == false)
-			this.manageView();		
+		this.manageView();		
 	},
 	resetView:function(){
 		this.term = this.$el.find('#term').val();
@@ -125,8 +122,6 @@ App.views.SemanticFinder = Backbone.View.extend({
 		this.data = {term:this.term};		
 		this.$el.find('#term').val(this.term);
 		this.render();
-		if(this.viewState == false)
-			this.manageView();		
 	},
 	semanticConsult : function(e){
 		e.preventDefault();		
@@ -139,9 +134,7 @@ App.views.SemanticFinder = Backbone.View.extend({
 			var idSelected = that.data.idSelected;
 			if(that.data.facetData != undefined && that.data.facetData != null)
 				var facetData = that.data.facetData
-			that.data = {facetData:facetData,facets:data.facets, idSelected : that.data.idSelected,term:that.term, totalResults:data.totalResults};
-			if(that.viewState == true)
-				that.data.viewState = that.viewState;
+			that.data = {facetData:facetData, facets:data.facets, idSelected : that.data.idSelected, term:that.term, totalResults:data.totalResults};
 			that.render();
 		});
 	},
@@ -155,24 +148,34 @@ App.views.SemanticFinder = Backbone.View.extend({
 	search: function(){
 		var searchQuery = encodeURIComponent(this.term);
 		var facet ="";
-		if(this.$el.find("select#facets")>-1 && this.$el.find("select#facets") != undefined ){
+		if(this.$el.find("select#facets").val()!=-1 && this.$el.find("select#facets").val() != undefined ){
 			facet+='&qf='+this.$el.find("select#facets option:selected").html();
-			if(this.$el.find("select#facetData").val()!= -1){
+			if(this.$el.find("select#facetData").val()!= -1 && this.$el.find("select#facetData").val()!= undefined){
 				facet += ':'+encodeURIComponent(this.$el.find("select#facetData").val());
 			}
-		}		
+		}	
+		console.log(facet);	
 		return $.ajax({
 			url:'http://europeana.eu/api//v2/search.json?wskey=PQuiDaucA&query='+searchQuery+'&start=1&rows=100&profile=facets'+facet,
 			dataType: "jsonp",
 		});	
 	},
-	manageView:function(){
-		this.$el.removeClass(this.viewState==true?'show-semantic':'hide-semantic')
-			.addClass(this.viewState==true?'hide-semantic':'show-semantic');
-		this.$el.attr('style','');
-		this.$el.find("a#openSearcher").css('display',this.viewState==true?'inline-block':'none');
-		this.$el.find("a#closeSearcher").css('display',this.viewState==true?'none':'inline-block');		
-		this.viewState = !this.viewState;
+	manageView:function(e){
+		if(this.$el.attr('style') != ''){
+			this.$el.attr('style','');
+			this.$el.find("a#openSearcher").css('display','none');
+			this.$el.find("a#closeSearcher").css('display','inline-block');
+		}else{
+			this.$el.find("a#openSearcher").css('display',this.$el.hasClass('show-semantic') == true && e != undefined?'inline-block':'none');
+			this.$el.find("a#closeSearcher").css('display',this.$el.hasClass('show-semantic') == true && e != undefined?'none':'inline-block');
+		}
+
+		if(e === undefined && this.$el.hasClass('show-semantic')==true)
+			return true;		
+		if(this.$el.hasClass('show-semantic')==true)
+			this.$el.attr('class','hide-semantic');
+		else
+			this.$el.attr('class','show-semantic');
 	}
 });
 
