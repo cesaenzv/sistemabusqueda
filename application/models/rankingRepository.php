@@ -15,14 +15,24 @@ class RankingRepository{
 		-Retorno:
 			$newRanking-> Objeto de tipo ranking, el cual es una nueva calificacion de un recurso especifico
 	*/
+<<<<<<< HEAD
+<<<<<<< HEAD
+	public function insert_Ranking($idMetadata, $qualification){
+=======
 	public function insert_Ranking($idMetadata, $qualification=1){
+>>>>>>> 9edb6f6bb4e50430a74e3458657c7b94dd73a5fe
+=======
+	public function insert_Ranking($idMetadata, $qualification=1, $userId=1){
+>>>>>>> 319e20cd069fb1b1eaf54d7237b946c9219ee47a
 		try {
 			$newRanking = new Ranking(
-								array("id_metadata_term"=>$idMetadata, 
+								array("id_metadata_term"=>$idMetadata,
+									  "idUser"=> $userId,
 									  "qualification"=>$qualification)
 							);
 			$metadata = Metadata::find($idMetadata);			
-			$newRanking = $metadata->ranking()->insert($newRanking);			
+			$newRanking = $metadata->ranking()->insert($newRanking);
+						
 			return true;
 		}catch(Exception $e){
 			return $e->getMessage();
@@ -43,6 +53,16 @@ class RankingRepository{
 			$rankingAvg-> Valor numero del promedio de todos los rankings asociados al metadata
 	*/
 	private function get_MetadataRanking($idMetadata=0){
+<<<<<<< HEAD
+		
+		$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
+		if ($rankingAvg)
+			return $rankingAvg;		
+		else
+			return 0;
+		
+		
+=======
 		try{
 			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
 			return $rankingAvg;	
@@ -50,6 +70,7 @@ class RankingRepository{
 		catch(Exception $e){
 			return 1;
 		}
+>>>>>>> 9edb6f6bb4e50430a74e3458657c7b94dd73a5fe
 	}
 
 	/* Info
@@ -92,6 +113,15 @@ class RankingRepository{
 			$resource['numVotes'] = $this->get_numVotes($resource['id_metadata_mandatory']);
 			$resources[$i] = $resource;		
 		}
-		return $resources;		
+		usort($resources, array("RankingRepository", "cmp"));
+		return 	$resources;
+	}	
+
+	public function cmp($a, $b)
+	{
+	    if ($a['ranking'] == $b['ranking']) {
+	        return 0;
+	    }
+	    return ($a['ranking'] > $b['ranking']) ? -1 : 1;
 	}
 }

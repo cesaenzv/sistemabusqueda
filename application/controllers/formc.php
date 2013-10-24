@@ -1,6 +1,14 @@
 <?php 
 
 class Formc_Controller extends Base_Controller {
+	
+
+	function __construct(){
+
+		parent::__construct();
+		$this->filter('before', 'auth')->only(array('index'));
+	}
+
 	/* Info
 		<Desarrollado>
 		Carlos Sáenz
@@ -11,15 +19,6 @@ class Formc_Controller extends Base_Controller {
 		-Retorno: 
 			$forms->Objeto json que contien la informacion de los campos de cada uno de los formularios			
 	*/
-
-
-	function __construct(){
-
-		parent::__construct();
-		$this->filter('before', 'auth')->only(array('index'));
-	}
-
-
 	function action_getFormFields(){
 		$forms = array();
 		$mandatoryR = new MandatoryRepository();
