@@ -19,6 +19,7 @@ class Resource_Controller extends Base_Controller {
 			term -> Termino de busqueda textual
 			idColumn -> Columna en la cual se realiza la busqueda de la Id
 			idTerm -> Id que identifica el termino por el cual se realiza la consulta de los pies
+			criterio-> Termino que identifica que pie es el que se esta construyendo segun los discriminantes de los metadatos
 		-Retorno: 
 			Objeto json que contien la informacion de los pies con todos los criterio implementados
 			PD:Si la busqueda fue por medio textual, regresa un dato mas el cual contiene el ID de este termino
@@ -32,9 +33,11 @@ class Resource_Controller extends Base_Controller {
 				$europeanaTR = new EuropeanaTermRepository();
 				$datos['id'] = $europeanaTR->get_IdByTerm(Input::get('term'));
 				return Response::json($datos);		
+			}else{
+				$datos['pie'] = $pieR->generate_Pies(Input::get('criterio'),Input::get('idTerm'),Input::get('idColumn'));			
+				return Response::json($datos);	
 			}
-			$datos['pie'] = $pieR->generate_Pies(Input::get('criterio'),Input::get('idTerm'),Input::get('idColumn'));			
-			return Response::json($datos);
+			
 		}
 		catch(Exception $error){
 			$datos['mensaje'] = "Hubo un problema resource/getPies". $error->getMessage();

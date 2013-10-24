@@ -57,7 +57,6 @@ Route::get('ranking',function()
 Route::get('nuevorecurso', 'formc@index');
 
 Route::get('logout', function(){
-
 	
 	Auth::logout();
 	return Redirect::to('account');

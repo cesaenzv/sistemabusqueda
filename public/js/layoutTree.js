@@ -1,27 +1,31 @@
-(function(){
+var NodeLayoutTreeArray = new Array();
+var selected = false;
 
+$("#arbolLayoutBtn").click(function(){
+  if(selected ==  true)
+    return false;
   var m = [20, 120, 20, 120],
-    w = 1000 - m[1] - m[3],
-    h = 700 - m[0] - m[2],
+    w = 940 - m[1] - m[3],
+    h = 480 - m[0] - m[2],
     i = 0,
     root;
 
-var tree = d3.layout.tree()
-    .size([h, w]);
+  var tree = d3.layout.tree().size([h, w]); //Representa el tamaño en X y Y del diagrama
 
-var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+  var diagonal = d3.svg.diagonal().projection(function(d) { return [d.y, d.x]; });//Se encarga de la proyeccion de los 
+                                                                                  //nodos entre si, para apertura y cierre
 
-var vis = d3.select("#arbol").append("svg:svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
-  .append("svg:g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+  var vis = d3.select("#arbolLayout")
+    .append("svg:svg")
+      .attr("width", (w + m[1] + m[3])*(1.6))
+      .attr("height",h + m[0] + m[2])
+    .append("svg:g")
+      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-d3.json("js/flare.json", function(json) {
-  root = json;
-  root.x0 = h / 2;
-  root.y0 = 0;
+  d3.json("js/flare.json", function(json) {
+    root = json;
+    root.x0 = h / 2;
+    root.y0 = 0;
 
   function toggleAll(d) {
     
@@ -30,13 +34,27 @@ d3.json("js/flare.json", function(json) {
       toggle(d);
     }
   }
-
   // Initialize the display to show a few nodes.
   root.children.forEach(toggleAll);
-
-
   update(root);
+  activeBackbone();
+  selected = true;
 });
+
+function activeBackbone(){
+  $("#arbolLayout").find('g.node').each(function(){
+    var flag = true;    
+    for(var i=0; i<NodeLayoutTreeArray.length;i++){
+      if(NodeLayoutTreeArray[i] === this){
+        flag = false;
+      }
+    }
+    if(flag === true){
+      NodeLayoutTreeArray.push(this);
+      new App.views.Node({el:this});
+    }
+  });
+}
 
 function update(source) {
   var duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -55,7 +73,7 @@ function update(source) {
   var nodeEnter = node.enter().append("svg:g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", function(d) { console.log('potato'); toggle(d); update(d); });
+      .on("click", function(d) { toggle(d); update(d); activeBackbone()});
 
   nodeEnter.append("svg:circle")
       .attr("r", 1e-6)
@@ -126,6 +144,7 @@ function update(source) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
+  
 }
 
 // Toggle children.
@@ -139,5 +158,5 @@ function toggle(d) {
   }
 }
   
-})();
+});
 

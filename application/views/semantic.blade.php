@@ -1,4 +1,4 @@
-@layout('master')
+<!-- @layout('master')
 
 @section('searchbar')
 
@@ -27,24 +27,12 @@
 			
 	</div>
 </section><!-- Fin de la seccion visual -->
-<div class="separator"></div>
-<!-- Fin del panel contenido-->	
-
-@include('semantichandlebars')
-
-
-
-@endsection
-
-@section('mainScripts')
-	
-	{{ HTML::script('js/jquery-ui/js/jquery-ui.js')}}
-	{{ HTML::script('js/jquery.mCustomScrollbar.js')}}
-	{{ HTML::script('js/jquery.mousewheel.min.js')}}
-	{{ HTML::script('js/circleloading.js')}}
-	{{ HTML::script('js/underscore.js')}}
-	{{ HTML::script('js/backbone.js')}}
-	{{ HTML::script('js/handlebars.js')}}
-	{{ HTML::script('js/semanticsearch.js')}}
-
-@endsection
+<!-- <div class="separator"></div>
+ --><!-- Fin del panel contenido-->
+ <section id="semanticContent" class="show">
+ 	<a class="btnView"></a>
+	<form action="{{url('semantic/searchTerm')}}" method="POST">
+		<input type="text" class="inputField" required  name="term" id="term"  placeholder="busqueda semantica">
+		<button type ='submit' class="ico"></button>
+	</form>
+ </section>

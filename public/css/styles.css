@@ -351,8 +351,7 @@ a.popupLink{
 }
 
 
-.niceSelect{
-    
+.niceSelect{    
     display:block;
     padding:1em;
     font-size: 1.2em;
@@ -372,6 +371,104 @@ a.popupLink{
     overflow: auto !important;
 }
 
+/*----------------------- Clases Semanticas -----------------------------*/
+#semanticContent{	
+	top: 50px; right: 0%;
+	background-color: white; border-radius: 10px;
+	position: fixed; z-index: 300;
+	min-height: 65px;
+}
+
+#semanticContent a.btnView{
+	height: 1.5em;
+	width: 1.5em;
+	border: 1px solid #eee;
+	display: inline-block;
+	border-radius: 2em;
+	position: relative;
+}
+
+/*#semanticContent > div:nth-child(2) {
+	height: 50%;
+}
+#semanticContent > div {
+	height: 15%;	
+}*/
+
+#semanticContent > div{	
+	display: block;	width: 96%;	padding: 2%;
+}
+
+#semanticContent a.btnView#openSearcher{
+	background-color: green;
+	float:left;	
+}
+
+#semanticContent a.btnView#closeSearcher{
+	background-color: red;
+	float:right;	
+}
+
+#semanticContent.show-semantic{
+	width: 350px; /*height: 200px;*/	
+	animation: show-semantic 1s;
+	-webkit-animation:show-semantic 1s; /* Safari and Chrome */	
+}
+
+#semanticContent.hide-semantic{
+	width: 1.6em; height: 1.6em;
+	min-height:  1.6em !important;	
+	animation: hide-semantic 1s;
+	-webkit-animation:hide-semantic 1s; /* Safari and Chrome */	
+}
+
+#semanticContent.hide-semantic > div {
+	display: none;
+}
+
+#semanticContent.hide-semantic > div:first-child {
+	display: block; !important;
+}
+
+#hoverNodes{
+	height:2em;
+	position: absolute; 
+	z-index: 300;
+	background-color: yellow;
+	color:red;
+	font-weight: 900;
+}
+/*Animations*/
+/*Mostrar div semantico*/
+@keyframes show-semantic
+{	
+	from{  width: 1.6em; height: 1.6em;}
+	/*to{ width: 350px; height: 200px;}*/
+	to{ width: 350px;}
+}
+
+@-webkit-keyframes show-semantic
+{
+	from{  width: 1.6em; height: 1.6em;}	
+	/*to{ width: 350px; height: 200px;}*/
+	to{ width: 350px;}
+}
+
+@keyframes hide-semantic
+{	
+	/*from{ width: 350px; height: 200px;}*/
+	from{width: 350px;}
+	to{  width: 1.6em; height: 1.6em;}	
+}
+
+@-webkit-keyframes hide-semantic
+{	
+	/*from{ width: 350px; height: 200px;}*/
+	from{width: 350px;}	
+	to{ width: 1.6em; height: 1.6em;}	
+}
+
+/*----------------------- Clases Semanticas Fin -------------------------*/
 
 
 /*----------------------Fin Clases--------------------------------------------------*/
@@ -388,12 +485,12 @@ section#visualArea{
 }
 div.vis{
 	position:relative;
-	height: 480px;
-	width:100% !important; 
+	height: 480px !important;
+	width:930px !important; 
 	background: rgba(0,0,0,0.9);
-	position:relative;
 	z-index:10;
 	overflow: hidden;
+	float: left !important;
 }
 
 

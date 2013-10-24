@@ -1,31 +1,51 @@
-(function(){
+var NodesPartitionArray = new Array();
+var SelectedPartition = false;
+$("#partitionBtn").click(function(){
+  if(SelectedPartition == false){
+    var w = 960,
+      h = 480,
+      i = 0,
+      barHeight = 20,
+      barWidth = w * .7,
+      duration = 400,
+      root;
 
+    var tree = d3.layout.tree()
+        .size([h*3, 300]);
 
-  var w = 960,
-    h = 800,
-    i = 0,
-    barHeight = 20,
-    barWidth = w * .8,
-    duration = 400,
-    root;
+    var diagonal = d3.svg.diagonal()
+        .projection(function(d) { return [d.y, d.x]; });
 
-var tree = d3.layout.tree()
-    .size([h, 100]);
+    var vis = d3.select("#partition").append("svg:svg")
+        .attr("width", w)
+        .attr("height", h*6)
+        .attr("overflow-y",'scroll')
+      .append("svg:g")
+        .attr("transform", "translate(20,30)");
 
-var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+    d3.json("js/flare.json", function(json) {
+      json.x0 = 0;
+      json.y0 = 0;
+      update(root = json);
+    });
 
-var vis = d3.select("#partition").append("svg:svg")
-    .attr("width", w)
-    .attr("height", h)
-  .append("svg:g")
-    .attr("transform", "translate(20,30)");
+    function activeBackbone(){
+      $("#partition").find('g.node').each(function(){
+        var flag = true;    
+        for(var i=0; i<NodesPartitionArray.length;i++){
+          if(NodesPartitionArray[i] === this){
+            flag = false;
+          }
+        }
+        if(flag === true){
+          NodesPartitionArray.push(this);
+          new App.views.Node({el:this});
+        }
+      });
+    }
+    SelectedPartition = true;
+  }
 
-d3.json("js/flare.json", function(json) {
-  json.x0 = 0;
-  json.y0 = 0;
-  update(root = json);
-});
 
 function update(source) {
 
@@ -113,6 +133,7 @@ function update(source) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
+  activeBackbone();
 }
 
 // Toggle children on click.
@@ -132,5 +153,5 @@ function color(d) {
 }
 
 
-})();
+});
 

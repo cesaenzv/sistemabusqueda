@@ -45,65 +45,65 @@ class RankingRepository{
                 -Retorno:
                         $rankingAvg-> Valor numero del promedio de todos los rankings asociados al metadata
         */
-        private function get_MetadataRanking($idMetadata=0){                
-                try{
-                        $rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
-                        return $rankingAvg;        
-                }
-                catch(Exception $e){
-                        return 1;
-                }
-        }
+	private function get_MetadataRanking($idMetadata=0){		
+		try{
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->avg('qualification');
+			return $rankingAvg;	
+		}
+		catch(Exception $e){
+			return 1;
+		}
+	}
 
-        /* Info
-                <Desarrollado>
-                Carlos Sáenz
-                <Resumen>
-                -Funcionalidad:
-                        Metodo encargado de la obtencion del numero de votos realizados a un unico recurso
-                -Variables:                        
-                        $idMetadata->Id del recurso del cual quiere identifcar su promedio de calificacion
-                -Retorno:
-                        $rankingCount-> Valor numerico del numero de votos realizados a un recuros
-        */
-        private function get_numVotes($idMetadata=0){
-                try{
-                        $rankingAvg = Ranking::where_id_metadata_term($idMetadata)->count();
-                        return $rankingAvg;        
-                }
-                catch(Exception $e){
-                        return 0;
-                }
-        }
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
+			Metodo encargado de la obtencion del numero de votos realizados a un unico recurso
+		-Variables:			
+			$idMetadata->Id del recurso del cual quiere identifcar su promedio de calificacion
+		-Retorno:
+			$rankingCount-> Valor numerico del numero de votos realizados a un recuros
+	*/
+	private function get_numVotes($idMetadata=0){
+		try{
+			$rankingAvg = Ranking::where_id_metadata_term($idMetadata)->count();
+			return $rankingAvg;	
+		}
+		catch(Exception $e){
+			return 0;
+		}
+	}
 
-        /* Info
-                <Desarrollado>
-                Carlos Sáenz
-                <Resumen>
-                -Funcionalidad:
-                        Metodo encargado de la recoleccion del valor promedio de las calificaciones asociados 
-                -Variables:                        
-                        $resources->Array de los recursos recuperados desde la base de datos
-                -Retorno:
-                        $resources-> Array de los recursos recuperados desde la base de datos con el valor agregado del 
-                        ranking
-        */
-        public function get_RankingValues($resources){
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
+			Metodo encargado de la recoleccion del valor promedio de las calificaciones asociados 
+		-Variables:			
+			$resources->Array de los recursos recuperados desde la base de datos
+		-Retorno:
+			$resources-> Array de los recursos recuperados desde la base de datos con el valor agregado del 
+			ranking
+	*/
+	public function get_RankingValues($resources){
 
-                foreach ($resources as $i=>$resource) {
-                        $resource['ranking'] = $this->get_MetadataRanking($resource['id_metadata_mandatory']);
-                        $resource['numVotes'] = $this->get_numVotes($resource['id_metadata_mandatory']);
-                        $resources[$i] = $resource;                
-                }
-                usort($resources, array("RankingRepository", "cmp"));
-                return         $resources;
-        }        
+		foreach ($resources as $i=>$resource) {
+			$resource['ranking'] = $this->get_MetadataRanking($resource['id_metadata_mandatory']);
+			$resource['numVotes'] = $this->get_numVotes($resource['id_metadata_mandatory']);
+			$resources[$i] = $resource;		
+		}
+		usort($resources, array("RankingRepository", "cmp"));
+		return 	$resources;
+	}	
 
-        public function cmp($a, $b)
-        {
-            if ($a['ranking'] == $b['ranking']) {
-                return 0;
-            }
-            return ($a['ranking'] > $b['ranking']) ? -1 : 1;
-        }
+	public function cmp($a, $b)
+	{
+	    if ($a['ranking'] == $b['ranking']) {
+	        return 0;
+	    }
+	    return ($a['ranking'] > $b['ranking']) ? -1 : 1;
+	}
 }

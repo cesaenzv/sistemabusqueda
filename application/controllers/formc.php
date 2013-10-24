@@ -4,7 +4,6 @@ class Formc_Controller extends Base_Controller {
 	
 
 	function __construct(){
-
 		parent::__construct();
 		$this->filter('before', 'auth')->only(array('index'));
 	}
@@ -46,8 +45,7 @@ class Formc_Controller extends Base_Controller {
 
 	function action_index(){
 
-		$terminos = EuropeanaTerm::lists('termnameutf8','id_europeana_term');
-		//dd($terminos);
+		$terminos = EuropeanaTerm::lists('termnameutf8','id_europeana_term');		
 		return View::make('form')->with('terminos',$terminos);
 	}
 

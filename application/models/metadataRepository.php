@@ -31,8 +31,7 @@ class MetadataRepository {
 						->join('metadatamandatory AS mm','m.id_metadata_term','=','mm.id_metadata_mandatory')
 						->where("e.$columnType",'=',$idTerm)->where("mm.$criterio","=",$group)->order_by("mm.id_metadata_mandatory")
 						->skip(200*$numConsult)->take(200)->get('id_metadata_term');
-			return $metadatasId;
-			
+			return $metadatasId;			
 		}
 		
 	}

@@ -17,19 +17,20 @@
 					Integrado <br>
 					de búsqueda</h1>
 
+
 			@section('searchbar')
 
-				<form action="{{url('resource/getPies')}}" class="grid_4 push_5" id="form_buscador" method="POST">
-					<button type ='submit' class="ico"></button>
-					<input type="text" class="inputField" required  name="term">
-				</form>
+			<form action="{{url('resource/getPies')}}" class="grid_4 push_5" id="form_buscador" method="POST">
+				<button type ='submit' class="ico"></button>
+				<input type="text" class="inputField" required  name="term">
+			</form>
 
 			@yield_section
-			</div>		
-		</header><!-- Fin del Header -->
-		<div class="separator"></div>
-		
-		@yield('Content')
+		</div>		
+	</header><!-- Fin del Header -->
+	<div class="separator"></div>
+	
+	@yield('Content')
 
 		<div class="separator"></div>
 		<footer>
@@ -46,7 +47,7 @@
 		{{ HTML::script('js/jquery.js')}}
 		{{ HTML::script('js/handlebars.js')}}
 		{{ HTML::script('js/circleloading.js')}}
-		{{ HTML::script('js/ranking_module.js')}}
+		{{ HTML::script('js/CustomModuls/ranking_module.js')}}
 		@yield('mainScripts')   
 		@yield('scriptForm')
 	</body>

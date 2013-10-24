@@ -12,10 +12,8 @@ class UserRepository {
 		-Retorno:
 			$user-> Usuario nuevo o ya creado de la obtenida IP
 	*/
-
 	public function create_VisitorUser () {
 		$userIp  = $this->get_RealIpAdress();
-
 		$user = User::where_username($userIp)->first();
 		if($user == null){
 			$user = User::create(array(

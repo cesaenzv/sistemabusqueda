@@ -17,6 +17,15 @@ class OptionalRepository {
 		return $fields;
 	}
 
+	/* Info
+		<Desarrollado>
+		Carlos Sáenz
+		<Resumen>
+		-Funcionalidad:
+			Metodo encargado del ingreso de un nuevo recurso				
+		-Retorno:
+			$newData->Nuevo objeto
+	*/
 	public function insert_Optional($idMetadata,$format,$identifier,$extent,$medium,$rights,$provenance,$relation,
 									$conformsTo,$hasFormat,$isFormatOf,$isReferencedBy,$references,$isReplacedBy,
 									$replaces,$requires,$tableOfContents,$hasVersion,$isVersionOf,$isRequiredBy,
