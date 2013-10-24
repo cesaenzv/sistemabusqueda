@@ -15,7 +15,7 @@ App.collections.recursos = Backbone.Collection.extend({
 
 App.views.recursoView = Backbone.View.extend({
 	model : App.models.recurso,
-	template : Handlebars.compile($('#resourceTemplate').html()),
+	template : Handlebars.compile($('#semanticResourceTemplate').html()),
 	tagName: 'div',
 	className :'recurso',
 	initialize : function(){
