@@ -1,4 +1,4 @@
-<script type="text/x-handlebars-template" id="resourceTemplate">
+<script type="text/x-handlebars-template" id="semanticResourceTemplate">
 	<div class="imgCont">
 		{{#each this.edmPreview}}
 			<img src="{{this}}" width="60" height="60">
