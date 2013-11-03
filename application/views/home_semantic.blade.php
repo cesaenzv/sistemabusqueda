@@ -1,4 +1,7 @@
 @layout('master')
+
+
+
 @section('Content')
  <style type="text/css">
 	path.arc {
@@ -47,30 +50,15 @@
 <div id="hoverNodes"></div>
 
 @section('searchbar')
-	<form action="{{url('resource/getPies')}}" class="grid_4 push_5" id="form_buscador" method="POST">
-		<button type ='submit' class="ico"></button>
-		<input type="text" class="inputField" required  name="term">
-	</form>
+	<section id="semanticContent" class="hide-semantic" style="display:none;">
+
+	</section>			
 @endsection
-
-
-<section id="semanticContent" class="hide-semantic" style="display:none;">
-
-</section>
 
 <section id="visualArea">
 	<div class="container_12">
 		<div id="tabs" class="grid_12">
 			<ul>
-				<li id ="arbolLink">
-					<a href="#arbol">Radial graph</a>
-				</li>
-				<li id="hyperLink">
-					<a href="#hyperArbol">Hypertree</a>
-				</li>	
-				<li id="spaceLink">
-					<a href="#space">Space tree</a>
-				</li>
 				<li id ="arbolLayoutLink">
 					<a id="arbolLayoutBtn" href="#arbolLayout">Layout tree</a>
 				</li>				
@@ -81,47 +69,10 @@
 					<a id="circlesBtn" href="#circles">Circles</a>
 				</li>
 			</ul>
-			<div id="arbol"class="grid_12 vis"></div>
-			<div id="hyperArbol" class="grid_12 vis"></div>
-			<div id="space" class="grid_12 vis "></div>
 			<div id="arbolLayout" class="grid_12 vis white"></div>
 			<div id="partition" class="grid_12 vis white"></div>
 			<div id="circles" class="grid_12 vis white"></div>
 		</div>							
-		
-			<div class="piesContainer">
-			@include('handlebarsTemplate')				
-				<div class="pieHolder grid_6 clearfix ">
-					<div class="pie" id="Language"></div>
-					<div class="pieContent">
-						
-					</div>
-				</div>
-				<div class="pieHolder grid_6 clearfix ">
-					<div class="pie" id="Country"></div>
-					<div class="pieContent">
-						
-					</div>
-				</div>
-				<div class="pieHolder grid_6 clearfix">
-					<div class="pie" id="Type"></div>
-					<div class="pieContent">
-						
-					</div>
-				</div>
-				<div class="pieHolder grid_6 clearfix">
-					<div class="pie" id="Provider"></div>
-					<div class="pieContent">
-						
-					</div>
-				</div>
-				<div class="pieHolder grid_6 clearfix">
-					<div class="pie" id="Rights"></div>
-					<div class="pieContent">
-												
-					</div>
-				</div>
-			</div>
 	</div>
 </section><!-- Fin de la seccion visual -->
 <div class="separator"></div>
@@ -143,26 +94,6 @@
 	@include('semantichandlebars')
 	</div>
 </section><!-- Fin de la seccion visual -->
-
-<section id="contentPanel">
-	<div class="container_12">
-		<div class="panelBajo grid_6"></div>
-		<div class="panelBajo grid_3"></div>
-		<div class="panelBajo grid_3" id="titulo"></div>
-	</div>
-	<div id="dialogo" title="Mensaje importante !!" style="display: none;"></div>
-	<div id="contentResource">
-		<span id="numOfResources"></span>
-		<span class="closeTag">X</span>
-	    <ul id="listResource">
-	    	
-	    </ul>
-	    <span id="prev">prev</span>
-	    <span id="next">next</span>
-	    @include('handlebarsResource')
-
-	</div>
-</section>
 
 <!-- Fin del panel contenido-->	
 @endsection
