@@ -39,7 +39,9 @@
 
 Route::get('/', 'HomeController');
 
-
+Route::get('landing' , function(){
+	return View::make('decide');
+});
 
 Route::get('/form', function(){
 	return View::make('form');
