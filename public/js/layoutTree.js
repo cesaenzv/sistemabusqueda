@@ -160,3 +160,7 @@ function toggle(d) {
   
 });
 
+
+$(document).ready(function(){
+  $("#arbolLayoutBtn").trigger('click');
+});
