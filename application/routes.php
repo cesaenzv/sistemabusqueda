@@ -32,13 +32,12 @@
 |
 */
 
-// Route::get('/', function()
-// {
-// 	return View::make('home');
-// });
+Route::get('/', function()
+{
+	return View::make('decide');
+});
 
-Route::get('/', 'HomeController');
-
+// Route::get('/', 'HomeController');
 
 Route::get('landing' , function(){
 	return View::make('decide');
@@ -76,7 +75,7 @@ Route::controller('text');
 Route::controller('resource');
 Route::controller('formc');
 Route::controller('ranking');
-Route::controller('home');
+// Route::controller('home');
 
 /***************************************************************************/
 Route::get('/semantic',function(){
