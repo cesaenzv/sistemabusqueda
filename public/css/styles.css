@@ -373,10 +373,29 @@ a.popupLink{
 
 /*----------------------- Clases Semanticas -----------------------------*/
 #semanticContent{	
-	top: 50px; right: 0%;
-	background-color: white; border-radius: 10px;
+	top: 167px; 
+	right: 10px;
+	background-color: white; 
+	border-radius: 0;
 	position: fixed; z-index: 300;
 	min-height: 65px;
+	color:white;
+	background: rgba(15, 15, 15, 0.48);
+	border: 1px solid rgb(13, 141, 173);
+}
+
+
+
+#semanticContent label, #semanticContent input, #semanticContent select{
+	display:block;
+	font-size: 1.1em;
+	margin-top:10px;
+	padding: 5px;
+}
+
+#semanticContent label{
+	font-size: 1.2em;
+	font-weight:bold;
 }
 
 #semanticContent a.btnView{
@@ -386,6 +405,17 @@ a.popupLink{
 	display: inline-block;
 	border-radius: 2em;
 	position: relative;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+}
+
+#semanticContent button{
+	display: block;
+	padding:5px 10px;
+	margin-top:10px;
+	cursor:pointer;
 }
 
 /*#semanticContent > div:nth-child(2) {
@@ -400,19 +430,23 @@ a.popupLink{
 }
 
 #semanticContent a.btnView#openSearcher{
-	background-color: green;
-	float:left;	
+	background-color: green;	
+	position: absolute;
+	top: 0px;
+	right: 0px;
 }
 
 #semanticContent a.btnView#closeSearcher{
 	background-color: red;
-	float:right;	
+	/* float:right; */	
 }
 
 #semanticContent.show-semantic{
-	width: 350px; /*height: 200px;*/	
+	width: 350px; 
+	/* height: 200px; */	
 	animation: show-semantic 1s;
 	-webkit-animation:show-semantic 1s; /* Safari and Chrome */	
+	padding: 1em;
 }
 
 #semanticContent.hide-semantic{
@@ -438,6 +472,36 @@ a.popupLink{
 	color:red;
 	font-weight: 900;
 }
+
+a.landing{
+	display:inline-block;
+	width:49%;
+	height:100px;
+	text-align:center;
+	background: rgb(25, 130, 150);
+	padding: 3em 0;
+	color:white;
+	margin: 1.5em 0;
+	font-size: 2em;
+	text-decoration:none;
+	line-height:100px;
+	-webkit-transition: all .3s ease-in-out;
+}
+
+a.landing:hover{
+	background: rgb(12, 76, 88);
+	-webkit-transform: translate(0, -10px);
+}
+
+.landHeading{
+	font-size: 2.5em;
+	margin:1.5em 0;
+	margin-bottom:0;
+	text-shadow: 1px 1px 12px rgba(21, 150, 145, 1);
+	color: rgb(253, 253, 253);
+	text-align: center;
+}
+
 /*Animations*/
 /*Mostrar div semantico*/
 @keyframes show-semantic
@@ -482,6 +546,10 @@ section#visualArea{
 	padding: 30px 0;
 	z-index:-1;
 	
+}
+
+section#landingArea{
+	background: #8B7777 url("../img/FondoDiv.jpg") repeat-x;
 }
 div.vis{
 	position:relative;

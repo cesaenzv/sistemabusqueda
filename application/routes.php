@@ -39,6 +39,13 @@
 
 Route::get('/', 'HomeController');
 
+<<<<<<< HEAD
+=======
+Route::get('landing' , function(){
+	return View::make('decide');
+});
+
+>>>>>>> 9be341d364aecfcb1672230a3c4aa97b0b96dcc4
 Route::get('/form', function(){
 	return View::make('form');
 });
