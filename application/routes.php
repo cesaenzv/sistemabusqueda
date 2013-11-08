@@ -39,6 +39,7 @@
 
 Route::get('/', 'HomeController');
 
+
 Route::get('landing' , function(){
 	return View::make('decide');
 });
@@ -46,10 +47,6 @@ Route::get('landing' , function(){
 Route::get('/form', function(){
 	return View::make('form');
 });
-
-// Route::get('form', 'formc@getFormFields',function($result){	
-// 	dd($result);
-// });
 
 Route::get('ranking',function()
 {	
@@ -64,23 +61,31 @@ Route::get('logout', function(){
 	return Redirect::to('account');
 });
 
-Route::get('semantic' , function(){
+/*Route::get('semantic' , function(){
 
 	return View::make('semantic');
-});
+});*/
 
 
 Route::get('d3' , function(){
 	return View::make('d3visuals');
 });
 
-Route::Controller('account');
+Route::controller('account');
 Route::controller('text');
 Route::controller('resource');
 Route::controller('formc');
 Route::controller('ranking');
 Route::controller('home');
 
+/***************************************************************************/
+Route::get('/semantic',function(){
+	return View::make('home_semantic');
+});
+
+Route::get('/graphic',function(){
+	return View::make('home_graphic');
+});
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
